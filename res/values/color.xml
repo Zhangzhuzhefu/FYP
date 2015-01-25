@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="title_orange">#FF9933</color>
+
+    <!-- premium celebrity by country page -->
+    <color name="translucent">#ccffffff</color>
+    <color name="gray99">#ff999999</color>
+    <color name="usernamecolor">#ff006987</color>
+    <color name="top_menu_orange">#FF9700</color>
+    <color name="top_menu_gray">#787775</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="forty_black">#66000000</color>
+    <color name="black_overlay">#66000000</color>
+    <color name="orange">#FA9B00</color>
+    <color name="app_background">#f5efe9</color>
+    <color name="transparent">#00000000</color>
+    <color name="comment_orange">#FD9903</color>
+    <color name="bubbly_bg_orange">#f7b132</color>
+    <color name="greyCC">#cccccc</color>
+    <color name="dark_gray">#737373</color>
+    <color name="followingbuttontext">#9a9a9a</color>
+    <color name="button_blue">#1ecbd6</color>
+    <color name="twitter_blue">#42b5d9</color>
+    <color name="facebook_blue">#445fa2</color>
+    <color name="discover_dark_blue">#0e435a</color>
+    <color name="button_blue_translucent">#881ecbd6</color>
+    <color name="playback_progress_color">#ff9a00</color>
+    <color name="recorder_progress_color">#ff0000</color>
+    <color name="upload_progress_color">#3BB9FF</color>
+    <color name="premium_celeb_gray">#e1e1e1</color>
+    <color name="actionbartab">#f9f9f9</color>
+    <color name="bg_record_color_new">#f9f6f1</color>
+    <color name="bg_record_color">#f0fbf7f2</color>
+    <color name="gray">#555555</color>
+    <color name="translucent_light_gray">#88d3d3d3</color>
+    <color name="caption_gray">#9E9E9E</color>
+
+    <drawable name="transparent">#00ffffff</drawable>
+
+    
+    <drawable name="animation_set_tab_pressed">#f7f4f0</drawable>
+    <drawable name="animation_set_tab_normal">#e9e4df</drawable>
+    <drawable name="animation_keyboard_background">#f7f4f0</drawable>
+    
+    <color name="animation_preview_background">#ccffffff</color>
+    <color name="animation_keyboard_separator">#d7c5b4</color>
+</resources>
