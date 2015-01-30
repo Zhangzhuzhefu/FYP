@@ -33,6 +33,19 @@
         <item name="android:background">@android:drawable/bottom_bar</item>
     </style>
 
+    <style name="CalendarDayOfWeeks" parent="@android:style/TextAppearance.Medium">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#ff999999</item>
+        <item name="android:typeface">sans</item>
+    </style>
+    <style name="CalendarDates" parent="@android:style/TextAppearance.Medium">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#f7b132</item>
+        <item name="android:typeface">sans</item>
+    </style>
+    
     <style name="ButtonBarButton" />
 
 </resources>

@@ -1,5 +1,8 @@
-package sg.edu.ntu.sce.fyp.calevent;
+package sg.edu.ntu.sce.fyp.calevent.activity;
 
+import sg.edu.ntu.sce.fyp.calevent.R;
+import sg.edu.ntu.sce.fyp.calevent.R.id;
+import sg.edu.ntu.sce.fyp.calevent.R.layout;
 import sg.edu.ntu.sce.fyp.calevent.util.SystemUiHider;
 
 import android.annotation.TargetApi;

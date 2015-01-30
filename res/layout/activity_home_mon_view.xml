@@ -109,19 +109,44 @@
               
         </LinearLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/calendar_layout"
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
             android:layout_below="@id/control_layout"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="0dp"
-            android:orientation="vertical" >
-            
-			<include layout="@layout/calendar_week_view" />
-            
-        </LinearLayout>
+            android:layout_centerHorizontal="true" >
+
+            <LinearLayout
+                android:id="@+id/calendar_layout_month"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@id/control_layout"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="0dp"
+                android:orientation="vertical" >
+
+                <CalendarView
+                    android:id="@+id/calendar_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="8dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/calendar_layout_week"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@id/control_layout"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="0dp"
+                android:orientation="vertical" >
+
+                <include layout="@layout/calendar_week_view" />
+            </LinearLayout>
+        </RelativeLayout>
         
 </RelativeLayout>
 

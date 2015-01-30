@@ -15,7 +15,7 @@
         android:theme="@android:style/Theme.Holo"
         uiOptions="splitActionBarWhenNarrow" >
         <activity
-            android:name="sg.edu.ntu.sce.fyp.calevent.HomeActivity"
+            android:name="sg.edu.ntu.sce.fyp.calevent.activity.HomeActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,7 +24,7 @@
         </activity>
         
          <activity
-            android:name="sg.edu.ntu.sce.fyp.calevent.FullscreenActivity"
+            android:name="sg.edu.ntu.sce.fyp.calevent.activity.FullscreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:theme="@style/FullscreenTheme" >
