@@ -24,8 +24,7 @@ public class HomeActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_home_mon_view);
-//		setContentView(R.layout.activity_home);
+		setContentView(R.layout.activity_home);
 		
 		//set up navigation tabs
 		ActionBar actionBar = getActionBar();
@@ -129,7 +128,9 @@ public class HomeActivity extends Activity {
 	        e.printStackTrace();
 	    }
 		
+		//set up calendarViewWeek
 		calendarViewWeek = this.findViewById(R.id.calendar_layout_week);
+		
 		
 		calendarViewMonth.setVisibility(View.VISIBLE);
 		calendarViewWeek.setVisibility(View.INVISIBLE);
