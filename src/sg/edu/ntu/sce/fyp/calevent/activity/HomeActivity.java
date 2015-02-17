@@ -95,30 +95,24 @@ public class HomeActivity extends Activity {
 		/**
 		 * set up calendarViewMonth model
 		 */
-		// sets whether to show the week number.
 		calendarViewMonth.setShowWeekNumber(false);
-		// sets the first day of week according to Calendar.
-				// here we set Sunday as the first day of the Calendar
+		// here we set Sunday as the first day of the Calendar
 		calendarViewMonth.setFirstDayOfWeek(1);
 		
 		/**
 		 * set up appearance
 		 */
 		calendarViewMonth.setBackgroundColor(getResources().getColor(R.color.white));
-		// The background color for the selected week.
 		calendarViewMonth.setSelectedWeekBackgroundColor(getResources().getColor(
 				R.color.bg_record_color));
 		// sets the color for the vertical bar shown at the beginning and at the
 				// end of the selected date.
 		calendarViewMonth.setSelectedDateVerticalBar(R.color.greyCC);
 		
-		// sets the color for the dates
 		calendarViewMonth.setWeekDayTextAppearance(R.style.CalendarDayOfWeeks);
-
 		calendarViewMonth.setFocusedMonthDateColor(getResources().getColor(R.color.black));
 		calendarViewMonth.setUnfocusedMonthDateColor(getResources().getColor(R.color.greyCC));
 		
-		// sets the color for the separator line between weeks.
 		calendarViewMonth.setWeekSeparatorLineColor(getResources().getColor(
 				R.color.bg_record_color));
 
