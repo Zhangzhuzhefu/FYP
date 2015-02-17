@@ -144,7 +144,9 @@
                 android:layout_marginBottom="0dp"
                 android:orientation="vertical" >
 
-                <include layout="@layout/calendar_week_view" />
+                <include
+                    layout="@layout/calendar_week_view" />
+
             </LinearLayout>
         </RelativeLayout>
         
