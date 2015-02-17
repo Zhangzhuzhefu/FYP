@@ -5,6 +5,7 @@ import java.lang.reflect.Field;
 import sg.edu.ntu.sce.fyp.calevent.R;
 import sg.edu.ntu.sce.fyp.calevent.fragment.HomeFragment;
 import sg.edu.ntu.sce.fyp.calevent.fragment.NewEventFragment;
+import sg.edu.ntu.sce.fyp.calevent.listener.CalendarOnClickListner;
 import sg.edu.ntu.sce.fyp.calevent.listener.CalendarViewOnDateChangeListener;
 import sg.edu.ntu.sce.fyp.calevent.listener.TabListener;
 import sg.edu.ntu.sce.fyp.calevent.model.Today;
@@ -147,7 +148,7 @@ public class HomeActivity extends Activity {
 		 */
 		// sets the listener to be notified upon selected date change.
 		calendarViewMonth.setOnDateChangeListener(new CalendarViewOnDateChangeListener(getApplicationContext(),this));
-		
+		calendarViewMonth.setOnClickListener(new CalendarOnClickListner(getApplicationContext(), this));
 	}
 	
 	private void setupCalendarViewWeek(){
@@ -191,6 +192,7 @@ public class HomeActivity extends Activity {
 		weekdayTextView6.setText(DateHelper.convertDayOfWeek(today.dayOfWeekInt + 5));
 		weekdayTextView7.setText(DateHelper.convertDayOfWeek(today.dayOfWeekInt + 6));
 		
+		calendarViewWeek.setOnClickListener(new CalendarOnClickListner(getApplicationContext(), this));
 	}
 
 }
