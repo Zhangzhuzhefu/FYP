@@ -7,6 +7,8 @@ import sg.edu.ntu.sce.fyp.calevent.fragment.HomeFragment;
 import sg.edu.ntu.sce.fyp.calevent.fragment.NewEventFragment;
 import sg.edu.ntu.sce.fyp.calevent.listener.CalendarViewOnDateChangeListener;
 import sg.edu.ntu.sce.fyp.calevent.listener.TabListener;
+import sg.edu.ntu.sce.fyp.calevent.model.Today;
+import sg.edu.ntu.sce.fyp.calevent.util.DateHelper;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
@@ -19,7 +21,7 @@ import android.widget.TextView;
 public class HomeActivity extends Activity {
 	CalendarView calendarViewMonth;
 	View calendarViewWeek;
-	
+	Today today;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +63,10 @@ public class HomeActivity extends Activity {
 								HomeFragment.class));
 		actionBar.addTab(tab);
 		
+		initializeAppModels();
 		initializeCalendar();
+		
+		
 	}
 
 	@Override
@@ -71,15 +76,34 @@ public class HomeActivity extends Activity {
 		return super.onCreateOptionsMenu(menu);
 	}
 	
+	public void initializeAppModels(){
+		//set up global date 
+		today = new Today();
+		
+	}
 	public void initializeCalendar() {
+		setupCalendarViewMonth();
+		setupCalendarViewWeek();
+		
+		calendarViewMonth.setVisibility(View.VISIBLE);
+		calendarViewWeek.setVisibility(View.INVISIBLE);
+	}
+	
+	private void setupCalendarViewMonth(){
 		calendarViewMonth = (CalendarView) findViewById(R.id.calendar_view);
+		
+		/**
+		 * set up calendarViewMonth model
+		 */
 		// sets whether to show the week number.
 		calendarViewMonth.setShowWeekNumber(false);
-
 		// sets the first day of week according to Calendar.
-		// here we set Monday as the first day of the Calendar
+				// here we set Sunday as the first day of the Calendar
 		calendarViewMonth.setFirstDayOfWeek(1);
-
+		
+		/**
+		 * set up appearance
+		 */
 		calendarViewMonth.setBackgroundColor(getResources().getColor(R.color.white));
 		// The background color for the selected week.
 		calendarViewMonth.setSelectedWeekBackgroundColor(getResources().getColor(
@@ -98,9 +122,6 @@ public class HomeActivity extends Activity {
 		calendarViewMonth.setWeekSeparatorLineColor(getResources().getColor(
 				R.color.bg_record_color));
 
-		// sets the listener to be notified upon selected date change.
-		calendarViewMonth.setOnDateChangeListener(new CalendarViewOnDateChangeListener(getApplicationContext(),this));
-		
 		//set color of month name
 		try
 	    {
@@ -127,13 +148,55 @@ public class HomeActivity extends Activity {
 	    {
 	        e.printStackTrace();
 	    }
+		/**
+		 * set up calendarViewWeek controller
+		 */
+		// sets the listener to be notified upon selected date change.
+		calendarViewMonth.setOnDateChangeListener(new CalendarViewOnDateChangeListener(getApplicationContext(),this));
 		
-		//set up calendarViewWeek
+	}
+	
+	private void setupCalendarViewWeek(){
+		/**
+		 * set up calendarViewWeek
+		 */
 		calendarViewWeek = this.findViewById(R.id.calendar_layout_week);
 		
+		TextView currentMonthTextView = (TextView) this.findViewById(R.id.currentMonthTextView);
+		TextView currentYearTextView = (TextView) this.findViewById(R.id.currentYearTextView);
+		currentMonthTextView.setText(DateHelper.convertMonth(today.monthInt));
+		currentYearTextView.setText(today.year);
 		
-		calendarViewMonth.setVisibility(View.VISIBLE);
-		calendarViewWeek.setVisibility(View.INVISIBLE);
+		TextView dateTextView1 = (TextView) this.findViewById(R.id.dateTextView1);
+		TextView dateTextView2 = (TextView) this.findViewById(R.id.dateTextView2);
+		TextView dateTextView3 = (TextView) this.findViewById(R.id.dateTextView3);
+		TextView dateTextView4 = (TextView) this.findViewById(R.id.dateTextView4);
+		TextView dateTextView5 = (TextView) this.findViewById(R.id.dateTextView5);
+		TextView dateTextView6 = (TextView) this.findViewById(R.id.dateTextView6);
+		TextView dateTextView7 = (TextView) this.findViewById(R.id.dateTextView7);
+		dateTextView1.setText(today.day);
+		dateTextView2.setText(DateHelper.dateIncr(today, 1));
+		dateTextView3.setText(DateHelper.dateIncr(today, 2));
+		dateTextView4.setText(DateHelper.dateIncr(today, 3));
+		dateTextView5.setText(DateHelper.dateIncr(today, 4));
+		dateTextView6.setText(DateHelper.dateIncr(today, 5));
+		dateTextView7.setText(DateHelper.dateIncr(today, 6));
+		
+		TextView weekdayTextView1 = (TextView) this.findViewById(R.id.weekdayTextView1);
+		TextView weekdayTextView2 = (TextView) this.findViewById(R.id.weekdayTextView2);
+		TextView weekdayTextView3 = (TextView) this.findViewById(R.id.weekdayTextView3);
+		TextView weekdayTextView4 = (TextView) this.findViewById(R.id.weekdayTextView4);
+		TextView weekdayTextView5 = (TextView) this.findViewById(R.id.weekdayTextView5);
+		TextView weekdayTextView6 = (TextView) this.findViewById(R.id.weekdayTextView6);
+		TextView weekdayTextView7 = (TextView) this.findViewById(R.id.weekdayTextView7);
+		weekdayTextView1.setText(today.dayOfWeek);
+		weekdayTextView2.setText(DateHelper.convertDayOfWeek(today.dayOfWeekInt + 1));
+		weekdayTextView3.setText(DateHelper.convertDayOfWeek(today.dayOfWeekInt + 2));
+		weekdayTextView4.setText(DateHelper.convertDayOfWeek(today.dayOfWeekInt + 3));
+		weekdayTextView5.setText(DateHelper.convertDayOfWeek(today.dayOfWeekInt + 4));
+		weekdayTextView6.setText(DateHelper.convertDayOfWeek(today.dayOfWeekInt + 5));
+		weekdayTextView7.setText(DateHelper.convertDayOfWeek(today.dayOfWeekInt + 6));
+		
 	}
 
 }

@@ -49,7 +49,7 @@
             android:layout_weight="2" >
             
             <LinearLayout
-                android:id="@+id/dayColumnLinearLayout_sun"
+                android:id="@+id/dayColumnLinearLayout_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -57,7 +57,7 @@
                 android:orientation="vertical" >
 
                 <TextView
-                    android:id="@+id/sundayDateTextView"
+                    android:id="@+id/dateTextView1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="bottom"
@@ -68,7 +68,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/sundayTextView"
+                    android:id="@+id/weekdayTextView1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="top"
@@ -104,7 +104,7 @@
                 android:orientation="vertical" >
 
                 <TextView
-                    android:id="@+id/mondayDateTextView"
+                    android:id="@+id/dateTextView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="bottom"
@@ -115,7 +115,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/mondayTextView"
+                    android:id="@+id/weekdayTextView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="top"
@@ -150,7 +150,7 @@
                 android:orientation="vertical" >
 
                 <TextView
-                    android:id="@+id/tuesdayDateTextView"
+                    android:id="@+id/dateTextView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="bottom"
@@ -161,7 +161,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tuedayTextView"
+                    android:id="@+id/weekdayTextView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="top"
@@ -196,7 +196,7 @@
                 android:orientation="vertical" >
 
                 <TextView
-                    android:id="@+id/wednesdayDateTextView"
+                    android:id="@+id/dateTextView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="bottom"
@@ -207,7 +207,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/wednesdayTextView"
+                    android:id="@+id/weekdayTextView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="top"
@@ -243,7 +243,7 @@
                 android:orientation="vertical" >
 
                 <TextView
-                    android:id="@+id/thursdayDateTextView"
+                    android:id="@+id/dateTextView5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="bottom"
@@ -254,7 +254,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/thursdayTextView"
+                    android:id="@+id/weekdayTextView5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="top"
@@ -291,7 +291,7 @@
                 android:orientation="vertical" >
 
                 <TextView
-                    android:id="@+id/fridayDateTextView"
+                    android:id="@+id/dateTextView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="bottom"
@@ -302,7 +302,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/fridayTextView"
+                    android:id="@+id/weekdayTextView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="top"
@@ -337,7 +337,7 @@
                 android:orientation="vertical" >
 
                 <TextView
-                    android:id="@+id/saturdayDateTextView"
+                    android:id="@+id/dateTextView7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="bottom"
@@ -348,7 +348,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/saturdayTextView"
+                    android:id="@+id/weekdayTextView7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="top"
