@@ -15,7 +15,7 @@
         android:theme="@android:style/Theme.Holo"
         uiOptions="splitActionBarWhenNarrow" >
         <activity
-            android:name="sg.edu.ntu.sce.fyp.calevent.activity.HomeActivity"
+            android:name="sg.edu.ntu.sce.fyp.calevent.activity.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

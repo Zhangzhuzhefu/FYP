@@ -11,21 +11,21 @@ import android.widget.Toast;
 
 public class CalendarOnClickListner implements OnClickListener{
 
-	private Context con; 
+	private Context context; 
 	private Activity activity;
 	
 	public CalendarOnClickListner (Context context, Activity activity){
-		con = context;
+		this.context = context;
 		this.activity =activity;  
 	}
 	
 	@Override
 	public void onClick(View v) {
-		int dayOfMonth = Calendar.DAY_OF_MONTH;
-		int month = Calendar.MONTH;
-		int year = Calendar.YEAR;
+		int dayOfMonth = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+		int month = Calendar.getInstance().get(Calendar.MONTH);
+		int year = Calendar.getInstance().get(Calendar.YEAR);
 		
-		Toast.makeText(con , dayOfMonth + "/" + month+1 + "/" + year, Toast.LENGTH_LONG).show();
+		Toast.makeText(context , dayOfMonth + "/" + month+1 + "/" + year, Toast.LENGTH_LONG).show();
 		
 		if (this.activity.findViewById(R.id.calendar_layout_month).getVisibility() == View.VISIBLE) {
 			this.activity.findViewById(R.id.calendar_layout_month).setVisibility(View.INVISIBLE);

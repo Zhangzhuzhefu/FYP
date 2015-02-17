@@ -3,6 +3,7 @@ package sg.edu.ntu.sce.fyp.calevent.activity;
 import java.lang.reflect.Field;
 
 import sg.edu.ntu.sce.fyp.calevent.R;
+import sg.edu.ntu.sce.fyp.calevent.controller.CalendarEventCommunicator;
 import sg.edu.ntu.sce.fyp.calevent.fragment.HomeFragment;
 import sg.edu.ntu.sce.fyp.calevent.fragment.NewEventFragment;
 import sg.edu.ntu.sce.fyp.calevent.listener.CalendarOnClickListner;
@@ -19,10 +20,11 @@ import android.view.View;
 import android.widget.CalendarView;
 import android.widget.TextView;
 
-public class HomeActivity extends Activity {
+public class MainActivity extends Activity {
 	CalendarView calendarViewMonth;
 	View calendarViewWeek;
 	Today today;
+	CalendarEventCommunicator caleventCommunicator;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +67,8 @@ public class HomeActivity extends Activity {
 		actionBar.addTab(tab);
 		
 		initializeAppModels();
-		initializeCalendar();
-		
+		initializeAppControllers();
+		initializeCalendarViews();
 		
 	}
 
@@ -78,11 +80,17 @@ public class HomeActivity extends Activity {
 	}
 	
 	public void initializeAppModels(){
-		//set up global date 
+		//set up global models
 		today = new Today();
-		
 	}
-	public void initializeCalendar() {
+	
+	
+	public void initializeAppControllers(){
+		caleventCommunicator = new CalendarEventCommunicator(getApplicationContext(), this);
+	}
+	
+	
+	public void initializeCalendarViews() {
 		setupCalendarViewMonth();
 		setupCalendarViewWeek();
 		
