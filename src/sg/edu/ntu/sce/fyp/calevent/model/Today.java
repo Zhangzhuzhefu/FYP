@@ -44,16 +44,16 @@ public class Today {
 		month = String.valueOf(monthInt+1);
 		day = String.valueOf(dayInt);
 		dayOfWeek = DateHelper.convertDayOfWeek(dayOfWeekInt);
-		hour = String.valueOf(hour);
-		minute = String.valueOf(minute);
-		second = String.valueOf(hour);
+		hour = String.valueOf(hourInt);
+		minute = String.valueOf(minuteInt);
+		second = String.valueOf(secondInt);
 		
-		Log.d("zzzf","year: "+String.valueOf(year));
-		Log.d("zzzf","month: "+String.valueOf(month));
-		Log.d("zzzf","date: "+String.valueOf(day));
-		Log.d("zzzf","dayofweek: "+String.valueOf(dayOfWeek));
-		Log.d("zzzf", "hour: "+String.valueOf(hour));
-		Log.d("zzzf", "minute: "+String.valueOf(minute));
-		Log.d("zzzf", "second: "+String.valueOf(second));
+		Log.d("Today","year: "+String.valueOf(year));
+		Log.d("Today","month: "+String.valueOf(month));
+		Log.d("Today","date: "+String.valueOf(day));
+		Log.d("Today","dayofweek: "+String.valueOf(dayOfWeek));
+		Log.d("Today", "hour: "+String.valueOf(hour));
+		Log.d("Today", "minute: "+String.valueOf(minute));
+		Log.d("Today", "second: "+String.valueOf(second));
 	}
 }
