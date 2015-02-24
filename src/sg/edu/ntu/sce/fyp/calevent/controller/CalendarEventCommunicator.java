@@ -13,8 +13,12 @@ public class CalendarEventCommunicator {
 	public CalendarEventCommunicator (Context context, Activity activity){
 		this.context = context;
 		this.activity =activity;
-		reader = new CalendarEventReader();
+		reader = new CalendarEventReader(context);
 		writer = new CalendarEventWriter();
+		
+		//functionality test 
+		reader.getAllCalendars();
+		reader.getSelectedCalendars(new String[] {"1","4","3"});
 	}
 	
 	
