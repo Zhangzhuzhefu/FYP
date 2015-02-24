@@ -7,20 +7,20 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.provider.CalendarContract;
+import android.provider.CalendarContract.Calendars;
 import android.util.Log;
 
 public class CalendarEventReader {
 
 	public static final String[] FIELDS = { 
-		CalendarContract.Calendars._ID,
-		CalendarContract.Calendars.NAME,
-		CalendarContract.Calendars.ACCOUNT_NAME,
-		CalendarContract.Calendars.ACCOUNT_TYPE,
-		CalendarContract.Calendars.OWNER_ACCOUNT,
-		CalendarContract.Calendars.CALENDAR_DISPLAY_NAME,
-		CalendarContract.Calendars.CALENDAR_COLOR,
-		CalendarContract.Calendars.VISIBLE 
+		Calendars._ID,
+		Calendars.NAME,
+		Calendars.ACCOUNT_NAME,
+		Calendars.ACCOUNT_TYPE,
+		Calendars.OWNER_ACCOUNT,
+		Calendars.CALENDAR_DISPLAY_NAME,
+		Calendars.CALENDAR_COLOR,
+		Calendars.VISIBLE 
 	};
 	
 	private static final int ID_INDEX = 0;
@@ -43,41 +43,34 @@ public class CalendarEventReader {
 	}
 
 	public ArrayList<HashMap<String,String>> getAllCalendars() {
-		// Fetch a list of all calendars sync'd with the device and their
-		// display names
 		allCalendars.clear();
 		Cursor cursor = contentResolver.query(CALENDAR_URI, FIELDS, null, null, null);
-		allCalendars = handleCursor(cursor);
+		allCalendars = handleCursor_getCalendar(cursor);
 		return allCalendars;
 	}
 	
 	public ArrayList<HashMap<String,String>> getSelectedCalendars(String[] selectionIDs){
 		Cursor cursor = null;  
 		selectedCalendars.clear();
-		/*String selection = "((" + CalendarContract.Calendars.ACCOUNT_NAME + " = ?) AND (" 
-		                        + CalendarContract.Calendars.ACCOUNT_TYPE + " = ?) AND ("
-		                        + CalendarContract.Calendars.OWNER_ACCOUNT + " = ?))";*/
-//		selectionIDs = new String[] {"1","0","3"}; 
 		
-		String selection = "(" + CalendarContract.Calendars._ID + " = ?)";
-		
+		String selection = "(" + Calendars._ID + " = ?)";
 		String[] selectionArgs = new String[1];
 		
 		for (String cal_id : selectionIDs) {
 			selectionArgs[0] = cal_id;
 			cursor = contentResolver.query(CALENDAR_URI, FIELDS, selection, selectionArgs, null);
-			selectedCalendars.add(handleCursor(cursor).get(0));
+			selectedCalendars.add(handleCursor_getCalendar(cursor).get(0));
 		}
 		
 		for (HashMap<String,String> cal: selectedCalendars) {
-			Log.d("CalendarEventReader",cal.get("selectedCalendars: "+"cal_display_name"));
+			Log.d("CalendarEventReader","selectedCalendars: "+cal.get(Calendars.CALENDAR_DISPLAY_NAME));
 		}
 		
 		return selectedCalendars;
 	}
 	
 	
-	private ArrayList<HashMap<String,String>> handleCursor(Cursor cursor){
+	private ArrayList<HashMap<String,String>> handleCursor_getCalendar(Cursor cursor){
 		ArrayList<HashMap<String,String>> calendars = new ArrayList<HashMap<String,String>>();
 		try {
 			if (cursor.getCount() > 0) {
@@ -95,15 +88,15 @@ public class CalendarEventReader {
 							"0");
 
 					HashMap<String, String> calendar = new HashMap<String, String>();
-					calendar.put("id", id);
-					calendar.put("name", name);
-					calendar.put("acc_name", acc_name);
-					calendar.put("acc_type", acc_type);
-					calendar.put("cal_display_name", cal_display_name);
-					calendar.put("owner_acc", owner_acc);
-					calendar.put("cal_color", cal_color);
-					calendar.put("selected", String.valueOf(selected));
-
+					calendar.put(Calendars._ID, id);
+					calendar.put(Calendars.NAME, name);
+					calendar.put(Calendars.ACCOUNT_NAME, acc_name);
+					calendar.put(Calendars.ACCOUNT_TYPE, acc_type);
+					calendar.put(Calendars.OWNER_ACCOUNT, cal_display_name);
+					calendar.put(Calendars.CALENDAR_DISPLAY_NAME, owner_acc);
+					calendar.put(Calendars.CALENDAR_COLOR, cal_color);
+					calendar.put(Calendars.VISIBLE, String.valueOf(selected));
+					
 					calendars.add(calendar);
 					Log.d("CalendarEventReader", id + " " + name + "\n"
 							+ acc_name + " " + acc_type + "\n"
