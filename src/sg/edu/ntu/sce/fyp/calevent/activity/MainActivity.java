@@ -3,7 +3,7 @@ package sg.edu.ntu.sce.fyp.calevent.activity;
 import java.lang.reflect.Field;
 
 import sg.edu.ntu.sce.fyp.calevent.R;
-import sg.edu.ntu.sce.fyp.calevent.controller.CalendarEventCommunicator;
+import sg.edu.ntu.sce.fyp.calevent.controller.CalendarController;
 import sg.edu.ntu.sce.fyp.calevent.fragment.HomeFragment;
 import sg.edu.ntu.sce.fyp.calevent.fragment.NewEventFragment;
 import sg.edu.ntu.sce.fyp.calevent.listener.CalendarOnClickListner;
@@ -24,7 +24,7 @@ public class MainActivity extends Activity {
 	CalendarView calendarViewMonth;
 	View calendarViewWeek;
 	Today today;
-	CalendarEventCommunicator caleventCommunicator;
+	CalendarController caleventCommunicator;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +86,7 @@ public class MainActivity extends Activity {
 	
 	
 	public void initializeAppControllers(){
-		caleventCommunicator = new CalendarEventCommunicator(getApplicationContext(), this);
+		caleventCommunicator = new CalendarController(getApplicationContext());
 	}
 	
 	

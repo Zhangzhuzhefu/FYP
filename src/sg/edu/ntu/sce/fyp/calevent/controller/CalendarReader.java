@@ -6,12 +6,11 @@ import java.util.HashMap;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
-import android.net.Uri;
 import android.provider.CalendarContract.Calendars;
 import android.util.Log;
 
-public class CalendarEventReader {
-
+public class CalendarReader {
+	private static final String DEBUG_TAG = CalendarReader.class.getSimpleName();
 	public static final String[] FIELDS = { 
 		Calendars._ID,
 		Calendars.NAME,
@@ -32,19 +31,18 @@ public class CalendarEventReader {
 	private static final int CALENDAR_COLOR_INDEX = 6;
 	private static final int VISIBLE_INDEX = 7;
 	
-	public static final Uri CALENDAR_URI = Uri.parse("content://com.android.calendar/calendars");
 
 	private ContentResolver contentResolver;
 	private ArrayList<HashMap<String,String>> allCalendars = new ArrayList<HashMap<String,String>>();
 	private ArrayList<HashMap<String,String>> selectedCalendars = new ArrayList<HashMap<String,String>>();
 
-	public CalendarEventReader(Context ctx) {
+	public CalendarReader(Context ctx) {
 		contentResolver = ctx.getContentResolver();
 	}
 
 	public ArrayList<HashMap<String,String>> getAllCalendars() {
 		allCalendars.clear();
-		Cursor cursor = contentResolver.query(CALENDAR_URI, FIELDS, null, null, null);
+		Cursor cursor = contentResolver.query(CalendarController.CALENDAR_URI, FIELDS, null, null, null);
 		allCalendars = handleCursor_getCalendar(cursor);
 		return allCalendars;
 	}
@@ -58,12 +56,12 @@ public class CalendarEventReader {
 		
 		for (String cal_id : selectionIDs) {
 			selectionArgs[0] = cal_id;
-			cursor = contentResolver.query(CALENDAR_URI, FIELDS, selection, selectionArgs, null);
+			cursor = contentResolver.query(CalendarController.CALENDAR_URI, FIELDS, selection, selectionArgs, null);
 			selectedCalendars.add(handleCursor_getCalendar(cursor).get(0));
 		}
 		
 		for (HashMap<String,String> cal: selectedCalendars) {
-			Log.d("CalendarEventReader","selectedCalendars: "+cal.get(Calendars.CALENDAR_DISPLAY_NAME));
+			Log.d(DEBUG_TAG,"selectedCalendars: "+cal.get(Calendars.CALENDAR_DISPLAY_NAME));
 		}
 		
 		return selectedCalendars;
@@ -98,14 +96,14 @@ public class CalendarEventReader {
 					calendar.put(Calendars.VISIBLE, String.valueOf(selected));
 					
 					calendars.add(calendar);
-					Log.d("CalendarEventReader", id + " " + name + "\n"
+					Log.d(DEBUG_TAG, id + " " + name + "\n"
 							+ acc_name + " " + acc_type + "\n"
 							+ cal_display_name + "\n" + owner_acc + "\n"
 							+ cal_color + " " + String.valueOf(selected));
 				}
 			}
 		} catch (AssertionError ex) {
-			Log.d("CalendarEventReader","catch with possible bug");
+			Log.d(DEBUG_TAG,"catch with possible bug");
 		}
 		return calendars;
 	}

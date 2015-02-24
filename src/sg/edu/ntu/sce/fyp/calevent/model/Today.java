@@ -7,6 +7,8 @@ import android.util.Log;
 
 public class Today {
 
+	private static final String DEBUG_TAG = Today.class.getSimpleName();
+	
 	public String year;
 	public String month; 
 	public String day;
@@ -48,12 +50,12 @@ public class Today {
 		minute = String.valueOf(minuteInt);
 		second = String.valueOf(secondInt);
 		
-		Log.d("Today","year: "+String.valueOf(year));
-		Log.d("Today","month: "+String.valueOf(month));
-		Log.d("Today","date: "+String.valueOf(day));
-		Log.d("Today","dayofweek: "+String.valueOf(dayOfWeek));
-		Log.d("Today", "hour: "+String.valueOf(hour));
-		Log.d("Today", "minute: "+String.valueOf(minute));
-		Log.d("Today", "second: "+String.valueOf(second));
+		Log.d(DEBUG_TAG,"year: "+String.valueOf(year));
+		Log.d(DEBUG_TAG,"month: "+String.valueOf(month));
+		Log.d(DEBUG_TAG,"date: "+String.valueOf(day));
+		Log.d(DEBUG_TAG,"dayofweek: "+String.valueOf(dayOfWeek));
+		Log.d(DEBUG_TAG, "hour: "+String.valueOf(hour));
+		Log.d(DEBUG_TAG, "minute: "+String.valueOf(minute));
+		Log.d(DEBUG_TAG, "second: "+String.valueOf(second));
 	}
 }
