@@ -1,5 +1,7 @@
 package sg.edu.ntu.sce.fyp.calevent.model;
 
+import java.util.Calendar;
+
 
 public class Event {
 
@@ -11,6 +13,8 @@ public class Event {
 	private String calendar_id;
 	private String event_id;
 	private String duration;
+	
+	private String startTimeFromMidnight;
 	
 	public Event(){
 		
@@ -38,6 +42,13 @@ public class Event {
 
 	public void setDtstart(String dtstart) {
 		this.dtstart = dtstart;
+		
+		Calendar calendar_now= Calendar.getInstance();
+		calendar_now.setTimeInMillis(Long.valueOf(dtstart));
+		long nowInMilli = calendar_now.getTimeInMillis();
+		long offset = calendar_now.get(Calendar.ZONE_OFFSET) + calendar_now.get(Calendar.DST_OFFSET);
+		long sinceMidnight = (nowInMilli + offset) % (24 * 60 * 60 * 1000);
+		setStartTimeFromMidnight(String.valueOf(sinceMidnight));
 	}
 
 	public String getDtend() {
@@ -78,6 +89,14 @@ public class Event {
 
 	public void setDuration(String duration) {
 		this.duration = duration;
+	}
+
+	public String getStartTimeFromMidnight() {
+		return startTimeFromMidnight;
+	}
+
+	public void setStartTimeFromMidnight(String startTimeFromMidnight) {
+		this.startTimeFromMidnight = startTimeFromMidnight;
 	}
 	
 }

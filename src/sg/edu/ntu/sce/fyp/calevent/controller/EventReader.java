@@ -2,6 +2,7 @@ package sg.edu.ntu.sce.fyp.calevent.controller;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -9,13 +10,11 @@ import sg.edu.ntu.sce.fyp.calevent.model.Event;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
-import android.provider.CalendarContract.Calendars;
 import android.provider.CalendarContract.Events;
 import android.util.Log;
 
 public class EventReader {
 	private static final String DEBUG_TAG = EventReader.class.getSimpleName();
-	private ContentResolver contentResolver;
 	public static final String[] FIELDS = { 
 		Events.CALENDAR_ID,
 		Events.TITLE,
@@ -26,7 +25,6 @@ public class EventReader {
 		Events._ID,
 		Events.DURATION
 	};
-	
 	private static final int CALENDAR_ID_INDEX = 0;
 	private static final int TITLE_INDEX = 1;
 	private static final int DESCRIPTION_INDEX = 2;
@@ -36,26 +34,27 @@ public class EventReader {
 	private static final int ID_INDEX = 6;
 	private static final int DURATION_INDEX = 7;
 	
+	private ContentResolver contentResolver;
+	private ArrayList<Event> eventList;
+	
 	public EventReader(Context ctx) {
 		contentResolver = ctx.getContentResolver();
+		eventList = new ArrayList<Event>();
 	}
 	
-	public void readEventsFromCalendar(String[] calIDs, long startMilli, long endMilli){
+	public ArrayList<Event> readEventsFromCalendar(String[] calIDs, long startMilli, long endMilli){
 		Cursor cursor = null;  
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		
-		
 		String selection = "((calendar_id = ?) AND (dtstart >= ?) AND (dtstart <= ?))";
-//		String selection = "((calendar_id = ?))";
 		String[] arg = new String[3];
 		arg[1] = Long.toString(startMilli);
 		arg[2] = Long.toString(endMilli);
 		String sort = Events.DTSTART + "";
-		
+		eventList.clear();
 		for (String calId : calIDs) {
 			
 			arg[0] = calId;
-//			arg[0] = "zhangzhuzhefu@gmail.com";
 			cursor = contentResolver.query(CalendarController.EVENT_URI, FIELDS, selection, arg, sort);
 			Log.d(DEBUG_TAG, "calId: "+ calId + "\n"
 					+ "startMilli: " + startMilli + " " + df.format(new Date(startMilli)) + "\n"
@@ -85,20 +84,28 @@ public class EventReader {
 						ev.setEvent_id(event_id);
 						ev.setDuration(duration);
 						
+						if (ev.getDuration() == null) {
+							if (ev.getDtend() !=null) {
+								ev.setDuration(String.valueOf(Long.valueOf(ev.getDtend())-Long.valueOf(ev.getDtstart())));
+							}
+						}
+						eventList.add(ev);
+						
 						Calendar beginTime = Calendar.getInstance();
-						beginTime.setTimeInMillis(Long.valueOf(dtstart));
+						beginTime.setTimeInMillis(Long.valueOf(ev.getDtstart()));
 						
 						Calendar endTime = Calendar.getInstance();
-						if (dtend != null) {
-							endTime.setTimeInMillis(Long.valueOf(dtend));
+						if (ev.getDtend() != null) {
+							endTime.setTimeInMillis(Long.valueOf(ev.getDtend()));
 						}
 						
-						Log.d(DEBUG_TAG, event_id + ": " + title +"\n"
-								+ description + "\n" 
-								+ "dtstart: " + dtstart + " " + df.format(beginTime.getTime()) + "\n" 
-								+ "dtend:" + dtend +" "
-								+ (dtend==null?"null":df.format(endTime.getTime())) + "\n" + duration +"\n" 
-								+ event_loc + "\n");
+						Log.d(DEBUG_TAG, ev.getEvent_id() + ": " + ev.getTitle() +"\n"
+								+ ev.getDescription() + "\n" 
+								+ "strt: " + ev.getDtstart() + " " + df.format(beginTime.getTime()) + "\n" 
+								+ "end:  " + ev.getDtend() +" " + (ev.getDtend()==null?"null":df.format(endTime.getTime())) + "\n" 
+								+ "time: " + ev.getStartTimeFromMidnight() + "\n"
+								+ "durt: "+ ev.getDuration() +"\n" 
+								+ ev.getEvent_location() + "\n");
 					}
 					
 				}
@@ -106,6 +113,7 @@ public class EventReader {
 				Log.d(DEBUG_TAG,"catch with possible bug");
 			}
 		}
+		return eventList;
 	}
 
 }

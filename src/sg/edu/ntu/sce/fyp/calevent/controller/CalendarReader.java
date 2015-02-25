@@ -11,7 +11,7 @@ import android.util.Log;
 
 public class CalendarReader {
 	private static final String DEBUG_TAG = CalendarReader.class.getSimpleName();
-	public static final String[] FIELDS = { 
+	private static final String[] FIELDS = { 
 		Calendars._ID,
 		Calendars.NAME,
 		Calendars.ACCOUNT_NAME,
@@ -21,7 +21,6 @@ public class CalendarReader {
 		Calendars.CALENDAR_COLOR,
 		Calendars.VISIBLE 
 	};
-	
 	private static final int ID_INDEX = 0;
 	private static final int NAME_INDEX = 1;
 	private static final int ACCOUNT_NAME_INDEX = 2;
@@ -30,21 +29,29 @@ public class CalendarReader {
 	private static final int CALENDAR_DISPLAY_NAME_INDEX = 5;
 	private static final int CALENDAR_COLOR_INDEX = 6;
 	private static final int VISIBLE_INDEX = 7;
-	
 
 	private ContentResolver contentResolver;
-	private ArrayList<HashMap<String,String>> allCalendars = new ArrayList<HashMap<String,String>>();
-	private ArrayList<HashMap<String,String>> selectedCalendars = new ArrayList<HashMap<String,String>>();
+	private ArrayList<HashMap<String,String>> allCalendars;
+	private ArrayList<HashMap<String,String>> selectedCalendars;
 
 	public CalendarReader(Context ctx) {
 		contentResolver = ctx.getContentResolver();
+		allCalendars = new ArrayList<HashMap<String,String>>();
+		selectedCalendars = new ArrayList<HashMap<String,String>>();
 	}
 
 	public ArrayList<HashMap<String,String>> getAllCalendars() {
-		allCalendars.clear();
-		Cursor cursor = contentResolver.query(CalendarController.CALENDAR_URI, FIELDS, null, null, null);
-		allCalendars = handleCursor_getCalendar(cursor);
+		if (allCalendars.isEmpty()) {
+			refeshAllCalendars();
+		}
 		return allCalendars;
+	}
+	
+	public void refeshAllCalendars(){
+		allCalendars.clear();
+		Cursor cursor = contentResolver.query(
+				CalendarController.CALENDAR_URI, FIELDS, null, null, null);
+		allCalendars = handleCursor_getCalendar(cursor);
 	}
 	
 	public ArrayList<HashMap<String,String>> getSelectedCalendars(String[] selectionIDs){
@@ -108,4 +115,5 @@ public class CalendarReader {
 		return calendars;
 	}
 
+	
 }
