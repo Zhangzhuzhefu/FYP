@@ -1,5 +1,7 @@
 package sg.edu.ntu.sce.fyp.calevent.controller;
 
+import java.util.Calendar;
+
 import android.content.Context;
 import android.net.Uri;
 
@@ -23,7 +25,11 @@ public class CalendarController {
 		calReader.getAllCalendars();
 		calReader.getSelectedCalendars(new String[] {"1","3"});
 		
-		eventReader.readEventsFromCalendar(new String[] {"1","3"});
+		Calendar c_start= Calendar.getInstance();
+		c_start.set(2015,0,25,0,0); //Note that months start from 0 (January)   
+		Calendar c_end= Calendar.getInstance();
+		c_end.set(2015,5,7,0,0); //Note that months start from 0 (January)
+		eventReader.readEventsFromCalendar(new String[] {"1","2","3","4"},c_start.getTimeInMillis(),c_end.getTimeInMillis());
 	}
 	
 	

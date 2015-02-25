@@ -9,6 +9,7 @@ import sg.edu.ntu.sce.fyp.calevent.model.Event;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
+import android.provider.CalendarContract.Calendars;
 import android.provider.CalendarContract.Events;
 import android.util.Log;
 
@@ -39,27 +40,28 @@ public class EventReader {
 		contentResolver = ctx.getContentResolver();
 	}
 	
-	public void readEventsFromCalendar(String[] calIDs){
+	public void readEventsFromCalendar(String[] calIDs, long startMilli, long endMilli){
 		Cursor cursor = null;  
-		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-		Calendar c_start= Calendar.getInstance();
-		c_start.set(2015,0,2,0,0); //Note that months start from 0 (January)   
-		Calendar c_end= Calendar.getInstance();
-		c_end.set(2015,5,7,0,0); //Note that months start from 0 (January)
-		//String selection = "((dtstart >= " + c_start.getTimeInMillis() + ") AND (dtend <= " + c_end.getTimeInMillis() + "))";//") AND (calendar_id = ?))";
-		//String selection = "((calendar_id = ?) AND (dtend <= " + c_end.getTimeInMillis() + ") AND (dtstart >= " + c_start.getTimeInMillis() + "))";
-		//String selection = "((calendar_id = ?) AND (2>1) AND (1<2))";
-		String selection = "((calendar_id = ?) AND (dtstart >= " + c_start.getTimeInMillis() + ") AND (dtend <= " + c_end.getTimeInMillis() + "))";
-		String[] arg = new String[1];
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		
+		
+		String selection = "((calendar_id = ?) AND (dtstart >= ?) AND (dtstart <= ?))";
+//		String selection = "((calendar_id = ?))";
+		String[] arg = new String[3];
+		arg[1] = Long.toString(startMilli);
+		arg[2] = Long.toString(endMilli);
+		String sort = Events.DTSTART + "";
 		
 		for (String calId : calIDs) {
 			
 			arg[0] = calId;
-			cursor = contentResolver.query(CalendarController.EVENT_URI,
-					FIELDS, selection, arg, null);
-			Log.d(DEBUG_TAG, "calId: "+ calId 								
-					+ "c_start: " + c_start.getTimeInMillis() + " " + df.format(c_start.getTime()) + "\n");
-			Log.d("zzzf", selection);
+//			arg[0] = "zhangzhuzhefu@gmail.com";
+			cursor = contentResolver.query(CalendarController.EVENT_URI, FIELDS, selection, arg, sort);
+			Log.d(DEBUG_TAG, "calId: "+ calId + "\n"
+					+ "startMilli: " + startMilli + " " + df.format(new Date(startMilli)) + "\n"
+					+ "endMilli: " + endMilli + " " + df.format(new Date(endMilli)));
+			Log.d("zzz", selection);
+			
 			try {
 				if (cursor.getCount() > 0) {
 					while (cursor.moveToNext()) {
