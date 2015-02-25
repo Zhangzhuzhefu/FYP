@@ -104,6 +104,12 @@ public class DateHelper {
 		return sinceMidnight;
 	}
 	
+	public static long getTodayMidnightInMilli(){
+		Calendar calendar_now= Calendar.getInstance();
+		long nowInMilli = calendar_now.getTimeInMillis();
+		nowInMilli -= getCurrentTimeFromMidnightInMilli();
+		return nowInMilli;
+	}
 	
 
 }

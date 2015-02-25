@@ -49,10 +49,8 @@ public class CalendarController {
 	}
 	
 	public ArrayList<Event> readEventsFromToday(String[] calIDs, long durationInMilli){
-		Calendar calendar_now= Calendar.getInstance();
 		//c_start.set(2015,0,25,0,0); //Note that months start from 0 (January)   
-		long nowInMilli = calendar_now.getTimeInMillis();
-		nowInMilli -= DateHelper.getCurrentTimeFromMidnightInMilli();;
+		long nowInMilli = DateHelper.getTodayMidnightInMilli();
 		
 		return eventReader.readEventsFromCalendar(selectedCalendarIDs, nowInMilli, nowInMilli + durationInMilli);
 	}

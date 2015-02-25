@@ -74,15 +74,47 @@ public class CalendarWeekView {
 	
 	private void updateTimeLine(){
 		int marginTop;
-		marginTop = (int)((float)DateHelper.getCurrentTimeFromMidnightInMilli()/(float)DateHelper.HOURINMILLI * 60);
+		marginTop = (int) ((float) DateHelper
+				.getCurrentTimeFromMidnightInMilli()
+				/ (float) DateHelper.HOURINMILLI * 60);
 		
 		LinearLayout curTimeLine = (LinearLayout) this.activity.findViewById(R.id.currentTimeMarkerLinearLayout);
 		RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) curTimeLine.getLayoutParams();
+		
 		layoutParams.setMargins(0, marginTop, 0, 0);
 		curTimeLine.setLayoutParams(layoutParams);
 	}
 	
-	public void updateEvents(ArrayList<Event> myEventList){
+	public void updateEvents(ArrayList<Event> eventList, int color){
+		RelativeLayout[] colLayouts = new RelativeLayout[7];
+		colLayouts[0] = (RelativeLayout) this.activity.findViewById(R.id.sundayRelativeLayout);
+		colLayouts[1] = (RelativeLayout) this.activity.findViewById(R.id.mondayRelativeLayout);
+		colLayouts[2] = (RelativeLayout) this.activity.findViewById(R.id.tuesdayRelativeLayout);
+		colLayouts[3] = (RelativeLayout) this.activity.findViewById(R.id.wednesdayRelativeLayout);
+		colLayouts[4] = (RelativeLayout) this.activity.findViewById(R.id.thursdayRelativeLayout);
+		colLayouts[5] = (RelativeLayout) this.activity.findViewById(R.id.fridayRelativeLayout);
+		colLayouts[6] = (RelativeLayout) this.activity.findViewById(R.id.saturdayRelativeLayout);
 		
+		for (Event ev : eventList) {
+			TextView tv;
+			String eventTitle;
+			int colIndex, tvHeight, tvMargtinTop;
+			
+			tv = new TextView(activity);
+			eventTitle = ev.getTitle();
+			tvHeight =(int) (Float.valueOf(ev.getDuration()) / Float.valueOf(DateHelper.HOURINMILLI) * 60);
+			tvMargtinTop = (int) (Float.valueOf(ev.getStartTimeFromMidnight()) / Float.valueOf(DateHelper.HOURINMILLI) * 60);
+			colIndex = (int) ((Float.valueOf(ev.getDtstart()) - Float.valueOf(DateHelper.getTodayMidnightInMilli()))/DateHelper.DAYINMILLI);
+			
+			RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
+					RelativeLayout.LayoutParams.MATCH_PARENT, tvHeight);
+			layoutParams.setMargins(0, tvMargtinTop, 0, 0);
+			tv.setLayoutParams(layoutParams);
+			tv.setText(eventTitle);
+			tv.setTextSize(10);
+			tv.setTextColor(this.activity.getResources().getColor(R.color.white));
+			tv.setBackgroundColor(this.activity.getResources().getColor(color));
+			colLayouts[colIndex].addView(tv);
+		}
 	}
 }
