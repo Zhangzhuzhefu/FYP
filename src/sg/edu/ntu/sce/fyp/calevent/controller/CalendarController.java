@@ -1,6 +1,5 @@
 package sg.edu.ntu.sce.fyp.calevent.controller;
 
-import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 
