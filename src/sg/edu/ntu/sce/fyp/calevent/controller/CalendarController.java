@@ -3,15 +3,19 @@ package sg.edu.ntu.sce.fyp.calevent.controller;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import sg.edu.ntu.sce.fyp.calevent.activity.MainActivity;
 import sg.edu.ntu.sce.fyp.calevent.model.Event;
-
+import sg.edu.ntu.sce.fyp.calevent.model.ModelManager;
+import sg.edu.ntu.sce.fyp.calevent.util.DateHelper;
+import sg.edu.ntu.sce.fyp.calevent.view.CalendarViewManager;
 import android.content.Context;
 import android.net.Uri;
-import android.util.Log;
 
 public class CalendarController {
-
 	private Context context;
+	private ModelManager modelMgr;
+	private CalendarViewManager viewlMgr;
+	
 	private CalendarReader calReader;
 	private CalendarWriter calWriter;
 	private EventReader eventReader;
@@ -21,37 +25,35 @@ public class CalendarController {
 	public static final Uri CALENDAR_URI = Uri.parse("content://com.android.calendar/calendars");
 	public static final Uri EVENT_URI = Uri.parse("content://com.android.calendar/events");
 	
-	public CalendarController (Context context){
+	public CalendarController (Context context, MainActivity act){
 		this.context = context;
 		calReader = new CalendarReader(this.context);
 		calWriter = new CalendarWriter(this.context);
 		eventReader = new EventReader(this.context);
+		modelMgr = ModelManager.getInstance();
+		viewlMgr = act.calendarViewMgr;
+		//TODO
 		selectedCalendarIDs = new String[] {"1","2","3","4"};
 		
 		//functionality test 
 		calReader.getAllCalendars();
 		calReader.getSelectedCalendars(selectedCalendarIDs);
-		
-		/*
-		Calendar c_start= Calendar.getInstance();
-		c_start.set(2015,0,25,0,0); //Note that months start from 0 (January)   
-		Calendar c_end= Calendar.getInstance();
-		c_end.set(2015,5,7,0,0); //Note that months start from 0 (January)
-		eventReader.readEventsFromCalendar(selectedCalendarIDs, c_start.getTimeInMillis(), c_end.getTimeInMillis());*/
+
 		ArrayList<Event> eventList = readEventsOneWeekFromToday(selectedCalendarIDs);
+		modelMgr.setMyEventList(eventList);
+		viewlMgr.updateWeekView();
 	}
 	
 	public ArrayList<Event> readEventsOneWeekFromToday(String[] calIDs){
-		long weekInMilli = 1000*60*60*24*7;
-		return readEventsFromToday(calIDs, weekInMilli);
+		return readEventsFromToday(calIDs, DateHelper.WEEKINMILLI);
 	}
 	
 	public ArrayList<Event> readEventsFromToday(String[] calIDs, long durationInMilli){
 		Calendar calendar_now= Calendar.getInstance();
+		//c_start.set(2015,0,25,0,0); //Note that months start from 0 (January)   
 		long nowInMilli = calendar_now.getTimeInMillis();
-		long offset = calendar_now.get(Calendar.ZONE_OFFSET) + calendar_now.get(Calendar.DST_OFFSET);
-		long sinceMidnight = (nowInMilli + offset) % (24 * 60 * 60 * 1000);
-		nowInMilli -= sinceMidnight;
+		nowInMilli -= DateHelper.getCurrentTimeFromMidnightInMilli();;
+		
 		return eventReader.readEventsFromCalendar(selectedCalendarIDs, nowInMilli, nowInMilli + durationInMilli);
 	}
 }

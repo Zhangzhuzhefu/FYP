@@ -1,13 +1,17 @@
 package sg.edu.ntu.sce.fyp.calevent.view;
 
+import java.util.ArrayList;
+
 import sg.edu.ntu.sce.fyp.calevent.R;
 import sg.edu.ntu.sce.fyp.calevent.activity.MainActivity;
 import sg.edu.ntu.sce.fyp.calevent.listener.CalendarOnClickListner;
+import sg.edu.ntu.sce.fyp.calevent.model.Event;
 import sg.edu.ntu.sce.fyp.calevent.model.Today;
 import sg.edu.ntu.sce.fyp.calevent.util.DateHelper;
-import android.app.Activity;
 import android.content.Context;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class CalendarWeekView {
@@ -15,9 +19,9 @@ public class CalendarWeekView {
 	private MainActivity activity;
 	private View calendarViewWeek;
 
-	public CalendarWeekView(Context ctx, Activity act){
+	public CalendarWeekView(Context ctx, MainActivity act){
 		this.context = ctx;
-		this.activity = (MainActivity) act;
+		this.activity = act;
 	}
 	
 	public void setupCalendarViewWeek(){
@@ -61,8 +65,24 @@ public class CalendarWeekView {
 		weekdayTextView6.setText(DateHelper.convertDayOfWeek(today.dayOfWeekInt + 5));
 		weekdayTextView7.setText(DateHelper.convertDayOfWeek(today.dayOfWeekInt + 6));
 		
+		updateTimeLine();
+
 		calendarViewWeek.setOnClickListener(new CalendarOnClickListner(this.context, this.activity));
 
 		calendarViewWeek.setVisibility(View.INVISIBLE);
+	}
+	
+	private void updateTimeLine(){
+		int marginTop;
+		marginTop = (int)((float)DateHelper.getCurrentTimeFromMidnightInMilli()/(float)DateHelper.HOURINMILLI * 60);
+		
+		LinearLayout curTimeLine = (LinearLayout) this.activity.findViewById(R.id.currentTimeMarkerLinearLayout);
+		RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) curTimeLine.getLayoutParams();
+		layoutParams.setMargins(0, marginTop, 0, 0);
+		curTimeLine.setLayoutParams(layoutParams);
+	}
+	
+	public void updateEvents(ArrayList<Event> myEventList){
+		
 	}
 }

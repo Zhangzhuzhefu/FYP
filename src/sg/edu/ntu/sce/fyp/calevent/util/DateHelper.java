@@ -6,7 +6,9 @@ import java.util.Date;
 import sg.edu.ntu.sce.fyp.calevent.model.Today;
 
 public class DateHelper {
-	
+	public static final long WEEKINMILLI = 1000*60*60*24*7;
+	public static final long DAYINMILLI = 1000*60*60*24;
+	public static final long HOURINMILLI = 1000*60*60;
 	public static String convertDayOfWeek(int d) {
 		String s;
 		switch (d%7){
@@ -89,5 +91,19 @@ public class DateHelper {
 		return String.valueOf(newDate.getDate());
 		
 	}
+	
+	public static long getCurrentTimeFromMidnightInMilli(){
+		long nowInMilli = Calendar.getInstance().getTimeInMillis();
+		return getTimeFromMidnightInMilli(nowInMilli);
+	}
+	
+	public static long getTimeFromMidnightInMilli(long nowInMilli){
+		Calendar calendar_now= Calendar.getInstance();
+		long offset = calendar_now.get(Calendar.ZONE_OFFSET) + calendar_now.get(Calendar.DST_OFFSET);
+		long sinceMidnight = (nowInMilli + offset) % (24 * 60 * 60 * 1000);
+		return sinceMidnight;
+	}
+	
+	
 
 }

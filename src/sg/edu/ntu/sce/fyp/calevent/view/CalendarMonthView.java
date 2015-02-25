@@ -6,7 +6,6 @@ import sg.edu.ntu.sce.fyp.calevent.R;
 import sg.edu.ntu.sce.fyp.calevent.activity.MainActivity;
 import sg.edu.ntu.sce.fyp.calevent.listener.CalendarOnClickListner;
 import sg.edu.ntu.sce.fyp.calevent.listener.CalendarViewOnDateChangeListener;
-import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.widget.CalendarView;
@@ -17,9 +16,9 @@ public class CalendarMonthView {
 	private MainActivity activity;
 	private CalendarView calendarViewMonth;
 
-	public CalendarMonthView(Context ctx, Activity act){
+	public CalendarMonthView(Context ctx, MainActivity act){
 		this.context = ctx;
-		this.activity = (MainActivity) act;
+		this.activity = act;
 	}
 	
 	public void setupCalendarViewMonth(){
@@ -79,7 +78,7 @@ public class CalendarMonthView {
 		 * set up calendarViewWeek controller
 		 */
 		// sets the listener to be notified upon selected date change.
-		calendarViewMonth.setOnDateChangeListener(new CalendarViewOnDateChangeListener(this.context,this.activity));
+		calendarViewMonth.setOnDateChangeListener(new CalendarViewOnDateChangeListener(this.context));
 		calendarViewMonth.setOnClickListener(new CalendarOnClickListner(this.context,this.activity));
 		
 		calendarViewMonth.setVisibility(View.VISIBLE);

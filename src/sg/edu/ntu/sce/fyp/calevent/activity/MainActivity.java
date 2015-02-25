@@ -60,9 +60,9 @@ public class MainActivity extends Activity {
 		actionBar.addTab(tab);
 		
 		initializeAppModels();
-		initializeAppControllers();
 		initializeAppViews();
-		
+		initializeAppControllers();
+
 	}
 
 	@Override
@@ -73,18 +73,18 @@ public class MainActivity extends Activity {
 	}
 	
 	public void initializeAppModels(){
-		modelManager = new ModelManager();
+		modelManager = ModelManager.getInstance();
 	}
-	
-	
-	public void initializeAppControllers(){
-		caleventCommunicator = new CalendarController(getApplicationContext());
-	}
-	
 	
 	public void initializeAppViews() {
 		calendarViewMgr = new CalendarViewManager(getApplicationContext(),this);
 		calendarViewMgr.setupCalendarView();
 	}
 
+	public void initializeAppControllers(){
+		caleventCommunicator = new CalendarController(getApplicationContext(), this);
+	}
+	
+	
+	
 }
