@@ -31,32 +31,22 @@ public class CalendarReader {
 	private static final int VISIBLE_INDEX = 7;
 
 	private ContentResolver contentResolver;
-	private ArrayList<HashMap<String,String>> allCalendars;
-	private ArrayList<HashMap<String,String>> selectedCalendars;
 
 	public CalendarReader(Context ctx) {
 		contentResolver = ctx.getContentResolver();
-		allCalendars = new ArrayList<HashMap<String,String>>();
-		selectedCalendars = new ArrayList<HashMap<String,String>>();
 	}
 
 	public ArrayList<HashMap<String,String>> getAllCalendars() {
-		if (allCalendars.isEmpty()) {
-			refeshAllCalendars();
-		}
-		return allCalendars;
-	}
-	
-	public void refeshAllCalendars(){
-		allCalendars.clear();
+		ArrayList<HashMap<String,String>> allCalendars = new ArrayList<HashMap<String,String>>();
 		Cursor cursor = contentResolver.query(
 				CalendarCommunicator.CALENDAR_URI, FIELDS, null, null, null);
 		allCalendars = handleCursor_getCalendar(cursor);
+		return allCalendars;
 	}
 	
 	public ArrayList<HashMap<String,String>> getSelectedCalendars(String[] selectionIDs){
 		Cursor cursor = null;  
-		selectedCalendars.clear();
+		ArrayList<HashMap<String,String>> selectedCalendars = new ArrayList<HashMap<String,String>>();
 		
 		String selection = "(" + Calendars._ID + " = ?)";
 		String[] selectionArgs = new String[1];
