@@ -10,6 +10,7 @@ import sg.edu.ntu.sce.fyp.calevent.model.Event;
 import sg.edu.ntu.sce.fyp.calevent.model.Today;
 import sg.edu.ntu.sce.fyp.calevent.util.DateHelper;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -87,6 +88,7 @@ public class CalendarWeekView {
 	}
 	
 	public void updateEvents(ArrayList<Event> eventList, int color){
+		//TODO remove all TextViews
 		RelativeLayout[] colLayouts = new RelativeLayout[7];
 		colLayouts[0] = (RelativeLayout) this.activity.findViewById(R.id.sundayRelativeLayout);
 		colLayouts[1] = (RelativeLayout) this.activity.findViewById(R.id.mondayRelativeLayout);
@@ -95,7 +97,24 @@ public class CalendarWeekView {
 		colLayouts[4] = (RelativeLayout) this.activity.findViewById(R.id.thursdayRelativeLayout);
 		colLayouts[5] = (RelativeLayout) this.activity.findViewById(R.id.fridayRelativeLayout);
 		colLayouts[6] = (RelativeLayout) this.activity.findViewById(R.id.saturdayRelativeLayout);
-		
+		for (RelativeLayout layout : colLayouts) {
+			for (int i = 0; i < layout.getChildCount();i++) {
+		        View v = layout.getChildAt(i);
+		        if(v.getTag() != null)
+		        	Log.d("zzz", (String)v.getTag());
+		        if (v instanceof TextView) {
+		        	Log.d("zzz",(String) ((TextView)v).getText());
+					if (v.getTag() != null) {
+						if (v.getTag() instanceof String) {
+							if (((String) v.getTag()).equalsIgnoreCase("selected_event")) {
+								layout.removeView(v); 
+								i--;
+							}
+						}
+					}
+		        } 
+		    }
+		}
 		for (Event ev : eventList) {
 			TextView tv;
 			String eventTitle;
@@ -110,6 +129,7 @@ public class CalendarWeekView {
 			RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
 					RelativeLayout.LayoutParams.MATCH_PARENT, tvHeight);
 			layoutParams.setMargins(0, tvMargtinTop, 0, 0);
+			tv.setTag("selected_event");
 			tv.setLayoutParams(layoutParams);
 			tv.setText(eventTitle);
 			tv.setTextSize(10);

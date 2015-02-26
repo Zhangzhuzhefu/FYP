@@ -1,4 +1,4 @@
-package sg.edu.ntu.sce.fyp.calevent.controller;
+package sg.edu.ntu.sce.fyp.calevent.communicator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,7 +50,7 @@ public class CalendarReader {
 	public void refeshAllCalendars(){
 		allCalendars.clear();
 		Cursor cursor = contentResolver.query(
-				CalendarController.CALENDAR_URI, FIELDS, null, null, null);
+				CalendarCommunicator.CALENDAR_URI, FIELDS, null, null, null);
 		allCalendars = handleCursor_getCalendar(cursor);
 	}
 	
@@ -63,7 +63,7 @@ public class CalendarReader {
 		
 		for (String cal_id : selectionIDs) {
 			selectionArgs[0] = cal_id;
-			cursor = contentResolver.query(CalendarController.CALENDAR_URI, FIELDS, selection, selectionArgs, null);
+			cursor = contentResolver.query(CalendarCommunicator.CALENDAR_URI, FIELDS, selection, selectionArgs, null);
 			selectedCalendars.add(handleCursor_getCalendar(cursor).get(0));
 		}
 		

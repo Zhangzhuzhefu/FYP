@@ -1,4 +1,4 @@
-package sg.edu.ntu.sce.fyp.calevent.controller;
+package sg.edu.ntu.sce.fyp.calevent.communicator;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -55,11 +55,11 @@ public class EventReader {
 		for (String calId : calIDs) {
 			
 			arg[0] = calId;
-			cursor = contentResolver.query(CalendarController.EVENT_URI, FIELDS, selection, arg, sort);
+			cursor = contentResolver.query(CalendarCommunicator.EVENT_URI, FIELDS, selection, arg, sort);
 			Log.d(DEBUG_TAG, "calId: "+ calId + "\n"
 					+ "startMilli: " + startMilli + " " + df.format(new Date(startMilli)) + "\n"
 					+ "endMilli: " + endMilli + " " + df.format(new Date(endMilli)));
-			Log.d("zzz", selection);
+			Log.d(DEBUG_TAG, selection);
 			
 			try {
 				if (cursor.getCount() > 0) {

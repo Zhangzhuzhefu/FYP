@@ -1,10 +1,7 @@
 package sg.edu.ntu.sce.fyp.calevent.view;
 
-import java.util.ArrayList;
-
 import sg.edu.ntu.sce.fyp.calevent.R;
 import sg.edu.ntu.sce.fyp.calevent.activity.MainActivity;
-import sg.edu.ntu.sce.fyp.calevent.model.Event;
 import sg.edu.ntu.sce.fyp.calevent.model.ModelManager;
 import android.content.Context;
 
