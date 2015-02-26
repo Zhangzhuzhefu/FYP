@@ -58,7 +58,7 @@ public class MainActivity extends Activity {
 		//TODO
 		selectedCalendarIDs = new String[] {"1"};
 		modelManager.setSelectedCalendarIDs(selectedCalendarIDs);
-		caleventCommunicator.getMyEventAndUpdateView();
+		caleventCommunicator.getMyEventsAndUpdateView();
 	}
 	
 	

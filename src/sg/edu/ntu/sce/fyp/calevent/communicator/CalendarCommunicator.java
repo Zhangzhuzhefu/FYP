@@ -32,7 +32,8 @@ public class CalendarCommunicator {
 		eventReader = new EventReader(this.context);
 		modelMgr = ModelManager.getInstance();
 		viewlMgr = act.calendarViewMgr;
-		 
+		
+		/*set allCalendars, selecedCalendarsIDs and selectedCalendars*/
 		modelMgr.setAllCalendars(calReader.getAllCalendars());
 		int len = modelMgr.getAllCalendars().size();
 		int i = 0;
@@ -42,12 +43,13 @@ public class CalendarCommunicator {
 			modelMgr.getSelectedCalendarIDs()[i] = calendar.get(Calendars._ID);
 			i++;
 		}
-		
 		modelMgr.setSelectedCalendars(calReader.getSelectedCalendars(modelMgr.getSelectedCalendarIDs()));
-		getMyEventAndUpdateView();
+		
+		/*set myEvents and update view*/
+		getMyEventsAndUpdateView();
 	}
 	
-	public void getMyEventAndUpdateView(){
+	public void getMyEventsAndUpdateView(){
 		ArrayList<Event> eventList = readEventsOneWeekFromToday(modelMgr.getSelectedCalendarIDs());
 		modelMgr.setMyEventList(eventList);
 		viewlMgr.updateWeekView();
