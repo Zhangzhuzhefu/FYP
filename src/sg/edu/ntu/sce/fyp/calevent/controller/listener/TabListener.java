@@ -1,4 +1,4 @@
-package sg.edu.ntu.sce.fyp.calevent.listener;
+package sg.edu.ntu.sce.fyp.calevent.controller.listener;
 
 import sg.edu.ntu.sce.fyp.calevent.R;
 import sg.edu.ntu.sce.fyp.calevent.activity.MainActivity;
@@ -11,18 +11,18 @@ import android.app.FragmentTransaction;
 import android.view.View;
 import android.widget.Toast;
 
-public class TabListener<T extends Fragment> implements ActionBar.TabListener {
+public class TabListener implements ActionBar.TabListener {
     private Fragment mFragment_info;
     private final MainActivity mActivity;
     private final String mTag;
-    private final Class<T> mClass;
+    private final Class<?> mClass;
 
     /** Constructor used each time a new tab is created.
       * @param activity  The host Activity, used to instantiate the fragment
       * @param tag  The identifier tag for the fragment
       * @param clz  The fragment's Class, used to instantiate the fragment
       */
-    public TabListener(Activity activity, String tag, Class<T> clz) {
+    public TabListener(Activity activity, String tag, Class<?> clz) {
         mActivity = (MainActivity)activity;
         mTag = tag;
         mClass = clz;

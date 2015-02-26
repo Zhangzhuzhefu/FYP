@@ -2,11 +2,8 @@ package sg.edu.ntu.sce.fyp.calevent.view;
 
 import sg.edu.ntu.sce.fyp.calevent.R;
 import sg.edu.ntu.sce.fyp.calevent.activity.MainActivity;
-import sg.edu.ntu.sce.fyp.calevent.fragment.HomeFragment;
-import sg.edu.ntu.sce.fyp.calevent.fragment.InboxFragment;
-import sg.edu.ntu.sce.fyp.calevent.fragment.InfoFragment;
-import sg.edu.ntu.sce.fyp.calevent.fragment.NewEventFragment;
-import sg.edu.ntu.sce.fyp.calevent.listener.TabListener;
+import sg.edu.ntu.sce.fyp.calevent.activity.fragment.InfoFragment;
+import sg.edu.ntu.sce.fyp.calevent.controller.listener.TabListener;
 import sg.edu.ntu.sce.fyp.calevent.model.ModelManager;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
@@ -44,28 +41,25 @@ public class HomeViewManager {
 				.newTab()
 				.setIcon(R.drawable.tab_home)
 				.setTabListener(
-						new TabListener<HomeFragment>(activity, HOME,
-								HomeFragment.class));
+						new TabListener(activity, HOME, null));
 		actionBar.addTab(tab);
 		tab = actionBar
 				.newTab()
 				.setIcon(R.drawable.tab_new)
 				.setTabListener(
-						new TabListener<NewEventFragment>(activity, NEWEVENT,
-								NewEventFragment.class));
+						new TabListener(activity, NEWEVENT, null));
 		actionBar.addTab(tab);
 		tab = actionBar
 				.newTab()
 				.setIcon(R.drawable.tab_inbox)
 				.setTabListener(
-						new TabListener<InboxFragment>(activity, INBOX,
-								InboxFragment.class));
+						new TabListener(activity, INBOX, null));
 		actionBar.addTab(tab);
 		tab = actionBar
 				.newTab()
 				.setIcon(R.drawable.tab_info)
 				.setTabListener(
-						new TabListener<InfoFragment>(activity, INFO,
+						new TabListener(activity, INFO,
 								InfoFragment.class));
 		actionBar.addTab(tab);
 		

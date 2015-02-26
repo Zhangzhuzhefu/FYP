@@ -1,4 +1,4 @@
-package sg.edu.ntu.sce.fyp.calevent.listener;
+package sg.edu.ntu.sce.fyp.calevent.controller.listener;
 
 import java.util.Calendar;
 
@@ -13,9 +13,9 @@ public class EventOnClickListner implements OnClickListener{
 	private Context context; 
 	private Activity activity;
 	
-	public EventOnClickListner (Context context, Activity activity){
-		this.context = context;
-		this.activity =activity;  
+	public EventOnClickListner (Activity activity){
+		this.activity = activity;
+		this.context = this.activity.getApplicationContext();
 	}
 	
 	@Override

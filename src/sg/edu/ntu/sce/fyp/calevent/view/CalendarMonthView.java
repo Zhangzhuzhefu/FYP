@@ -4,8 +4,8 @@ import java.lang.reflect.Field;
 
 import sg.edu.ntu.sce.fyp.calevent.R;
 import sg.edu.ntu.sce.fyp.calevent.activity.MainActivity;
-import sg.edu.ntu.sce.fyp.calevent.listener.CalendarOnClickListner;
-import sg.edu.ntu.sce.fyp.calevent.listener.CalendarViewOnDateChangeListener;
+import sg.edu.ntu.sce.fyp.calevent.controller.listener.CalendarOnClickListner;
+import sg.edu.ntu.sce.fyp.calevent.controller.listener.CalendarViewOnDateChangeListener;
 import android.content.Context;
 import android.view.View;
 import android.widget.CalendarView;

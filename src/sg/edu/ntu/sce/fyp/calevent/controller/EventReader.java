@@ -1,4 +1,4 @@
-package sg.edu.ntu.sce.fyp.calevent.communicator;
+package sg.edu.ntu.sce.fyp.calevent.controller;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

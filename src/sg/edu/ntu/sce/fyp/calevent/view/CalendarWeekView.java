@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import sg.edu.ntu.sce.fyp.calevent.R;
 import sg.edu.ntu.sce.fyp.calevent.activity.MainActivity;
-import sg.edu.ntu.sce.fyp.calevent.listener.CalendarOnClickListner;
-import sg.edu.ntu.sce.fyp.calevent.listener.EventOnClickListner;
+import sg.edu.ntu.sce.fyp.calevent.controller.listener.CalendarOnClickListner;
+import sg.edu.ntu.sce.fyp.calevent.controller.listener.EventOnClickListner;
 import sg.edu.ntu.sce.fyp.calevent.model.Event;
 import sg.edu.ntu.sce.fyp.calevent.model.Today;
 import sg.edu.ntu.sce.fyp.calevent.util.DateHelper;
@@ -132,7 +132,7 @@ public class CalendarWeekView {
 			tv.setTextSize(10);
 			tv.setTextColor(this.activity.getResources().getColor(R.color.white));
 			tv.setBackgroundColor(this.activity.getResources().getColor(color));
-			tv.setOnClickListener(new EventOnClickListner(this.context, this.activity));
+			tv.setOnClickListener(new EventOnClickListner(this.activity));
 			colLayouts[colIndex].addView(tv);
 		}
 	}

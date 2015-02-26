@@ -1,8 +1,9 @@
-package sg.edu.ntu.sce.fyp.calevent.activity;
+package sg.edu.ntu.sce.fyp.calevent.controller.adapter;
 
 import java.util.List;
 
 import sg.edu.ntu.sce.fyp.calevent.R;
+import sg.edu.ntu.sce.fyp.calevent.activity.MainActivity;
 import sg.edu.ntu.sce.fyp.calevent.model.ModelManager;
 import sg.edu.ntu.sce.fyp.calevent.model.MyCalendar;
 import android.app.Activity;

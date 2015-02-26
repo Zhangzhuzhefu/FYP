@@ -1,6 +1,6 @@
 package sg.edu.ntu.sce.fyp.calevent.activity;
 
-import sg.edu.ntu.sce.fyp.calevent.communicator.CalendarCommunicator;
+import sg.edu.ntu.sce.fyp.calevent.controller.CalendarCommunicator;
 import sg.edu.ntu.sce.fyp.calevent.model.ModelManager;
 import sg.edu.ntu.sce.fyp.calevent.view.CalendarViewManager;
 import sg.edu.ntu.sce.fyp.calevent.view.HomeViewManager;
