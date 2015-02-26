@@ -1,15 +1,14 @@
 package sg.edu.ntu.sce.fyp.calevent.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class ModelManager {
 
 	private static ModelManager mg;
 	private Today today; 
 	private Settings settings;
-	private ArrayList<HashMap<String,String>> allCalendars;
-	private ArrayList<HashMap<String,String>> selectedCalendars;
+	private ArrayList<MyCalendar> allCalendars;
+	private ArrayList<MyCalendar> selectedCalendars;
 	private String[] selectedCalendarIDs;
 	private ArrayList<Event> myEventList;
 	private ArrayList<Event> otherEventList;
@@ -52,33 +51,44 @@ public class ModelManager {
 		return settings;
 	}
 
-	public ArrayList<HashMap<String, String>> getAllCalendars() {
+	public ArrayList<MyCalendar> getAllCalendars() {
 		if (allCalendars == null)
-			allCalendars = new ArrayList<HashMap<String, String>>();
+			allCalendars = new ArrayList<MyCalendar>();
 		return allCalendars;
 	}
 
-	public void setAllCalendars(ArrayList<HashMap<String, String>> allCalendars) {
+	public void setAllCalendarsAndUpdate(ArrayList<MyCalendar> allCalendars) {
 		this.allCalendars = allCalendars;
+		updateSelectedCalendars();
+	}
+	
+	public void updateSelectedCalendars(){
+		selectedCalendars = new ArrayList<MyCalendar>();
+		int numSelected = 0;
+		for (MyCalendar cal : allCalendars) {
+			if (cal.isSelected()){
+				selectedCalendars.add(cal);
+				numSelected ++;
+			}
+		}
+		selectedCalendarIDs = new String [numSelected];
+		int i = 0;
+		for (MyCalendar cal : allCalendars) {
+			if (cal.isSelected()){
+				selectedCalendarIDs[i] = cal.get_id();
+				i++;
+			}
+		}
 	}
 
-	public ArrayList<HashMap<String, String>> getSelectedCalendars() {
+	public ArrayList<MyCalendar> getSelectedCalendars() {
 		if (selectedCalendars == null)
-			selectedCalendars = new ArrayList<HashMap<String, String>>();
+			selectedCalendars = new ArrayList<MyCalendar>();
 		return selectedCalendars;
-	}
-
-	public void setSelectedCalendars(
-			ArrayList<HashMap<String, String>> selectedCalendars) {
-		this.selectedCalendars = selectedCalendars;
 	}
 
 	public String[] getSelectedCalendarIDs() {
 		return selectedCalendarIDs;
-	}
-
-	public void setSelectedCalendarIDs(String[] selectedCalendarIDs) {
-		this.selectedCalendarIDs = selectedCalendarIDs;
 	}
 
 }

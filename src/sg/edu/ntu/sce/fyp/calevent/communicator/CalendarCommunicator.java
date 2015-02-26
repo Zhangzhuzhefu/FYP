@@ -1,7 +1,6 @@
 package sg.edu.ntu.sce.fyp.calevent.communicator;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import sg.edu.ntu.sce.fyp.calevent.activity.MainActivity;
 import sg.edu.ntu.sce.fyp.calevent.model.Event;
@@ -10,7 +9,6 @@ import sg.edu.ntu.sce.fyp.calevent.util.DateHelper;
 import sg.edu.ntu.sce.fyp.calevent.view.CalendarViewManager;
 import android.content.Context;
 import android.net.Uri;
-import android.provider.CalendarContract.Calendars;
 
 public class CalendarCommunicator {
 	private Context context;
@@ -34,16 +32,7 @@ public class CalendarCommunicator {
 		viewlMgr = act.calendarViewMgr;
 		
 		/*set allCalendars, selecedCalendarsIDs and selectedCalendars*/
-		modelMgr.setAllCalendars(calReader.getAllCalendars());
-		int len = modelMgr.getAllCalendars().size();
-		int i = 0;
-		modelMgr.setSelectedCalendarIDs(new String[len]);
-		for (HashMap<String,String> calendar : modelMgr.getAllCalendars()){
-			modelMgr.getSelectedCalendars().add(calendar);
-			modelMgr.getSelectedCalendarIDs()[i] = calendar.get(Calendars._ID);
-			i++;
-		}
-		modelMgr.setSelectedCalendars(calReader.getSelectedCalendars(modelMgr.getSelectedCalendarIDs()));
+		modelMgr.setAllCalendarsAndUpdate(calReader.getAllCalendars());
 		
 		/*set myEvents and update view*/
 		getMyEventsAndUpdateView();

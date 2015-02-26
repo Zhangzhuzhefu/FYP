@@ -10,7 +10,6 @@ import sg.edu.ntu.sce.fyp.calevent.model.Event;
 import sg.edu.ntu.sce.fyp.calevent.model.Today;
 import sg.edu.ntu.sce.fyp.calevent.util.DateHelper;
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -74,7 +73,7 @@ public class CalendarWeekView {
 		calendarViewWeek.setVisibility(View.INVISIBLE);
 	}
 	
-	private void updateTimeLine(){
+	public void updateTimeLine(){
 		int marginTop;
 		marginTop = (int) ((float) DateHelper
 				.getCurrentTimeFromMidnightInMilli()
@@ -101,9 +100,7 @@ public class CalendarWeekView {
 			for (int i = 0; i < layout.getChildCount();i++) {
 		        View v = layout.getChildAt(i);
 		        if(v.getTag() != null)
-		        	Log.d("zzz", (String)v.getTag());
 		        if (v instanceof TextView) {
-		        	Log.d("zzz",(String) ((TextView)v).getText());
 					if (v.getTag() != null) {
 						if (v.getTag() instanceof String) {
 							if (((String) v.getTag()).equalsIgnoreCase("selected_event")) {

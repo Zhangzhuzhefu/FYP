@@ -1,14 +1,19 @@
 package sg.edu.ntu.sce.fyp.calevent.listener;
 
+import sg.edu.ntu.sce.fyp.calevent.R;
+import sg.edu.ntu.sce.fyp.calevent.activity.MainActivity;
+import sg.edu.ntu.sce.fyp.calevent.view.HomeViewManager;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.view.View;
+import android.widget.Toast;
 
 public class TabListener<T extends Fragment> implements ActionBar.TabListener {
-    private Fragment mFragment;
-    private final Activity mActivity;
+    private Fragment mFragment_info;
+    private final MainActivity mActivity;
     private final String mTag;
     private final Class<T> mClass;
 
@@ -18,30 +23,54 @@ public class TabListener<T extends Fragment> implements ActionBar.TabListener {
       * @param clz  The fragment's Class, used to instantiate the fragment
       */
     public TabListener(Activity activity, String tag, Class<T> clz) {
-        mActivity = activity;
+        mActivity = (MainActivity)activity;
         mTag = tag;
         mClass = clz;
     }
 
     /* The following are each of the ActionBar.TabListener callbacks */
 
-    public void onTabSelected(Tab tab, FragmentTransaction ft) {
-        // Check if the fragment is already initialized
-        if (mFragment == null) {
-            // If not, instantiate and add it to the activity
-            mFragment = Fragment.instantiate(mActivity, mClass.getName());
-            ft.add(android.R.id.content, mFragment, mTag);
-        } else {
-            // If it exists, simply attach it in order to show it
-            ft.attach(mFragment);
-        }
+	public void onTabSelected(Tab tab, FragmentTransaction ft) {
+		Toast.makeText(mActivity.getApplicationContext() , "tab selected", Toast.LENGTH_LONG).show();
+
+		if (mTag.equalsIgnoreCase(HomeViewManager.HOME)) {
+			mActivity.findViewById(R.id.activity_home_layout).setVisibility(View.VISIBLE);
+			if (mActivity.calendarViewMgr != null) mActivity.calendarViewMgr.updateTimeline();
+		} else if (mTag.equalsIgnoreCase(HomeViewManager.NEWEVENT)) {
+			mActivity.findViewById(R.id.activity_home_layout).setVisibility(View.VISIBLE);
+			if (mActivity.calendarViewMgr != null) mActivity.calendarViewMgr.updateTimeline();
+		} else if (mTag.equalsIgnoreCase(HomeViewManager.INBOX)) {
+			mActivity.findViewById(R.id.activity_home_layout).setVisibility(View.VISIBLE);
+			if (mActivity.calendarViewMgr != null) mActivity.calendarViewMgr.updateTimeline();
+		} else if (mTag.equalsIgnoreCase(HomeViewManager.INFO)) {
+			mActivity.findViewById(R.id.activity_home_layout).setVisibility(View.INVISIBLE);
+	        if (mFragment_info == null) {
+	        	mFragment_info = Fragment.instantiate(mActivity, mClass.getName());
+	            ft.add(android.R.id.content, mFragment_info, mTag);
+	        } else {
+	            ft.attach(mFragment_info);
+	        }
+		} else {
+			
+		}
+       
     }
 
     public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-        if (mFragment != null) {
-            // Detach the fragment, because another one is being attached
-            ft.detach(mFragment);
-        }
+        if (mTag.equalsIgnoreCase(HomeViewManager.HOME)) {
+        	
+        } else if (mTag.equalsIgnoreCase(HomeViewManager.NEWEVENT)) {
+        	
+		} else if (mTag.equalsIgnoreCase(HomeViewManager.INBOX)) {
+			
+		} else if (mTag.equalsIgnoreCase(HomeViewManager.INFO)) {
+			 if (mFragment_info != null) {
+		            // Detach the fragment, because another one is being attached
+		            ft.detach(mFragment_info);
+		        }
+		} else {
+			
+		}
     }
 
     public void onTabReselected(Tab tab, FragmentTransaction ft) {

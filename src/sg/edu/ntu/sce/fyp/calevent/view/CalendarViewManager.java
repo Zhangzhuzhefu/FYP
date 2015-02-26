@@ -16,14 +16,20 @@ public class CalendarViewManager {
 		weekView = new CalendarWeekView(ctx, act);
 		monthView = new CalendarMonthView(ctx, act);
 		modelMgr = ModelManager.getInstance();
+		setupCalendarView();
 	}
 	
-	public void setupCalendarView(){
+	private void setupCalendarView(){
 		weekView.setupCalendarViewWeek();
 		monthView.setupCalendarViewMonth();
 	}
 	
+	public void updateTimeline(){
+		weekView.updateTimeLine();
+	}
+	
 	public void updateWeekView(){
+		weekView.updateTimeLine();
 		if (modelMgr.getMyEventList() != null){
 			updateMyEventsInWeekView();
 		}

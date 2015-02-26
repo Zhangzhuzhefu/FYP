@@ -1,8 +1,8 @@
 package sg.edu.ntu.sce.fyp.calevent.communicator;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
+import sg.edu.ntu.sce.fyp.calevent.model.MyCalendar;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
@@ -36,17 +36,17 @@ public class CalendarReader {
 		contentResolver = ctx.getContentResolver();
 	}
 
-	public ArrayList<HashMap<String,String>> getAllCalendars() {
-		ArrayList<HashMap<String,String>> allCalendars = new ArrayList<HashMap<String,String>>();
+	public ArrayList<MyCalendar> getAllCalendars() {
+		ArrayList<MyCalendar> allCalendars = new ArrayList<MyCalendar>();
 		Cursor cursor = contentResolver.query(
 				CalendarCommunicator.CALENDAR_URI, FIELDS, null, null, null);
 		allCalendars = handleCursor_getCalendar(cursor);
 		return allCalendars;
 	}
 	
-	public ArrayList<HashMap<String,String>> getSelectedCalendars(String[] selectionIDs){
+	public ArrayList<MyCalendar> getSelectedCalendarsByQuery(String[] selectionIDs){
 		Cursor cursor = null;  
-		ArrayList<HashMap<String,String>> selectedCalendars = new ArrayList<HashMap<String,String>>();
+		ArrayList<MyCalendar> selectedCalendars = new ArrayList<MyCalendar>();
 		
 		String selection = "(" + Calendars._ID + " = ?)";
 		String[] selectionArgs = new String[1];
@@ -57,16 +57,17 @@ public class CalendarReader {
 			selectedCalendars.add(handleCursor_getCalendar(cursor).get(0));
 		}
 		
-		for (HashMap<String,String> cal: selectedCalendars) {
-			Log.d(DEBUG_TAG,"selectedCalendars: "+cal.get(Calendars.CALENDAR_DISPLAY_NAME));
+		for (MyCalendar cal: selectedCalendars) {
+			Log.d(DEBUG_TAG,"selectedCalendars: "+cal.getCalendar_display_name());
 		}
 		
 		return selectedCalendars;
 	}
 	
 	
-	private ArrayList<HashMap<String,String>> handleCursor_getCalendar(Cursor cursor){
-		ArrayList<HashMap<String,String>> calendars = new ArrayList<HashMap<String,String>>();
+	
+	private ArrayList<MyCalendar> handleCursor_getCalendar(Cursor cursor){
+		ArrayList<MyCalendar> calendars = new ArrayList<MyCalendar>();
 		try {
 			if (cursor.getCount() > 0) {
 				while (cursor.moveToNext()) {
@@ -79,24 +80,25 @@ public class CalendarReader {
 							.getString(CALENDAR_DISPLAY_NAME_INDEX);
 					owner_acc = cursor.getString(OWNER_ACCOUNT_INDEX);
 					cal_color = cursor.getString(CALENDAR_COLOR_INDEX);
-					Boolean selected = !cursor.getString(VISIBLE_INDEX).equals(
+					Boolean visible = !cursor.getString(VISIBLE_INDEX).equals(
 							"0");
 
-					HashMap<String, String> calendar = new HashMap<String, String>();
-					calendar.put(Calendars._ID, id);
-					calendar.put(Calendars.NAME, name);
-					calendar.put(Calendars.ACCOUNT_NAME, acc_name);
-					calendar.put(Calendars.ACCOUNT_TYPE, acc_type);
-					calendar.put(Calendars.OWNER_ACCOUNT, cal_display_name);
-					calendar.put(Calendars.CALENDAR_DISPLAY_NAME, owner_acc);
-					calendar.put(Calendars.CALENDAR_COLOR, cal_color);
-					calendar.put(Calendars.VISIBLE, String.valueOf(selected));
+					MyCalendar calendar = new MyCalendar();
+					calendar.set_id(id);
+					calendar.setName(name);
+					calendar.setAccount_name(acc_name);
+					calendar.setAccount_type(acc_type);
+					calendar.setCalendar_display_name(cal_display_name);
+					calendar.setOwner_account(owner_acc);
+					calendar.setColor(cal_color);
+					calendar.setVisible(visible);
+					calendar.setSelected(true);
 					
 					calendars.add(calendar);
 					Log.d(DEBUG_TAG, id + " " + name + "\n"
 							+ acc_name + " " + acc_type + "\n"
 							+ cal_display_name + "\n" + owner_acc + "\n"
-							+ cal_color + " " + String.valueOf(selected));
+							+ cal_color + " " + String.valueOf(visible));
 				}
 			}
 		} catch (AssertionError ex) {
