@@ -51,7 +51,7 @@ public class CaleandarListAdapter extends ArrayAdapter<MyCalendar> {
 							MyCalendar element = (MyCalendar) viewHolder.checkbox.getTag();
 							element.setSelected(buttonView.isChecked());
 							ModelManager.getInstance().updateSelectedCalendars();
-							activity.caleventCommunicator.getMyEventsAndUpdateView();
+							activity.caleventHelper.getMyEventsAndUpdateView();
 						}
 					});
 			view.setTag(viewHolder);

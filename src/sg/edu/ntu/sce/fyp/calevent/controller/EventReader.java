@@ -55,7 +55,7 @@ public class EventReader {
 		for (String calId : calIDs) {
 			
 			arg[0] = calId;
-			cursor = contentResolver.query(CalendarCommunicator.EVENT_URI, FIELDS, selection, arg, sort);
+			cursor = contentResolver.query(CalendarHelper.EVENT_URI, FIELDS, selection, arg, sort);
 			Log.d(DEBUG_TAG, "calId: "+ calId + "\n"
 					+ "startMilli: " + startMilli + " " + df.format(new Date(startMilli)) + "\n"
 					+ "endMilli: " + endMilli + " " + df.format(new Date(endMilli)));

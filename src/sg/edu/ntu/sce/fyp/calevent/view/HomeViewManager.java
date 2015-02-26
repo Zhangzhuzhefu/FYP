@@ -23,8 +23,8 @@ public class HomeViewManager {
 	public static final String INBOX = "inbox";
 	public static final String INFO = "info";
 	
-	public HomeViewManager(Context ctx, MainActivity act){
-		this.context = ctx;
+	public HomeViewManager(MainActivity act){
+		this.context = act.getApplicationContext(); 
 		this.activity = act;
 		setupHomeView();
 	}

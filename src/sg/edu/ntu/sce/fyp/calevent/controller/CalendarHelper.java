@@ -10,8 +10,8 @@ import sg.edu.ntu.sce.fyp.calevent.view.CalendarViewManager;
 import android.content.Context;
 import android.net.Uri;
 
-public class CalendarCommunicator {
-	private Context context;
+public class CalendarHelper {
+	private MainActivity activity;
 	private ModelManager modelMgr;
 	private CalendarViewManager viewlMgr;
 	
@@ -23,13 +23,15 @@ public class CalendarCommunicator {
 	public static final Uri CALENDAR_URI = Uri.parse("content://com.android.calendar/calendars");
 	public static final Uri EVENT_URI = Uri.parse("content://com.android.calendar/events");
 	
-	public CalendarCommunicator (Context context, MainActivity act){
-		this.context = context;
-		calReader = new CalendarReader(this.context);
-		calWriter = new CalendarWriter(this.context);
-		eventReader = new EventReader(this.context);
+	public CalendarHelper (MainActivity act){
+		this.activity = act;
+		Context context = act.getApplicationContext();
+		calReader = new CalendarReader(context);
+		calWriter = new CalendarWriter(context);
+		eventReader = new EventReader(context);
+		//TODO eventWriter
 		modelMgr = ModelManager.getInstance();
-		viewlMgr = act.calendarViewMgr;
+		viewlMgr = this.activity.calendarViewMgr;
 		
 		/*set allCalendars, selecedCalendarsIDs and selectedCalendars*/
 		modelMgr.setAllCalendarsAndUpdate(calReader.getAllCalendars());

@@ -12,7 +12,8 @@ public class CalendarViewManager {
 	private CalendarWeekView weekView;
 	private CalendarMonthView monthView;
 	
-	public CalendarViewManager(Context ctx, MainActivity act){
+	public CalendarViewManager(MainActivity act){
+		Context ctx = act.getApplicationContext();
 		weekView = new CalendarWeekView(ctx, act);
 		monthView = new CalendarMonthView(ctx, act);
 		modelMgr = ModelManager.getInstance();

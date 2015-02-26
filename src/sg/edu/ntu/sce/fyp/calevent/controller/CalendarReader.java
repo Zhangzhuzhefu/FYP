@@ -39,7 +39,7 @@ public class CalendarReader {
 	public ArrayList<MyCalendar> getAllCalendars() {
 		ArrayList<MyCalendar> allCalendars = new ArrayList<MyCalendar>();
 		Cursor cursor = contentResolver.query(
-				CalendarCommunicator.CALENDAR_URI, FIELDS, null, null, null);
+				CalendarHelper.CALENDAR_URI, FIELDS, null, null, null);
 		allCalendars = handleCursor_getCalendar(cursor);
 		return allCalendars;
 	}
@@ -53,7 +53,7 @@ public class CalendarReader {
 		
 		for (String cal_id : selectionIDs) {
 			selectionArgs[0] = cal_id;
-			cursor = contentResolver.query(CalendarCommunicator.CALENDAR_URI, FIELDS, selection, selectionArgs, null);
+			cursor = contentResolver.query(CalendarHelper.CALENDAR_URI, FIELDS, selection, selectionArgs, null);
 			selectedCalendars.add(handleCursor_getCalendar(cursor).get(0));
 		}
 		

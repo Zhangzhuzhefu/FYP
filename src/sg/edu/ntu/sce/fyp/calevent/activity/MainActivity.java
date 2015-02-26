@@ -1,6 +1,7 @@
 package sg.edu.ntu.sce.fyp.calevent.activity;
 
-import sg.edu.ntu.sce.fyp.calevent.controller.CalendarCommunicator;
+import sg.edu.ntu.sce.fyp.calevent.controller.CalendarHelper;
+import sg.edu.ntu.sce.fyp.calevent.controller.TransferHelper;
 import sg.edu.ntu.sce.fyp.calevent.model.ModelManager;
 import sg.edu.ntu.sce.fyp.calevent.view.CalendarViewManager;
 import sg.edu.ntu.sce.fyp.calevent.view.HomeViewManager;
@@ -14,7 +15,8 @@ public class MainActivity extends Activity {
 	
 	public ModelManager modelManager;
 	
-	public CalendarCommunicator caleventCommunicator;
+	public CalendarHelper caleventHelper;
+	public TransferHelper transferHelper;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +26,7 @@ public class MainActivity extends Activity {
 		initializeAppViews();
 		initializeAppCommunicator();
 		
-		//operationFlow();
+		operationFlowForUnitTesting();
 	}
 
 /*	@Override
@@ -39,15 +41,16 @@ public class MainActivity extends Activity {
 	}
 	
 	public void initializeAppViews() {
-		homeViewMgr = new HomeViewManager(getApplicationContext(),this);
-		calendarViewMgr = new CalendarViewManager(getApplicationContext(),this);
+		homeViewMgr = new HomeViewManager(this);
+		calendarViewMgr = new CalendarViewManager(this);
 	}
 
 	public void initializeAppCommunicator(){
-		caleventCommunicator = new CalendarCommunicator(getApplicationContext(), this);
+		caleventHelper = new CalendarHelper(this);
+		transferHelper = new TransferHelper(this);
 	}
 	
-	public void operationFlow(){
+	public void operationFlowForUnitTesting(){
 		
 	}
 	
