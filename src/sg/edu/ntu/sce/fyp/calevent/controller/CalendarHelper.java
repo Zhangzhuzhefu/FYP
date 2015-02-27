@@ -29,6 +29,7 @@ public class CalendarHelper {
 		calReader = new CalendarReader(context);
 		calWriter = new CalendarWriter(context);
 		eventReader = new EventReader(context);
+		eventWriter = new EventWriter(context);
 		//TODO eventWriter
 		modelMgr = ModelManager.getInstance();
 		viewlMgr = this.activity.calendarViewMgr;

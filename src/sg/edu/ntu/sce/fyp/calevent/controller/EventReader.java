@@ -35,23 +35,22 @@ public class EventReader {
 	private static final int DURATION_INDEX = 7;
 	
 	private ContentResolver contentResolver;
-	private ArrayList<Event> eventList;
 	
 	public EventReader(Context ctx) {
 		contentResolver = ctx.getContentResolver();
-		eventList = new ArrayList<Event>();
 	}
 	
 	public ArrayList<Event> readEventsFromCalendar(String[] calIDs, long startMilli, long endMilli){
 		Cursor cursor = null;  
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		ArrayList<Event> eventList = new ArrayList<Event>();
 		
 		String selection = "((calendar_id = ?) AND (dtstart >= ?) AND (dtstart <= ?))";
 		String[] arg = new String[3];
 		arg[1] = Long.toString(startMilli);
 		arg[2] = Long.toString(endMilli);
 		String sort = Events.DTSTART + "";
-		eventList.clear();
+		
 		for (String calId : calIDs) {
 			
 			arg[0] = calId;
