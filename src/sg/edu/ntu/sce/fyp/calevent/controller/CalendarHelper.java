@@ -58,6 +58,45 @@ public class CalendarHelper {
 		return eventReader.readEventsFromCalendar(modelMgr.getSelectedCalendarIDs(), nowInMilli, nowInMilli + durationInMilli);
 	}
 
+	public void addNewEventsToCalendar(ArrayList<Event> events, long cal_id){
+		for (Event ev : events) {
+			addNewEventToCalendar(ev, cal_id);
+		}
+	}
+
+	public void addNewEventToCalendar(Event ev, long cal_id){
+		if (ev != null) {
+			eventWriter.addNewEvent(ev, cal_id);
+			modelMgr.addNewEvent(ev);
+			viewlMgr.updateWeekView();
+		}
+	}
+	
+	public void updateNewEvents(ArrayList<Event> events){
+		for (Event ev : events) {
+			updateNewEvent(ev);
+		}
+	}
+
+	public void updateNewEvent(Event ev) {
+		if (ev != null) {
+			eventWriter.updateEvent(ev);
+			viewlMgr.updateWeekView();
+		}
+	}
+	public void deletEvents(ArrayList<Event> events){
+		for (Event ev : events) {
+			deletEvent(ev);
+		}
+	}
+	public void deletEvent(Event ev) {
+		if (ev != null) {
+			eventWriter.deletEvent(ev);
+			modelMgr.deleteEvent(ev);
+			viewlMgr.updateWeekView();
+		}
+	}
+	
 	public CalendarReader getCalReader() {
 		return calReader;
 	}

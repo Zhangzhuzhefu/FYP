@@ -41,7 +41,6 @@ public class CalendarViewManager {
 	
 	private void updateMyEventsInWeekView(){
 		weekView.updateEvents(modelMgr.getMyEventList(),R.color.myEvent_blue);
-
 	}
 	
 	private void updateEventsOfOthersInWeekView(){

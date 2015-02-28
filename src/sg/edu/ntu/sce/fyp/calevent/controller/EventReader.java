@@ -45,7 +45,7 @@ public class EventReader {
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		ArrayList<Event> eventList = new ArrayList<Event>();
 		
-		String selection = "((calendar_id = ?) AND (dtstart >= ?) AND (dtstart <= ?))";
+		String selection = "((calendar_id = ?) AND (dtstart >= ?) AND (dtstart <= ?) AND (deleted = 0))";
 		String[] arg = new String[3];
 		arg[1] = Long.toString(startMilli);
 		arg[2] = Long.toString(endMilli);
@@ -98,7 +98,7 @@ public class EventReader {
 							endTime.setTimeInMillis(Long.valueOf(ev.getDtend()));
 						}
 						
-						Log.d(DEBUG_TAG, ev.getEvent_id() + ": " + ev.getTitle() +"\n"
+						Log.d(DEBUG_TAG, ev.getEvent_id() + ": " + ev.getTitle() +" "+ ev.getCalendar_id()+"\n"
 								+ ev.getDescription() + "\n" 
 								+ "strt: " + ev.getDtstart() + " " + df.format(beginTime.getTime()) + "\n" 
 								+ "end:  " + ev.getDtend() +" " + (ev.getDtend()==null?"null":df.format(endTime.getTime())) + "\n" 

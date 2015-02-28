@@ -90,5 +90,24 @@ public class ModelManager {
 	public String[] getSelectedCalendarIDs() {
 		return selectedCalendarIDs;
 	}
+	
+	public Event getEventByID(String event_id){
+		for (Event ev : myEventList) {
+			if (ev.getEvent_id().equalsIgnoreCase(event_id)) {
+				return ev;
+			}
+		}
+		return null;
+	}
+	
+	public void addNewEvent(Event ev) {
+		if (ev != null)
+			myEventList.add(ev);
+	}
+
+	public void deleteEvent(Event ev) {
+		if (ev != null)
+			myEventList.remove(ev);
+	}
 
 }

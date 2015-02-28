@@ -1,12 +1,16 @@
 package sg.edu.ntu.sce.fyp.calevent.activity;
 
+import java.util.Calendar;
+
 import sg.edu.ntu.sce.fyp.calevent.controller.CalendarHelper;
 import sg.edu.ntu.sce.fyp.calevent.controller.TransferHelper;
+import sg.edu.ntu.sce.fyp.calevent.model.Event;
 import sg.edu.ntu.sce.fyp.calevent.model.ModelManager;
 import sg.edu.ntu.sce.fyp.calevent.view.CalendarViewManager;
 import sg.edu.ntu.sce.fyp.calevent.view.HomeViewManager;
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
@@ -51,7 +55,30 @@ public class MainActivity extends Activity {
 	}
 	
 	public void operationFlowForUnitTesting(){
+
+		///create a new event
+		Event newEvent = new Event();
+		long startMillis = 0; 
+		long endMillis = 0;   
+		Calendar beginTime = Calendar.getInstance();
+		beginTime.set(2015, 2, 2, 4, 10);
+		startMillis = beginTime.getTimeInMillis();
+		Calendar endTime = Calendar.getInstance();
+		endTime.set(2015, 2, 2, 4, 45);
+		endMillis = endTime.getTimeInMillis();
 		
+		newEvent.setDtstart(String.valueOf(startMillis));
+		newEvent.setDtend(String.valueOf(endMillis));
+		newEvent.setDuration(String.valueOf(endMillis-startMillis));
+		newEvent.setTitle("New");
+		newEvent.setDescription("Group workout");
+
+		
+		//caleventHelper.addNewEventToCalendar(newEvent, 3);
+		newEvent = modelManager.getEventByID("42");
+		//caleventHelper.updateNewEvent(newEvent);
+		caleventHelper.deletEvent(newEvent);
+		Toast.makeText(getApplicationContext(), String.valueOf(3), Toast.LENGTH_LONG).show();
 	}
 	
 }
