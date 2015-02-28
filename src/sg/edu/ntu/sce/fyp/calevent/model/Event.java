@@ -15,9 +15,10 @@ public class Event {
 	private String duration;
 	
 	private String startTimeFromMidnight;
+	private boolean toBeShared;
 	
 	public Event(){
-		
+		toBeShared = false;
 	}
 
 	public String getTitle() {
@@ -97,6 +98,14 @@ public class Event {
 
 	public void setStartTimeFromMidnight(String startTimeFromMidnight) {
 		this.startTimeFromMidnight = startTimeFromMidnight;
+	}
+
+	public boolean isToBeShared() {
+		return toBeShared;
+	}
+
+	public void setToBeShared(boolean toBeShared) {
+		this.toBeShared = toBeShared;
 	}
 	
 }

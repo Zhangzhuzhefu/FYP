@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import sg.edu.ntu.sce.fyp.calevent.R;
 import sg.edu.ntu.sce.fyp.calevent.activity.MainActivity;
 import sg.edu.ntu.sce.fyp.calevent.controller.listener.CalendarOnClickListner;
-import sg.edu.ntu.sce.fyp.calevent.controller.listener.EventOnClickListner;
+import sg.edu.ntu.sce.fyp.calevent.controller.listener.MyEventOnClickListner;
 import sg.edu.ntu.sce.fyp.calevent.model.Event;
 import sg.edu.ntu.sce.fyp.calevent.model.Today;
 import sg.edu.ntu.sce.fyp.calevent.util.DateHelper;
@@ -87,7 +87,7 @@ public class CalendarWeekView {
 	}
 	
 	public void updateEvents(ArrayList<Event> eventList, int color){
-		//TODO remove all TextViews
+		/*remove all TextViews*/
 		RelativeLayout[] colLayouts = new RelativeLayout[7];
 		colLayouts[0] = (RelativeLayout) this.activity.findViewById(R.id.sundayRelativeLayout);
 		colLayouts[1] = (RelativeLayout) this.activity.findViewById(R.id.mondayRelativeLayout);
@@ -132,7 +132,7 @@ public class CalendarWeekView {
 			tv.setTextSize(10);
 			tv.setTextColor(this.activity.getResources().getColor(R.color.white));
 			tv.setBackgroundColor(this.activity.getResources().getColor(color));
-			tv.setOnClickListener(new EventOnClickListner(this.activity));
+			tv.setOnClickListener(new MyEventOnClickListner(this.activity, ev));
 			colLayouts[colIndex].addView(tv);
 		}
 	}

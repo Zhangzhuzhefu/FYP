@@ -11,7 +11,8 @@ public class ModelManager {
 	private ArrayList<MyCalendar> selectedCalendars;
 	private String[] selectedCalendarIDs;
 	private ArrayList<Event> myEventList;
-	private ArrayList<Event> otherEventList;
+	private ArrayList<Event> toBeSharedEventList;
+	private ArrayList<Event> receivedEventList;
 	
 	public static ModelManager getInstance(){
 		if (mg == null) {
@@ -39,12 +40,26 @@ public class ModelManager {
 		this.myEventList = myEventList;
 	}
 
-	public ArrayList<Event> getOtherEventList() {
-		return otherEventList;
+	public ArrayList<Event> getToBeSharedEventList() {
+		if (toBeSharedEventList == null){
+			toBeSharedEventList = new ArrayList<Event>();
+		}
+		return toBeSharedEventList;
 	}
 
-	public void setOtherEventList(ArrayList<Event> otherEventList) {
-		this.otherEventList = otherEventList;
+	public void setToBeSharedEventList(ArrayList<Event> toBeSharedEventList) {
+		this.toBeSharedEventList = toBeSharedEventList;
+	}
+
+	public ArrayList<Event> getReceivedEventList() {
+		if (receivedEventList == null){
+			receivedEventList = new ArrayList<Event>();
+		}
+		return receivedEventList;
+	}
+
+	public void setReceivedEventList(ArrayList<Event> otherEventList) {
+		this.receivedEventList = otherEventList;
 	}
 
 	public Settings getSettings() {

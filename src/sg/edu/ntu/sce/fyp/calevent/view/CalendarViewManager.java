@@ -34,8 +34,8 @@ public class CalendarViewManager {
 		if (modelMgr.getMyEventList() != null){
 			updateMyEventsInWeekView();
 		}
-		if (modelMgr.getOtherEventList() != null){
-			updateEventsOfOthersInWeekView();
+		if (modelMgr.getReceivedEventList() != null){
+			updateReceivedEventsInWeekView();
 		}
 	}
 	
@@ -43,8 +43,8 @@ public class CalendarViewManager {
 		weekView.updateEvents(modelMgr.getMyEventList(),R.color.myEvent_blue);
 	}
 	
-	private void updateEventsOfOthersInWeekView(){
-		weekView.updateEvents(modelMgr.getOtherEventList(),R.color.otherEvent_green);
+	private void updateReceivedEventsInWeekView(){
+		weekView.updateEvents(modelMgr.getReceivedEventList(),R.color.otherEvent_green);
 	}
 	
 

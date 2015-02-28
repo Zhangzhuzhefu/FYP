@@ -28,8 +28,10 @@
     <color name="button_blue">#1ecbd6</color>
     <color name="strong_blue">#42b5d9</color>
     <color name="facebook_blue">#445fa2</color>
-    <color name="myEvent_blue">#7DB0E3</color>
-    <color name="otherEvent_green">#6EB580</color>
+    <color name="myEvent_blue">#9EBDF7</color>
+    <color name="myEvent_selected_blue">#5375B5</color>
+    <color name="otherEvent_green">#9AD6A9</color>
+    <color name="otherEvent_selected_green">#5FA370</color>
     <color name="discover_dark_blue">#0e435a</color>
     <color name="button_blue_translucent">#881ecbd6</color>
     <color name="playback_progress_color">#ff9a00</color>
