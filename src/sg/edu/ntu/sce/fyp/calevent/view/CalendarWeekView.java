@@ -70,7 +70,7 @@ public class CalendarWeekView {
 
 		calendarViewWeek.setOnClickListener(new CalendarOnClickListner(this.context, this.activity));
 
-		calendarViewWeek.setVisibility(View.INVISIBLE);
+		calendarViewWeek.setVisibility(View.VISIBLE);
 	}
 	
 	public void updateTimeLine(){

@@ -81,7 +81,7 @@ public class CalendarMonthView {
 		calendarViewMonth.setOnDateChangeListener(new CalendarViewOnDateChangeListener(this.context));
 		calendarViewMonth.setOnClickListener(new CalendarOnClickListner(this.context,this.activity));
 		
-		calendarViewMonth.setVisibility(View.VISIBLE);
+		this.activity.findViewById(R.id.calendar_layout_month).setVisibility(View.INVISIBLE);
 	}
 
 }

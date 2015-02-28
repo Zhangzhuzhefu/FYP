@@ -13,10 +13,14 @@ public class CalendarOnClickListner implements OnClickListener{
 
 	private Context context; 
 	private Activity activity;
+	private View week_view;
+	private View month_view;
 	
 	public CalendarOnClickListner (Context context, Activity activity){
 		this.context = context;
 		this.activity =activity;  
+		week_view = this.activity.findViewById(R.id.calendar_layout_week);
+		month_view = this.activity.findViewById(R.id.calendar_layout_month);
 	}
 	
 	@Override
@@ -27,12 +31,12 @@ public class CalendarOnClickListner implements OnClickListener{
 		
 		Toast.makeText(context , dayOfMonth + "/" + month+1 + "/" + year, Toast.LENGTH_LONG).show();
 		
-		if (this.activity.findViewById(R.id.calendar_layout_month).getVisibility() == View.VISIBLE) {
-			this.activity.findViewById(R.id.calendar_layout_month).setVisibility(View.INVISIBLE);
-			this.activity.findViewById(R.id.calendar_layout_week).setVisibility(View.VISIBLE);
+		if (month_view.getVisibility() == View.VISIBLE) {
+			week_view.setVisibility(View.VISIBLE);
+			month_view.setVisibility(View.INVISIBLE);
 		} else {
-			this.activity.findViewById(R.id.calendar_layout_month).setVisibility(View.VISIBLE);
-			this.activity.findViewById(R.id.calendar_layout_week).setVisibility(View.INVISIBLE);
+			week_view.setVisibility(View.INVISIBLE);
+			month_view.setVisibility(View.VISIBLE);
 		}
 		
 	}
