@@ -51,6 +51,9 @@ public class ModelManager {
 	}
 
 	public ArrayList<Event> getReceivedEventList() {
+		if (receivedEventList == null){
+			receivedEventList = new ArrayList<Event>();
+		}
 		return receivedEventList;
 	}
 

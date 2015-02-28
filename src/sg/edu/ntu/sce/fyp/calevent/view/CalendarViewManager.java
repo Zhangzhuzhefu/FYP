@@ -40,11 +40,11 @@ public class CalendarViewManager {
 	}
 	
 	private void updateMyEventsInWeekView(){
-		weekView.updateEvents(modelMgr.getMyEventList(),R.color.myEvent_blue);
+		weekView.updateEvents(modelMgr.getMyEventList(),R.color.myEvent_blue, "myevent");
 	}
 	
 	private void updateReceivedEventsInWeekView(){
-		weekView.updateEvents(modelMgr.getReceivedEventList(),R.color.otherEvent_green);
+		weekView.updateEvents(modelMgr.getReceivedEventList(),R.color.otherEvent_green,"receivedevent");
 	}
 	
 

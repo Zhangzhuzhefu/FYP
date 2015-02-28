@@ -86,7 +86,7 @@ public class CalendarWeekView {
 		curTimeLine.setLayoutParams(layoutParams);
 	}
 	
-	public void updateEvents(ArrayList<Event> eventList, int color){
+	public void updateEvents(ArrayList<Event> eventList, int color, String tag){
 		/*remove all TextViews*/
 		RelativeLayout[] colLayouts = new RelativeLayout[7];
 		colLayouts[0] = (RelativeLayout) this.activity.findViewById(R.id.sundayRelativeLayout);
@@ -103,7 +103,7 @@ public class CalendarWeekView {
 		        if (v instanceof TextView) {
 					if (v.getTag() != null) {
 						if (v.getTag() instanceof String) {
-							if (((String) v.getTag()).equalsIgnoreCase("selected_event")) {
+							if (((String) v.getTag()).equalsIgnoreCase(tag)) {
 								layout.removeView(v); 
 								i--;
 							}
@@ -126,7 +126,7 @@ public class CalendarWeekView {
 			RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
 					RelativeLayout.LayoutParams.MATCH_PARENT, tvHeight);
 			layoutParams.setMargins(0, tvMargtinTop, 0, 0);
-			tv.setTag("selected_event");
+			tv.setTag(tag);
 			tv.setLayoutParams(layoutParams);
 			tv.setText(eventTitle);
 			tv.setTextSize(10);
