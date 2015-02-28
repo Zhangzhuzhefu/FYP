@@ -30,7 +30,6 @@ public class CalendarHelper {
 		calWriter = new CalendarWriter(context);
 		eventReader = new EventReader(context);
 		eventWriter = new EventWriter(context);
-		//TODO eventWriter
 		modelMgr = ModelManager.getInstance();
 		viewlMgr = this.activity.calendarViewMgr;
 		
@@ -42,6 +41,7 @@ public class CalendarHelper {
 	}
 	
 	public void getMyEventsAndUpdateView(){
+		
 		ArrayList<Event> eventList = readEventsOneWeekFromToday(modelMgr.getSelectedCalendarIDs());
 		modelMgr.setMyEventList(eventList);
 		viewlMgr.updateWeekView();
@@ -62,9 +62,15 @@ public class CalendarHelper {
 		for (Event ev : events) {
 			addNewEventToCalendar(ev, cal_id);
 		}
+		viewlMgr.updateWeekView();
 	}
-
 	public void addNewEventToCalendar(Event ev, long cal_id){
+		if (ev != null) {
+			eventWriter.addNewEvent(ev, cal_id);
+			modelMgr.addNewEvent(ev);
+		}
+	}
+	public void addNewEventToCalendarAndUpdateView(Event ev, long cal_id){
 		if (ev != null) {
 			eventWriter.addNewEvent(ev, cal_id);
 			modelMgr.addNewEvent(ev);
@@ -76,9 +82,16 @@ public class CalendarHelper {
 		for (Event ev : events) {
 			updateNewEvent(ev);
 		}
+		viewlMgr.updateWeekView();
 	}
 
 	public void updateNewEvent(Event ev) {
+		if (ev != null) {
+			eventWriter.updateEvent(ev);
+		}
+	}
+	
+	public void updateNewEventAndUpdateView(Event ev) {
 		if (ev != null) {
 			eventWriter.updateEvent(ev);
 			viewlMgr.updateWeekView();
@@ -88,8 +101,15 @@ public class CalendarHelper {
 		for (Event ev : events) {
 			deletEvent(ev);
 		}
+		viewlMgr.updateWeekView();
 	}
 	public void deletEvent(Event ev) {
+		if (ev != null) {
+			eventWriter.deletEvent(ev);
+			modelMgr.deleteEvent(ev);
+		}
+	}
+	public void deletEventAndUpdateView(Event ev) {
 		if (ev != null) {
 			eventWriter.deletEvent(ev);
 			modelMgr.deleteEvent(ev);

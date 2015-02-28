@@ -4,6 +4,7 @@ public class Settings {
 	private static Settings settings;
 	
 	private boolean toggle; //ture: find; flase: share
+	private long writeCalendarId;
 	
 	private Settings (){
 		toggle = false;
@@ -21,6 +22,14 @@ public class Settings {
 
 	public void setToggle(boolean toggle) {
 		this.toggle = toggle;
+	}
+
+	public long getWriteCalendarId() {
+		return writeCalendarId;
+	}
+
+	public void setWriteCalendarId(long writeCalendarId) {
+		this.writeCalendarId = writeCalendarId;
 	}
 
 }

@@ -16,9 +16,14 @@ public class Event {
 	
 	private String startTimeFromMidnight;
 	private boolean toBeShared;
+	private boolean accepted;
+	
+	public static final String MYEVENT = "myevent";
+	public static final String RECEIVEDEVENT = "receivedevent";
 	
 	public Event(){
 		toBeShared = false;
+		accepted = false;
 	}
 
 	public String getTitle() {
@@ -106,6 +111,14 @@ public class Event {
 
 	public void setToBeShared(boolean toBeShared) {
 		this.toBeShared = toBeShared;
+	}
+
+	public boolean isAccepted() {
+		return accepted;
+	}
+
+	public void setAccepted(boolean accepted) {
+		this.accepted = accepted;
 	}
 	
 }

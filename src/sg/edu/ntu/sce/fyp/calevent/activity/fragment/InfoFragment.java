@@ -1,6 +1,6 @@
 package sg.edu.ntu.sce.fyp.calevent.activity.fragment;
 
-import sg.edu.ntu.sce.fyp.calevent.controller.adapter.CaleandarListAdapter;
+import sg.edu.ntu.sce.fyp.calevent.controller.adapter.ReadCaleandarListAdapter;
 import sg.edu.ntu.sce.fyp.calevent.model.ModelManager;
 import android.app.ListFragment;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ public class InfoFragment extends ListFragment{
 	@Override
 	  public void onActivityCreated(Bundle savedInstanceState) {
 	    super.onActivityCreated(savedInstanceState);
-	    CaleandarListAdapter adapter = new CaleandarListAdapter(getActivity(), ModelManager.getInstance().getAllCalendars()) ;
+	    ReadCaleandarListAdapter adapter = new ReadCaleandarListAdapter(getActivity(), ModelManager.getInstance().getAllCalendars()) ;
 	    setListAdapter(adapter);
 	  }
 

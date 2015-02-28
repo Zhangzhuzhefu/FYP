@@ -15,13 +15,13 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
-public class CaleandarListAdapter extends ArrayAdapter<MyCalendar> {
+public class ReadCaleandarListAdapter extends ArrayAdapter<MyCalendar> {
 
 	private final List<MyCalendar> calendarList;
 	private final MainActivity activity;
 
-	public CaleandarListAdapter(Activity act, List<MyCalendar> list) {
-		super(act, R.layout.rowlayout, list);
+	public ReadCaleandarListAdapter(Activity act, List<MyCalendar> list) {
+		super(act, R.layout.calendar_rowlayout, list);
 		this.activity = (MainActivity) act;
 		this.calendarList = list;
 	}
@@ -37,7 +37,7 @@ public class CaleandarListAdapter extends ArrayAdapter<MyCalendar> {
 		View view = null;
 		if (convertView == null) {
 			LayoutInflater inflator = activity.getLayoutInflater();
-			view = inflator.inflate(R.layout.rowlayout, null);
+			view = inflator.inflate(R.layout.calendar_rowlayout, null);
 			final ViewHolder viewHolder = new ViewHolder();
 			viewHolder.text_dsply = (TextView) view.findViewById(R.id.label_display_name);
 			viewHolder.text_owner = (TextView) view.findViewById(R.id.label_owner_account);

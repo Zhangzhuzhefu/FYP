@@ -2,14 +2,22 @@ package sg.edu.ntu.sce.fyp.calevent.activity;
 
 import java.util.Calendar;
 
+import sg.edu.ntu.sce.fyp.calevent.R;
 import sg.edu.ntu.sce.fyp.calevent.controller.CalendarHelper;
 import sg.edu.ntu.sce.fyp.calevent.controller.TransferHelper;
+import sg.edu.ntu.sce.fyp.calevent.controller.adapter.WriteCaleandarListAdapter;
 import sg.edu.ntu.sce.fyp.calevent.model.Event;
 import sg.edu.ntu.sce.fyp.calevent.model.ModelManager;
 import sg.edu.ntu.sce.fyp.calevent.view.CalendarViewManager;
 import sg.edu.ntu.sce.fyp.calevent.view.HomeViewManager;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ListView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
@@ -33,12 +41,34 @@ public class MainActivity extends Activity {
 		operationFlowForUnitTesting();
 	}
 
-/*	@Override
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.menu_main, menu);
 		return super.onCreateOptionsMenu(menu);
-	}*/
+	}
+	
+	@Override  
+    public boolean onOptionsItemSelected(MenuItem item) {  
+        switch (item.getItemId()) {  
+            case R.id.action_settings:  
+              AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+              //AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+              LayoutInflater inflater = getLayoutInflater();
+              View convertView = (View) inflater.inflate(R.layout.calendar_write_list, null);
+              alertDialog.setView(convertView);
+              alertDialog.setTitle("Select your calendar to be written");
+              alertDialog.setCanceledOnTouchOutside(true);
+              ListView listview = (ListView) convertView.findViewById(R.id.calendar_write_list);
+              //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,names);
+              WriteCaleandarListAdapter adapter = new WriteCaleandarListAdapter(this, ModelManager.getInstance().getAllCalendars()) ;
+              listview.setAdapter(adapter);
+              alertDialog.show();
+            return true;      
+              default:  
+                return super.onOptionsItemSelected(item);  
+        }  
+    }  
 	
 	public void initializeAppModels(){
 		modelManager = ModelManager.getInstance();

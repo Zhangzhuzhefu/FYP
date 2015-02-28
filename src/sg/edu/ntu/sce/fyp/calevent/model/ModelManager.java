@@ -13,6 +13,7 @@ public class ModelManager {
 	private ArrayList<Event> myEventList;
 	private ArrayList<Event> toBeSharedEventList;
 	private ArrayList<Event> receivedEventList;
+	private ArrayList<Event> acceptedEventList;
 	
 	public static ModelManager getInstance(){
 		if (mg == null) {
@@ -60,6 +61,17 @@ public class ModelManager {
 	public void setReceivedEventList(ArrayList<Event> receivedEventList) {
 		this.receivedEventList = receivedEventList;
 	}
+	
+	public ArrayList<Event> getAcceptedEventList() {
+		if (acceptedEventList == null){
+			acceptedEventList = new ArrayList<Event>();
+		}
+		return acceptedEventList;
+	}
+	
+	public void setAcceptedEventList(ArrayList<Event> receivedEventList) {
+		this.acceptedEventList = receivedEventList;
+	}
 
 	public Settings getSettings() {
 		return settings;
@@ -74,6 +86,7 @@ public class ModelManager {
 	public void setAllCalendarsAndUpdate(ArrayList<MyCalendar> allCalendars) {
 		this.allCalendars = allCalendars;
 		updateSelectedCalendars();
+		settings.setWriteCalendarId(Long.valueOf(getSelectedCalendarIDs()[0]));
 	}
 	
 	public void updateSelectedCalendars(){

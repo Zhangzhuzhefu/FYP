@@ -2,6 +2,7 @@ package sg.edu.ntu.sce.fyp.calevent.view;
 
 import sg.edu.ntu.sce.fyp.calevent.R;
 import sg.edu.ntu.sce.fyp.calevent.activity.MainActivity;
+import sg.edu.ntu.sce.fyp.calevent.model.Event;
 import sg.edu.ntu.sce.fyp.calevent.model.ModelManager;
 import android.content.Context;
 
@@ -40,11 +41,11 @@ public class CalendarViewManager {
 	}
 	
 	private void updateMyEventsInWeekView(){
-		weekView.updateEvents(modelMgr.getMyEventList(),R.color.myEvent_blue, "myevent");
+		weekView.updateEvents(modelMgr.getMyEventList(),R.color.myEvent_blue, Event.MYEVENT);
 	}
 	
 	private void updateReceivedEventsInWeekView(){
-		weekView.updateEvents(modelMgr.getReceivedEventList(),R.color.otherEvent_green,"receivedevent");
+		weekView.updateEvents(modelMgr.getReceivedEventList(),R.color.otherEvent_green,Event.RECEIVEDEVENT);
 	}
 	
 
