@@ -46,20 +46,16 @@ public class ModelManager {
 		}
 		return toBeSharedEventList;
 	}
-
 	public void setToBeSharedEventList(ArrayList<Event> toBeSharedEventList) {
 		this.toBeSharedEventList = toBeSharedEventList;
 	}
 
 	public ArrayList<Event> getReceivedEventList() {
-		if (receivedEventList == null){
-			receivedEventList = new ArrayList<Event>();
-		}
 		return receivedEventList;
 	}
 
-	public void setReceivedEventList(ArrayList<Event> otherEventList) {
-		this.receivedEventList = otherEventList;
+	public void setReceivedEventList(ArrayList<Event> receivedEventList) {
+		this.receivedEventList = receivedEventList;
 	}
 
 	public Settings getSettings() {
