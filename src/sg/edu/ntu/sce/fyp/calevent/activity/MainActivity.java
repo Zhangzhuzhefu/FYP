@@ -77,7 +77,7 @@ public class MainActivity extends Activity {
 		//caleventHelper.addNewEventToCalendar(newEvent, 3);
 		newEvent = modelManager.getEventByID("42");
 		//caleventHelper.updateNewEvent(newEvent);
-		caleventHelper.deletEvent(newEvent);
+		//caleventHelper.deletEvent(newEvent);
 		Toast.makeText(getApplicationContext(), String.valueOf(3), Toast.LENGTH_LONG).show();
 	}
 	
