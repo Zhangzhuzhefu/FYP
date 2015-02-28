@@ -57,10 +57,9 @@ public class MainActivity extends Activity {
               LayoutInflater inflater = getLayoutInflater();
               View convertView = (View) inflater.inflate(R.layout.calendar_write_list, null);
               alertDialog.setView(convertView);
-              alertDialog.setTitle("Select your calendar to be written");
+              alertDialog.setTitle(getResources().getText(R.string.select_to_be_written_calendar));
               alertDialog.setCanceledOnTouchOutside(true);
               ListView listview = (ListView) convertView.findViewById(R.id.calendar_write_list);
-              //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,names);
               WriteCaleandarListAdapter adapter = new WriteCaleandarListAdapter(this, ModelManager.getInstance().getAllCalendars()) ;
               listview.setAdapter(adapter);
               alertDialog.show();

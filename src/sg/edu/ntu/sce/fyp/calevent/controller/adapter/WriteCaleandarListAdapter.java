@@ -14,7 +14,6 @@ import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class WriteCaleandarListAdapter extends ArrayAdapter<MyCalendar> {
 
@@ -60,10 +59,6 @@ public class WriteCaleandarListAdapter extends ArrayAdapter<MyCalendar> {
 										(Long.valueOf(myCal.get_id())
 										- Settings.getInstance().getWriteCalendarId() == 0));
 							}
-							
-							Toast.makeText(activity.getApplicationContext(), 
-									String.valueOf(Settings.getInstance().getWriteCalendarId()),
-									Toast.LENGTH_SHORT).show();
 						}
 					});
 			view.setTag(viewHolder);
