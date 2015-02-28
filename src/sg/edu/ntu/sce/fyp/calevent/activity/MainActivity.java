@@ -3,6 +3,7 @@ package sg.edu.ntu.sce.fyp.calevent.activity;
 import java.util.Calendar;
 
 import sg.edu.ntu.sce.fyp.calevent.R;
+import sg.edu.ntu.sce.fyp.calevent.controller.BumpHandler;
 import sg.edu.ntu.sce.fyp.calevent.controller.CalendarHelper;
 import sg.edu.ntu.sce.fyp.calevent.controller.TransferHelper;
 import sg.edu.ntu.sce.fyp.calevent.controller.adapter.WriteCaleandarListAdapter;
@@ -18,7 +19,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
@@ -29,45 +29,49 @@ public class MainActivity extends Activity {
 	
 	public CalendarHelper caleventHelper;
 	public TransferHelper transferHelper;
-
+	private BumpHandler bumpHandler;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		initializeAppModels();
 		initializeAppViews();
-		initializeAppCommunicator();
+		initializeAppController();
 		
-		operationFlowForUnitTesting();
+		
+//		operationFlowForUnitTesting();
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.menu_main, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
 	
 	@Override  
-    public boolean onOptionsItemSelected(MenuItem item) {  
-        switch (item.getItemId()) {  
-            case R.id.action_settings:  
-              AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-              //AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
-              LayoutInflater inflater = getLayoutInflater();
-              View convertView = (View) inflater.inflate(R.layout.calendar_write_list, null);
-              alertDialog.setView(convertView);
-              alertDialog.setTitle(getResources().getText(R.string.select_to_be_written_calendar));
-              alertDialog.setCanceledOnTouchOutside(true);
-              ListView listview = (ListView) convertView.findViewById(R.id.calendar_write_list);
-              WriteCaleandarListAdapter adapter = new WriteCaleandarListAdapter(this, ModelManager.getInstance().getAllCalendars()) ;
-              listview.setAdapter(adapter);
-              alertDialog.show();
-            return true;      
-              default:  
-                return super.onOptionsItemSelected(item);  
-        }  
-    }  
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.action_settings:
+			AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+			LayoutInflater inflater = getLayoutInflater();
+			View convertView = (View) inflater.inflate(
+					R.layout.calendar_write_list, null);
+			alertDialog.setView(convertView);
+			alertDialog.setTitle(getResources().getText(
+					R.string.select_to_be_written_calendar));
+			alertDialog.setCanceledOnTouchOutside(true);
+			ListView listview = (ListView) convertView
+					.findViewById(R.id.calendar_write_list);
+			WriteCaleandarListAdapter adapter = new WriteCaleandarListAdapter(
+					this, ModelManager.getInstance().getAllCalendars());
+			listview.setAdapter(adapter);
+			alertDialog.show();
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
 	
 	public void initializeAppModels(){
 		modelManager = ModelManager.getInstance();
@@ -78,9 +82,23 @@ public class MainActivity extends Activity {
 		calendarViewMgr = new CalendarViewManager(this);
 	}
 
-	public void initializeAppCommunicator(){
+	public void initializeAppController(){
 		caleventHelper = new CalendarHelper(this);
 		transferHelper = new TransferHelper(this);
+		bumpHandler = new BumpHandler(this);
+	}
+	
+	@Override
+	public void onResume() {
+		bumpHandler.resume();
+		super.onResume();
+	}
+
+	@Override
+	public void onPause() {
+
+		bumpHandler.pause();
+		super.onPause();
 	}
 	
 	public void operationFlowForUnitTesting(){
@@ -107,7 +125,7 @@ public class MainActivity extends Activity {
 		//newEvent = modelManager.getEventByID("42");
 		//caleventHelper.updateNewEvent(newEvent);
 		//caleventHelper.deletEvent(newEvent);
-		Toast.makeText(getApplicationContext(), String.valueOf(3), Toast.LENGTH_LONG).show();
 	}
 	
+
 }
