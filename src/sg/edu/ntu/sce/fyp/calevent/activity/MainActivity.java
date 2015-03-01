@@ -5,19 +5,23 @@ import java.util.Calendar;
 import sg.edu.ntu.sce.fyp.calevent.R;
 import sg.edu.ntu.sce.fyp.calevent.controller.CalendarHelper;
 import sg.edu.ntu.sce.fyp.calevent.controller.adapter.WriteCaleandarListAdapter;
+import sg.edu.ntu.sce.fyp.calevent.model.BeamHelper;
 import sg.edu.ntu.sce.fyp.calevent.model.BumpHandler;
 import sg.edu.ntu.sce.fyp.calevent.model.CalendarReader;
 import sg.edu.ntu.sce.fyp.calevent.model.CalendarWriter;
 import sg.edu.ntu.sce.fyp.calevent.model.DataManager;
 import sg.edu.ntu.sce.fyp.calevent.model.EventReader;
 import sg.edu.ntu.sce.fyp.calevent.model.EventWriter;
-import sg.edu.ntu.sce.fyp.calevent.model.BeamHelper;
 import sg.edu.ntu.sce.fyp.calevent.model.myclass.MyEvent;
 import sg.edu.ntu.sce.fyp.calevent.view.CalendarViewManager;
 import sg.edu.ntu.sce.fyp.calevent.view.HomeViewManager;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.nfc.NdefMessage;
+import android.nfc.NfcAdapter.CreateNdefMessageCallback;
+import android.nfc.NfcEvent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -25,7 +29,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements CreateNdefMessageCallback{
 	private Context context;
 	public CalendarViewManager calendarViewMgr;
 	public HomeViewManager homeViewMgr;
@@ -104,15 +108,20 @@ public class MainActivity extends Activity {
 	
 	@Override
 	public void onResume() {
-		bumpHandler.resume();
 		super.onResume();
+		bumpHandler.onResume();
+		beamHelper.onResume();
 	}
 
 	@Override
 	public void onPause() {
-
-		bumpHandler.pause();
 		super.onPause();
+		bumpHandler.onPause();
+	}
+
+	@Override
+	public void onNewIntent(Intent intent) {
+		beamHelper.onNewIntent(intent);
 	}
 	
 	public void operationFlowForUnitTesting(){
@@ -139,6 +148,11 @@ public class MainActivity extends Activity {
 		//newEvent = modelManager.getEventByID("42");
 		//caleventHelper.updateNewEvent(newEvent);
 		//caleventHelper.deletEvent(newEvent);
+	}
+
+	@Override
+	public NdefMessage createNdefMessage(NfcEvent event) {
+		return beamHelper.createNdefMessage(event);
 	}
 	
 

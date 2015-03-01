@@ -27,11 +27,11 @@ public class BumpHandler {
 	    });
 	}
 
-	public void resume() {
+	public void onResume() {
 		bumper.resume();
 	}
 
-	public void pause() {
+	public void onPause() {
 		bumper.pause();
 	}
 
