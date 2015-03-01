@@ -11,7 +11,7 @@ import sg.edu.ntu.sce.fyp.calevent.model.CalendarWriter;
 import sg.edu.ntu.sce.fyp.calevent.model.DataManager;
 import sg.edu.ntu.sce.fyp.calevent.model.EventReader;
 import sg.edu.ntu.sce.fyp.calevent.model.EventWriter;
-import sg.edu.ntu.sce.fyp.calevent.model.TransferHelper;
+import sg.edu.ntu.sce.fyp.calevent.model.BeamHelper;
 import sg.edu.ntu.sce.fyp.calevent.model.myclass.MyEvent;
 import sg.edu.ntu.sce.fyp.calevent.view.CalendarViewManager;
 import sg.edu.ntu.sce.fyp.calevent.view.HomeViewManager;
@@ -37,7 +37,7 @@ public class MainActivity extends Activity {
 	public EventWriter eventWriter;
 	
 	public CalendarHelper caleventHelper;
-	public TransferHelper transferHelper;
+	public BeamHelper beamHelper;
 	private BumpHandler bumpHandler;
 	
 	@Override
@@ -86,7 +86,7 @@ public class MainActivity extends Activity {
 	public void initializeAppModels(){
 		dataManager = DataManager.getInstance();
 		bumpHandler = new BumpHandler(this);
-		transferHelper = new TransferHelper(this);
+		beamHelper = new BeamHelper(this);
 		calReader = new CalendarReader(context);
 		calWriter = new CalendarWriter(context);
 		eventReader = new EventReader(context);

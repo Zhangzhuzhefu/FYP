@@ -9,11 +9,11 @@ import android.widget.Toast;
 public class BumpHandler {
 	private MainActivity activity;
 	private BumpListener bumper;
-	private TransferHelper transferHelper;
+	private BeamHelper transferHelper;
 
 	public BumpHandler(MainActivity mainActivity) {
 		activity = mainActivity;
-		transferHelper = activity.transferHelper;
+		transferHelper = activity.beamHelper;
 		final Vibrator vibe = (Vibrator)activity.getSystemService(Context.VIBRATOR_SERVICE);
 
 	    bumper = new BumpListener(activity);
