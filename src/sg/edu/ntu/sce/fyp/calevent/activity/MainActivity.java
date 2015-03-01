@@ -3,16 +3,21 @@ package sg.edu.ntu.sce.fyp.calevent.activity;
 import java.util.Calendar;
 
 import sg.edu.ntu.sce.fyp.calevent.R;
-import sg.edu.ntu.sce.fyp.calevent.controller.BumpHandler;
 import sg.edu.ntu.sce.fyp.calevent.controller.CalendarHelper;
-import sg.edu.ntu.sce.fyp.calevent.controller.TransferHelper;
 import sg.edu.ntu.sce.fyp.calevent.controller.adapter.WriteCaleandarListAdapter;
-import sg.edu.ntu.sce.fyp.calevent.model.Event;
-import sg.edu.ntu.sce.fyp.calevent.model.ModelManager;
+import sg.edu.ntu.sce.fyp.calevent.model.BumpHandler;
+import sg.edu.ntu.sce.fyp.calevent.model.CalendarReader;
+import sg.edu.ntu.sce.fyp.calevent.model.CalendarWriter;
+import sg.edu.ntu.sce.fyp.calevent.model.DataManager;
+import sg.edu.ntu.sce.fyp.calevent.model.EventReader;
+import sg.edu.ntu.sce.fyp.calevent.model.EventWriter;
+import sg.edu.ntu.sce.fyp.calevent.model.TransferHelper;
+import sg.edu.ntu.sce.fyp.calevent.model.myclass.MyEvent;
 import sg.edu.ntu.sce.fyp.calevent.view.CalendarViewManager;
 import sg.edu.ntu.sce.fyp.calevent.view.HomeViewManager;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -21,11 +26,15 @@ import android.view.View;
 import android.widget.ListView;
 
 public class MainActivity extends Activity {
-	
+	private Context context;
 	public CalendarViewManager calendarViewMgr;
 	public HomeViewManager homeViewMgr;
 	
-	public ModelManager modelManager;
+	public DataManager dataManager;
+	public CalendarReader calReader;
+	public CalendarWriter calWriter;
+	public EventReader eventReader;
+	public EventWriter eventWriter;
 	
 	public CalendarHelper caleventHelper;
 	public TransferHelper transferHelper;
@@ -34,6 +43,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		context = getApplicationContext();
 
 		initializeAppModels();
 		initializeAppViews();
@@ -64,7 +74,7 @@ public class MainActivity extends Activity {
 			ListView listview = (ListView) convertView
 					.findViewById(R.id.calendar_write_list);
 			WriteCaleandarListAdapter adapter = new WriteCaleandarListAdapter(
-					this, ModelManager.getInstance().getAllCalendars());
+					this, DataManager.getInstance().getAllCalendars());
 			listview.setAdapter(adapter);
 			alertDialog.show();
 			return true;
@@ -74,7 +84,13 @@ public class MainActivity extends Activity {
 	}
 	
 	public void initializeAppModels(){
-		modelManager = ModelManager.getInstance();
+		dataManager = DataManager.getInstance();
+		bumpHandler = new BumpHandler(this);
+		transferHelper = new TransferHelper(this);
+		calReader = new CalendarReader(context);
+		calWriter = new CalendarWriter(context);
+		eventReader = new EventReader(context);
+		eventWriter = new EventWriter(context);
 	}
 	
 	public void initializeAppViews() {
@@ -84,8 +100,6 @@ public class MainActivity extends Activity {
 
 	public void initializeAppController(){
 		caleventHelper = new CalendarHelper(this);
-		transferHelper = new TransferHelper(this);
-		bumpHandler = new BumpHandler(this);
 	}
 	
 	@Override
@@ -104,7 +118,7 @@ public class MainActivity extends Activity {
 	public void operationFlowForUnitTesting(){
 
 		///create a new event
-		Event newEvent = new Event();
+		MyEvent newEvent = new MyEvent();
 		long startMillis = 0; 
 		long endMillis = 0;   
 		Calendar beginTime = Calendar.getInstance();

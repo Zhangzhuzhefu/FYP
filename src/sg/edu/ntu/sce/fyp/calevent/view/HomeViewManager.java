@@ -7,7 +7,7 @@ import sg.edu.ntu.sce.fyp.calevent.controller.listener.TabListenerHome;
 import sg.edu.ntu.sce.fyp.calevent.controller.listener.TabListenerInbox;
 import sg.edu.ntu.sce.fyp.calevent.controller.listener.TabListenerInfo;
 import sg.edu.ntu.sce.fyp.calevent.controller.listener.TabListenerNewevent;
-import sg.edu.ntu.sce.fyp.calevent.model.ModelManager;
+import sg.edu.ntu.sce.fyp.calevent.model.DataManager;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
@@ -75,7 +75,7 @@ public class HomeViewManager {
 		toggle.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				ModelManager.getInstance().getSettings().setToggle(isChecked);
+				DataManager.getInstance().getSettings().setToggle(isChecked);
 				
 				Toast.makeText(
 						context,

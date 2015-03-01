@@ -1,5 +1,6 @@
-package sg.edu.ntu.sce.fyp.calevent.controller;
+package sg.edu.ntu.sce.fyp.calevent.model;
 
+import sg.edu.ntu.sce.fyp.calevent.controller.CalendarHelper;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;

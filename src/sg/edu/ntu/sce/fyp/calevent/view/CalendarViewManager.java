@@ -2,13 +2,13 @@ package sg.edu.ntu.sce.fyp.calevent.view;
 
 import sg.edu.ntu.sce.fyp.calevent.R;
 import sg.edu.ntu.sce.fyp.calevent.activity.MainActivity;
-import sg.edu.ntu.sce.fyp.calevent.model.Event;
-import sg.edu.ntu.sce.fyp.calevent.model.ModelManager;
+import sg.edu.ntu.sce.fyp.calevent.model.DataManager;
+import sg.edu.ntu.sce.fyp.calevent.model.myclass.MyEvent;
 import android.content.Context;
 
 public class CalendarViewManager {
 
-	private ModelManager modelMgr; 
+	private DataManager dataMgr; 
 	
 	private CalendarWeekView weekView;
 	private CalendarMonthView monthView;
@@ -17,7 +17,7 @@ public class CalendarViewManager {
 		Context ctx = act.getApplicationContext();
 		weekView = new CalendarWeekView(ctx, act);
 		monthView = new CalendarMonthView(ctx, act);
-		modelMgr = ModelManager.getInstance();
+		dataMgr = DataManager.getInstance();
 		setupCalendarView();
 	}
 	
@@ -32,20 +32,20 @@ public class CalendarViewManager {
 	
 	public void updateWeekView(){
 		weekView.updateTimeLine();
-		if (modelMgr.getMyEventList() != null){
+		if (dataMgr.getMyEventList() != null){
 			updateMyEventsInWeekView();
 		}
-		if (modelMgr.getReceivedEventList() != null){
+		if (dataMgr.getReceivedEventList() != null){
 			updateReceivedEventsInWeekView();
 		}
 	}
 	
 	private void updateMyEventsInWeekView(){
-		weekView.updateEvents(modelMgr.getMyEventList(),R.color.myEvent_blue, Event.MYEVENT);
+		weekView.updateEvents(dataMgr.getMyEventList(),R.color.myEvent_blue, MyEvent.MYEVENT);
 	}
 	
 	private void updateReceivedEventsInWeekView(){
-		weekView.updateEvents(modelMgr.getReceivedEventList(),R.color.otherEvent_green,Event.RECEIVEDEVENT);
+		weekView.updateEvents(dataMgr.getReceivedEventList(),R.color.otherEvent_green,MyEvent.RECEIVEDEVENT);
 	}
 	
 

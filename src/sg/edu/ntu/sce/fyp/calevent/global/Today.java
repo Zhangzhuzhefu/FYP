@@ -1,8 +1,7 @@
-package sg.edu.ntu.sce.fyp.calevent.model;
+package sg.edu.ntu.sce.fyp.calevent.global;
 
 import java.util.Calendar;
 
-import sg.edu.ntu.sce.fyp.calevent.util.DateHelper;
 import android.util.Log;
 
 public class Today {

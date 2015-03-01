@@ -1,4 +1,4 @@
-package sg.edu.ntu.sce.fyp.calevent.model;
+package sg.edu.ntu.sce.fyp.calevent.global;
 
 public class Settings {
 	private static Settings settings;

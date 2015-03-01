@@ -1,15 +1,18 @@
-package sg.edu.ntu.sce.fyp.calevent.controller;
+package sg.edu.ntu.sce.fyp.calevent.model;
 
 import sg.edu.ntu.sce.fyp.calevent.activity.MainActivity;
-import sg.edu.ntu.sce.fyp.calevent.model.ModelManager;
 
 public class TransferHelper {
 	private MainActivity activity;
-	private ModelManager modelMgr; 
+	private DataManager dataMgr; 
 	
 	public TransferHelper(MainActivity act){
 		this.activity = act;
-		modelMgr = act.modelManager;
+		dataMgr = act.dataManager;
+	}
+	
+	public void sendAndReceiveData(){
+		
 	}
 
 }

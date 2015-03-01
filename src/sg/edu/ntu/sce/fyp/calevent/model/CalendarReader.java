@@ -1,8 +1,9 @@
-package sg.edu.ntu.sce.fyp.calevent.controller;
+package sg.edu.ntu.sce.fyp.calevent.model;
 
 import java.util.ArrayList;
 
-import sg.edu.ntu.sce.fyp.calevent.model.MyCalendar;
+import sg.edu.ntu.sce.fyp.calevent.controller.CalendarHelper;
+import sg.edu.ntu.sce.fyp.calevent.model.myclass.MyCalendar;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;

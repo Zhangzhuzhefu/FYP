@@ -1,9 +1,8 @@
-package sg.edu.ntu.sce.fyp.calevent.util;
+package sg.edu.ntu.sce.fyp.calevent.global;
 
 import java.util.Calendar;
 import java.util.Date;
 
-import sg.edu.ntu.sce.fyp.calevent.model.Today;
 
 public class DateHelper {
 	public static final long WEEKINMILLI = 1000*60*60*24*7;

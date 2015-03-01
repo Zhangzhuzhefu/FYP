@@ -1,8 +1,8 @@
-package sg.edu.ntu.sce.fyp.calevent.controller;
+package sg.edu.ntu.sce.fyp.calevent.model;
 
 import java.util.TimeZone;
 
-import sg.edu.ntu.sce.fyp.calevent.model.Event;
+import sg.edu.ntu.sce.fyp.calevent.model.myclass.MyEvent;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -19,7 +19,7 @@ public class EventWriter {
 	}
 
 
-	public long addNewEvent(Event ev, long cal_id){
+	public long addNewEvent(MyEvent ev, long cal_id){
 		
 		ContentValues values = new ContentValues();
 		TimeZone tz = TimeZone.getDefault();
@@ -35,7 +35,7 @@ public class EventWriter {
 		return Long.parseLong(uri.getLastPathSegment());
 	}
 	
-	public void updateEvent(Event ev) {
+	public void updateEvent(MyEvent ev) {
 		long eventID = Long.valueOf(ev.getEvent_id());
 		
 		ContentValues values = new ContentValues();
@@ -50,7 +50,7 @@ public class EventWriter {
 
 	}
 	
-	public void deletEvent (Event ev) {
+	public void deletEvent (MyEvent ev) {
 		Uri deleteUri = ContentUris.withAppendedId(Events.CONTENT_URI, Long.valueOf(ev.getEvent_id()));
 		int rows = contentResolver.delete(deleteUri, null, null);
 		Log.d(DEBUG_TAG, "Rows deleted: " + rows);

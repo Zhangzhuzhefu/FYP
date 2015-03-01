@@ -6,9 +6,9 @@ import sg.edu.ntu.sce.fyp.calevent.R;
 import sg.edu.ntu.sce.fyp.calevent.activity.MainActivity;
 import sg.edu.ntu.sce.fyp.calevent.controller.listener.CalendarOnClickListner;
 import sg.edu.ntu.sce.fyp.calevent.controller.listener.MyEventOnClickListner;
-import sg.edu.ntu.sce.fyp.calevent.model.Event;
-import sg.edu.ntu.sce.fyp.calevent.model.Today;
-import sg.edu.ntu.sce.fyp.calevent.util.DateHelper;
+import sg.edu.ntu.sce.fyp.calevent.global.DateHelper;
+import sg.edu.ntu.sce.fyp.calevent.global.Today;
+import sg.edu.ntu.sce.fyp.calevent.model.myclass.MyEvent;
 import android.content.Context;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -30,7 +30,7 @@ public class CalendarWeekView {
 		 * set up calendarViewWeek
 		 */
 		calendarViewWeek = this.activity.findViewById(R.id.calendar_layout_week);
-		Today today = this.activity.modelManager.getToday();
+		Today today = this.activity.dataManager.getToday();
 		TextView currentMonthTextView = (TextView) this.activity.findViewById(R.id.currentMonthTextView);
 		TextView currentYearTextView = (TextView) this.activity.findViewById(R.id.currentYearTextView);
 		currentMonthTextView.setText(DateHelper.convertMonth(today.monthInt));
@@ -86,7 +86,7 @@ public class CalendarWeekView {
 		curTimeLine.setLayoutParams(layoutParams);
 	}
 	
-	public void updateEvents(ArrayList<Event> eventList, int color, String tag){
+	public void updateEvents(ArrayList<MyEvent> eventList, int color, String tag){
 		/*remove all TextViews*/
 		RelativeLayout[] colLayouts = new RelativeLayout[7];
 		colLayouts[0] = (RelativeLayout) this.activity.findViewById(R.id.sundayRelativeLayout);
@@ -112,7 +112,7 @@ public class CalendarWeekView {
 		        } 
 		    }
 		}
-		for (Event ev : eventList) {
+		for (MyEvent ev : eventList) {
 			TextView tv;
 			String eventTitle;
 			int colIndex, tvHeight, tvMargtinTop;

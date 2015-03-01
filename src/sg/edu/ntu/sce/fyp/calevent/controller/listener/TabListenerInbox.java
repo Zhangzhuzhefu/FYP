@@ -2,7 +2,7 @@ package sg.edu.ntu.sce.fyp.calevent.controller.listener;
 
 import sg.edu.ntu.sce.fyp.calevent.R;
 import sg.edu.ntu.sce.fyp.calevent.activity.MainActivity;
-import sg.edu.ntu.sce.fyp.calevent.model.Settings;
+import sg.edu.ntu.sce.fyp.calevent.global.Settings;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
@@ -34,9 +34,9 @@ public class TabListenerInbox implements ActionBar.TabListener {
 
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
 		mActivity.caleventHelper.addNewEventsToCalendar(
-				mActivity.modelManager.getAcceptedEventList(), 
+				mActivity.dataManager.getAcceptedEventList(), 
 				Settings.getInstance().getWriteCalendarId());
-		mActivity.modelManager.getAcceptedEventList().clear();
+		mActivity.dataManager.getAcceptedEventList().clear();
 	}
 
 	public void onTabReselected(Tab tab, FragmentTransaction ft) {

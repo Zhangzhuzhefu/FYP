@@ -1,4 +1,4 @@
-package sg.edu.ntu.sce.fyp.calevent.controller;
+package sg.edu.ntu.sce.fyp.calevent.model;
 
 import sg.edu.ntu.sce.fyp.calevent.activity.MainActivity;
 import sg.edu.ntu.sce.fyp.calevent.controller.listener.BumpListener;
@@ -22,6 +22,7 @@ public class BumpHandler {
 	      {
 	        vibe.vibrate(100);
 			Toast.makeText(activity.getApplicationContext(), "shaken", Toast.LENGTH_SHORT).show();
+			transferHelper.sendAndReceiveData();
 	      }
 	    });
 	}

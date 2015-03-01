@@ -4,8 +4,8 @@ import java.util.List;
 
 import sg.edu.ntu.sce.fyp.calevent.R;
 import sg.edu.ntu.sce.fyp.calevent.activity.MainActivity;
-import sg.edu.ntu.sce.fyp.calevent.model.MyCalendar;
-import sg.edu.ntu.sce.fyp.calevent.model.Settings;
+import sg.edu.ntu.sce.fyp.calevent.global.Settings;
+import sg.edu.ntu.sce.fyp.calevent.model.myclass.MyCalendar;
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;

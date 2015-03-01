@@ -3,18 +3,22 @@ package sg.edu.ntu.sce.fyp.calevent.controller;
 import java.util.ArrayList;
 
 import sg.edu.ntu.sce.fyp.calevent.activity.MainActivity;
-import sg.edu.ntu.sce.fyp.calevent.model.Event;
-import sg.edu.ntu.sce.fyp.calevent.model.ModelManager;
-import sg.edu.ntu.sce.fyp.calevent.util.DateHelper;
+import sg.edu.ntu.sce.fyp.calevent.global.DateHelper;
+import sg.edu.ntu.sce.fyp.calevent.model.CalendarReader;
+import sg.edu.ntu.sce.fyp.calevent.model.CalendarWriter;
+import sg.edu.ntu.sce.fyp.calevent.model.DataManager;
+import sg.edu.ntu.sce.fyp.calevent.model.EventReader;
+import sg.edu.ntu.sce.fyp.calevent.model.EventWriter;
+import sg.edu.ntu.sce.fyp.calevent.model.myclass.MyEvent;
 import sg.edu.ntu.sce.fyp.calevent.view.CalendarViewManager;
-import android.content.Context;
 import android.net.Uri;
 
 public class CalendarHelper {
 	private MainActivity activity;
-	private ModelManager modelMgr;
+	
 	private CalendarViewManager viewlMgr;
 	
+	private DataManager dataMgr;
 	private CalendarReader calReader;
 	private CalendarWriter calWriter;
 	private EventReader eventReader;
@@ -25,16 +29,15 @@ public class CalendarHelper {
 	
 	public CalendarHelper (MainActivity act){
 		this.activity = act;
-		Context context = act.getApplicationContext();
-		calReader = new CalendarReader(context);
-		calWriter = new CalendarWriter(context);
-		eventReader = new EventReader(context);
-		eventWriter = new EventWriter(context);
-		modelMgr = ModelManager.getInstance();
+		calReader = activity.calReader;
+		calWriter = activity.calWriter;
+		eventReader = activity.eventReader;
+		eventWriter = activity.eventWriter;
+		dataMgr = DataManager.getInstance();
 		viewlMgr = this.activity.calendarViewMgr;
 		
 		/*set allCalendars, selecedCalendarsIDs and selectedCalendars*/
-		modelMgr.setAllCalendarsAndUpdate(calReader.getAllCalendars());
+		dataMgr.setAllCalendarsAndUpdate(calReader.getAllCalendars());
 		
 		/*set myEvents and update view*/
 		getMyEventsAndUpdateView();
@@ -42,77 +45,77 @@ public class CalendarHelper {
 	
 	public void getMyEventsAndUpdateView(){
 		
-		ArrayList<Event> eventList = readEventsOneWeekFromToday(modelMgr.getSelectedCalendarIDs());
-		modelMgr.setMyEventList(eventList);
+		ArrayList<MyEvent> eventList = readEventsOneWeekFromToday(dataMgr.getSelectedCalendarIDs());
+		dataMgr.setMyEventList(eventList);
 		viewlMgr.updateWeekView();
 	}
 	
-	public ArrayList<Event> readEventsOneWeekFromToday(String[] calIDs){
+	public ArrayList<MyEvent> readEventsOneWeekFromToday(String[] calIDs){
 		return readEventsFromToday(calIDs, DateHelper.WEEKINMILLI);
 	}
 	
-	public ArrayList<Event> readEventsFromToday(String[] calIDs, long durationInMilli){
+	public ArrayList<MyEvent> readEventsFromToday(String[] calIDs, long durationInMilli){
 		//c_start.set(2015,0,25,0,0); //Note that months start from 0 (January)   
 		long nowInMilli = DateHelper.getTodayMidnightInMilli();
 		
-		return eventReader.readEventsFromCalendar(modelMgr.getSelectedCalendarIDs(), nowInMilli, nowInMilli + durationInMilli);
+		return eventReader.readEventsFromCalendar(dataMgr.getSelectedCalendarIDs(), nowInMilli, nowInMilli + durationInMilli);
 	}
 
-	public void addNewEventsToCalendar(ArrayList<Event> events, long cal_id){
-		for (Event ev : events) {
+	public void addNewEventsToCalendar(ArrayList<MyEvent> events, long cal_id){
+		for (MyEvent ev : events) {
 			addNewEventToCalendar(ev, cal_id);
 		}
 		viewlMgr.updateWeekView();
 	}
-	public void addNewEventToCalendar(Event ev, long cal_id){
+	public void addNewEventToCalendar(MyEvent ev, long cal_id){
 		if (ev != null) {
 			eventWriter.addNewEvent(ev, cal_id);
-			modelMgr.addNewEvent(ev);
+			dataMgr.addNewEvent(ev);
 		}
 	}
-	public void addNewEventToCalendarAndUpdateView(Event ev, long cal_id){
+	public void addNewEventToCalendarAndUpdateView(MyEvent ev, long cal_id){
 		if (ev != null) {
 			eventWriter.addNewEvent(ev, cal_id);
-			modelMgr.addNewEvent(ev);
+			dataMgr.addNewEvent(ev);
 			viewlMgr.updateWeekView();
 		}
 	}
 	
-	public void updateNewEvents(ArrayList<Event> events){
-		for (Event ev : events) {
+	public void updateNewEvents(ArrayList<MyEvent> events){
+		for (MyEvent ev : events) {
 			updateNewEvent(ev);
 		}
 		viewlMgr.updateWeekView();
 	}
 
-	public void updateNewEvent(Event ev) {
+	public void updateNewEvent(MyEvent ev) {
 		if (ev != null) {
 			eventWriter.updateEvent(ev);
 		}
 	}
 	
-	public void updateNewEventAndUpdateView(Event ev) {
+	public void updateNewEventAndUpdateView(MyEvent ev) {
 		if (ev != null) {
 			eventWriter.updateEvent(ev);
 			viewlMgr.updateWeekView();
 		}
 	}
-	public void deletEvents(ArrayList<Event> events){
-		for (Event ev : events) {
+	public void deletEvents(ArrayList<MyEvent> events){
+		for (MyEvent ev : events) {
 			deletEvent(ev);
 		}
 		viewlMgr.updateWeekView();
 	}
-	public void deletEvent(Event ev) {
+	public void deletEvent(MyEvent ev) {
 		if (ev != null) {
 			eventWriter.deletEvent(ev);
-			modelMgr.deleteEvent(ev);
+			dataMgr.deleteEvent(ev);
 		}
 	}
-	public void deletEventAndUpdateView(Event ev) {
+	public void deletEventAndUpdateView(MyEvent ev) {
 		if (ev != null) {
 			eventWriter.deletEvent(ev);
-			modelMgr.deleteEvent(ev);
+			dataMgr.deleteEvent(ev);
 			viewlMgr.updateWeekView();
 		}
 	}

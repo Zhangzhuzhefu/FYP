@@ -4,8 +4,8 @@ import java.util.List;
 
 import sg.edu.ntu.sce.fyp.calevent.R;
 import sg.edu.ntu.sce.fyp.calevent.activity.MainActivity;
-import sg.edu.ntu.sce.fyp.calevent.model.ModelManager;
-import sg.edu.ntu.sce.fyp.calevent.model.MyCalendar;
+import sg.edu.ntu.sce.fyp.calevent.model.DataManager;
+import sg.edu.ntu.sce.fyp.calevent.model.myclass.MyCalendar;
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,7 +50,7 @@ public class ReadCaleandarListAdapter extends ArrayAdapter<MyCalendar> {
 								boolean isChecked) {
 							MyCalendar element = (MyCalendar) viewHolder.checkbox.getTag();
 							element.setSelected(buttonView.isChecked());
-							ModelManager.getInstance().updateSelectedCalendarsAndIDs();
+							DataManager.getInstance().updateSelectedCalendarsAndIDs();
 							activity.caleventHelper.getMyEventsAndUpdateView();
 						}
 					});

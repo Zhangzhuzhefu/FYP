@@ -1,4 +1,4 @@
-package sg.edu.ntu.sce.fyp.calevent.controller;
+package sg.edu.ntu.sce.fyp.calevent.model;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import sg.edu.ntu.sce.fyp.calevent.model.Event;
+import sg.edu.ntu.sce.fyp.calevent.controller.CalendarHelper;
+import sg.edu.ntu.sce.fyp.calevent.model.myclass.MyEvent;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
@@ -40,10 +41,10 @@ public class EventReader {
 		contentResolver = ctx.getContentResolver();
 	}
 	
-	public ArrayList<Event> readEventsFromCalendar(String[] calIDs, long startMilli, long endMilli){
+	public ArrayList<MyEvent> readEventsFromCalendar(String[] calIDs, long startMilli, long endMilli){
 		Cursor cursor = null;  
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-		ArrayList<Event> eventList = new ArrayList<Event>();
+		ArrayList<MyEvent> eventList = new ArrayList<MyEvent>();
 		
 		String selection = "((calendar_id = ?) AND (dtstart >= ?) AND (dtstart <= ?) AND (deleted = 0))";
 		String[] arg = new String[3];
@@ -73,7 +74,7 @@ public class EventReader {
 						event_id = cursor.getString(ID_INDEX);
 						duration = cursor.getString(DURATION_INDEX);
 					
-						Event ev = new Event();
+						MyEvent ev = new MyEvent();
 						ev.setCalendar_id(calendar_id);
 						ev.setDescription(description);
 						ev.setDtend(dtend);

@@ -1,9 +1,9 @@
-package sg.edu.ntu.sce.fyp.calevent.model;
+package sg.edu.ntu.sce.fyp.calevent.model.myclass;
 
 import java.util.Calendar;
 
 
-public class Event {
+public class MyEvent {
 
 	private String title;
 	private String description;
@@ -21,7 +21,7 @@ public class Event {
 	public static final String MYEVENT = "myevent";
 	public static final String RECEIVEDEVENT = "receivedevent";
 	
-	public Event(){
+	public MyEvent(){
 		toBeShared = false;
 		accepted = false;
 	}

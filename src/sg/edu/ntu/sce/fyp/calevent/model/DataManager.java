@@ -2,27 +2,32 @@ package sg.edu.ntu.sce.fyp.calevent.model;
 
 import java.util.ArrayList;
 
-public class ModelManager {
+import sg.edu.ntu.sce.fyp.calevent.global.Settings;
+import sg.edu.ntu.sce.fyp.calevent.global.Today;
+import sg.edu.ntu.sce.fyp.calevent.model.myclass.MyCalendar;
+import sg.edu.ntu.sce.fyp.calevent.model.myclass.MyEvent;
 
-	private static ModelManager mg;
+public class DataManager {
+
+	private static DataManager dataMgr;
 	private Today today; 
 	private Settings settings;
 	private ArrayList<MyCalendar> allCalendars;
 	private ArrayList<MyCalendar> selectedCalendars;
 	private String[] selectedCalendarIDs;
-	private ArrayList<Event> myEventList;
-	private ArrayList<Event> toBeSharedEventList;
-	private ArrayList<Event> receivedEventList;
-	private ArrayList<Event> acceptedEventList;
+	private ArrayList<MyEvent> myEventList;
+	private ArrayList<MyEvent> toBeSharedEventList;
+	private ArrayList<MyEvent> receivedEventList;
+	private ArrayList<MyEvent> acceptedEventList;
 	
-	public static ModelManager getInstance(){
-		if (mg == null) {
-			mg = new ModelManager();
+	public static DataManager getInstance(){
+		if (dataMgr == null) {
+			dataMgr = new DataManager();
 		}
-		return mg;
+		return dataMgr;
 	}
 
-	public ModelManager(){
+	public DataManager(){
 		settings = Settings.getInstance();
 	}
 	
@@ -33,43 +38,43 @@ public class ModelManager {
 		return today;
 	}
 
-	public ArrayList<Event> getMyEventList() {
+	public ArrayList<MyEvent> getMyEventList() {
 		return myEventList;
 	}
 
-	public void setMyEventList(ArrayList<Event> myEventList) {
+	public void setMyEventList(ArrayList<MyEvent> myEventList) {
 		this.myEventList = myEventList;
 	}
 
-	public ArrayList<Event> getToBeSharedEventList() {
+	public ArrayList<MyEvent> getToBeSharedEventList() {
 		if (toBeSharedEventList == null){
-			toBeSharedEventList = new ArrayList<Event>();
+			toBeSharedEventList = new ArrayList<MyEvent>();
 		}
 		return toBeSharedEventList;
 	}
-	public void setToBeSharedEventList(ArrayList<Event> toBeSharedEventList) {
+	public void setToBeSharedEventList(ArrayList<MyEvent> toBeSharedEventList) {
 		this.toBeSharedEventList = toBeSharedEventList;
 	}
 
-	public ArrayList<Event> getReceivedEventList() {
+	public ArrayList<MyEvent> getReceivedEventList() {
 		if (receivedEventList == null){
-			receivedEventList = new ArrayList<Event>();
+			receivedEventList = new ArrayList<MyEvent>();
 		}
 		return receivedEventList;
 	}
 
-	public void setReceivedEventList(ArrayList<Event> receivedEventList) {
+	public void setReceivedEventList(ArrayList<MyEvent> receivedEventList) {
 		this.receivedEventList = receivedEventList;
 	}
 	
-	public ArrayList<Event> getAcceptedEventList() {
+	public ArrayList<MyEvent> getAcceptedEventList() {
 		if (acceptedEventList == null){
-			acceptedEventList = new ArrayList<Event>();
+			acceptedEventList = new ArrayList<MyEvent>();
 		}
 		return acceptedEventList;
 	}
 	
-	public void setAcceptedEventList(ArrayList<Event> receivedEventList) {
+	public void setAcceptedEventList(ArrayList<MyEvent> receivedEventList) {
 		this.acceptedEventList = receivedEventList;
 	}
 
@@ -135,8 +140,8 @@ public class ModelManager {
 		return selectedCalendarIDs;
 	}
 	
-	public Event getEventByID(String event_id){
-		for (Event ev : myEventList) {
+	public MyEvent getEventByID(String event_id){
+		for (MyEvent ev : myEventList) {
 			if (ev.getEvent_id().equalsIgnoreCase(event_id)) {
 				return ev;
 			}
@@ -144,12 +149,12 @@ public class ModelManager {
 		return null;
 	}
 	
-	public void addNewEvent(Event ev) {
+	public void addNewEvent(MyEvent ev) {
 		if (ev != null)
 			myEventList.add(ev);
 	}
 
-	public void deleteEvent(Event ev) {
+	public void deleteEvent(MyEvent ev) {
 		if (ev != null)
 			myEventList.remove(ev);
 	}
