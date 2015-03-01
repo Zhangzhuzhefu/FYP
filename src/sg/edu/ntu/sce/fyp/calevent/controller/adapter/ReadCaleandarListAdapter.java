@@ -50,7 +50,7 @@ public class ReadCaleandarListAdapter extends ArrayAdapter<MyCalendar> {
 								boolean isChecked) {
 							MyCalendar element = (MyCalendar) viewHolder.checkbox.getTag();
 							element.setSelected(buttonView.isChecked());
-							ModelManager.getInstance().updateSelectedCalendars();
+							ModelManager.getInstance().updateSelectedCalendarsAndIDs();
 							activity.caleventHelper.getMyEventsAndUpdateView();
 						}
 					});

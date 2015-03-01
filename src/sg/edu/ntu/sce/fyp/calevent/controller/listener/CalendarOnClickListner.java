@@ -29,7 +29,7 @@ public class CalendarOnClickListner implements OnClickListener{
 		int month = Calendar.getInstance().get(Calendar.MONTH);
 		int year = Calendar.getInstance().get(Calendar.YEAR);
 		
-		Toast.makeText(context , dayOfMonth + "/" + month+1 + "/" + year, Toast.LENGTH_LONG).show();
+		Toast.makeText(context , dayOfMonth + "/" + month+1 + "/" + year, Toast.LENGTH_SHORT).show();
 		
 		if (month_view.getVisibility() == View.VISIBLE) {
 			week_view.setVisibility(View.VISIBLE);

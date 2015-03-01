@@ -85,11 +85,24 @@ public class ModelManager {
 
 	public void setAllCalendarsAndUpdate(ArrayList<MyCalendar> allCalendars) {
 		this.allCalendars = allCalendars;
-		updateSelectedCalendars();
+		firstTimeUpdateSelectedCalendarsAndIDs();
 		settings.setWriteCalendarId(Long.valueOf(getSelectedCalendarIDs()[0]));
 	}
 	
-	public void updateSelectedCalendars(){
+	public void firstTimeUpdateSelectedCalendarsAndIDs(){
+		selectedCalendars = new ArrayList<MyCalendar>();
+		int numSelected = 0;
+		for (MyCalendar cal : allCalendars) {
+			if (cal.isVisible()){
+				selectedCalendars.add(cal);
+				numSelected ++;
+				cal.setSelected(true);
+			}
+		}
+		updateSelectedCalendarIDs(numSelected);
+	}
+	
+	public void updateSelectedCalendarsAndIDs(){
 		selectedCalendars = new ArrayList<MyCalendar>();
 		int numSelected = 0;
 		for (MyCalendar cal : allCalendars) {
@@ -98,6 +111,10 @@ public class ModelManager {
 				numSelected ++;
 			}
 		}
+		updateSelectedCalendarIDs(numSelected);
+	}
+	
+	private void updateSelectedCalendarIDs(int numSelected) {
 		selectedCalendarIDs = new String [numSelected];
 		int i = 0;
 		for (MyCalendar cal : allCalendars) {

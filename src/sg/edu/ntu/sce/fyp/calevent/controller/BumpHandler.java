@@ -21,7 +21,7 @@ public class BumpHandler {
 	      public void onShake()
 	      {
 	        vibe.vibrate(100);
-			Toast.makeText(activity.getApplicationContext(), "shaken", Toast.LENGTH_LONG).show();
+			Toast.makeText(activity.getApplicationContext(), "shaken", Toast.LENGTH_SHORT).show();
 	      }
 	    });
 	}

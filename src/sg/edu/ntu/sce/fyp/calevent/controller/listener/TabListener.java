@@ -45,7 +45,7 @@ public class TabListener implements ActionBar.TabListener {
 			if (mActivity.calendarViewMgr != null)
 				mActivity.calendarViewMgr.updateTimeline();
 			Toast.makeText(ctx, ctx.getString(R.string.home_on_tab),
-					Toast.LENGTH_LONG).show();
+					Toast.LENGTH_SHORT).show();
 			
 		} else if (mTag.equalsIgnoreCase(HomeViewManager.NEWEVENT)) {
 			mActivity.findViewById(R.id.activity_home_layout).setVisibility(
@@ -53,7 +53,7 @@ public class TabListener implements ActionBar.TabListener {
 			if (mActivity.calendarViewMgr != null)
 				mActivity.calendarViewMgr.updateTimeline();
 			Toast.makeText(ctx, ctx.getString(R.string.new_on_tab),
-					Toast.LENGTH_LONG).show();
+					Toast.LENGTH_SHORT).show();
 			
 		} else if (mTag.equalsIgnoreCase(HomeViewManager.INBOX)) {
 			mActivity.findViewById(R.id.activity_home_layout).setVisibility(
@@ -61,11 +61,11 @@ public class TabListener implements ActionBar.TabListener {
 			if (mActivity.calendarViewMgr != null)
 				mActivity.calendarViewMgr.updateTimeline();
 			Toast.makeText(ctx, ctx.getString(R.string.inbox_on_tab),
-					Toast.LENGTH_LONG).show();
+					Toast.LENGTH_SHORT).show();
 			
 		} else if (mTag.equalsIgnoreCase(HomeViewManager.INFO)) {
 			Toast.makeText(ctx, ctx.getString(R.string.info_on_tab),
-					Toast.LENGTH_LONG).show();
+					Toast.LENGTH_SHORT).show();
 			mActivity.findViewById(R.id.activity_home_layout).setVisibility(
 					View.INVISIBLE);
 			if (mFragment_info == null) {

@@ -28,7 +28,7 @@ public class TabListenerHome implements ActionBar.TabListener {
 			mActivity.calendarViewMgr.updateTimeline();
 
 		Toast.makeText(ctx, ctx.getString(R.string.home_on_tab),
-				Toast.LENGTH_LONG).show();
+				Toast.LENGTH_SHORT).show();
 	}
 
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {

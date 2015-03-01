@@ -39,7 +39,7 @@ public class TabListenerInfo implements ActionBar.TabListener {
 
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
 			Toast.makeText(ctx, ctx.getString(R.string.info_on_tab),
-					Toast.LENGTH_LONG).show();
+					Toast.LENGTH_SHORT).show();
 			
 			mActivity.findViewById(R.id.activity_home_layout).setVisibility(
 					View.INVISIBLE);

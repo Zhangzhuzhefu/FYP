@@ -15,7 +15,7 @@ public class CalendarViewOnDateChangeListener implements OnDateChangeListener {
 	@Override
 	public void onSelectedDayChange(CalendarView view, int year, int month,
 			int dayOfMonth) {
-		Toast.makeText(con , dayOfMonth + "/" + month+1 + "/" + year, Toast.LENGTH_LONG).show();
+		Toast.makeText(con , dayOfMonth + "/" + month+1 + "/" + year, Toast.LENGTH_SHORT).show();
 		
 		
 	}

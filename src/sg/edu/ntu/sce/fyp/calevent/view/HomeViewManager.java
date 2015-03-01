@@ -82,7 +82,7 @@ public class HomeViewManager {
 						isChecked ? activity.getResources().getText(
 								R.string.find_mode) : activity.getResources()
 								.getText(R.string.share_mode),
-						Toast.LENGTH_LONG).show();
+						Toast.LENGTH_SHORT).show();
 			}
 		});
 	}

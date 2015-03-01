@@ -92,7 +92,7 @@ public class CalendarReader {
 					calendar.setOwner_account(owner_acc);
 					calendar.setColor(cal_color);
 					calendar.setVisible(visible);
-					calendar.setSelected(true);
+					calendar.setSelected(false);
 					
 					calendars.add(calendar);
 					Log.d(DEBUG_TAG, id + " " + name + "\n"

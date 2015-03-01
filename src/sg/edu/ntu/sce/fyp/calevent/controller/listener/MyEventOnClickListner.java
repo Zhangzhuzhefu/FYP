@@ -47,7 +47,7 @@ public class MyEventOnClickListner implements OnClickListener{
 					modelMgr.getAcceptedEventList().add(event);
 				}
 			}
-		Toast.makeText(context , event.getTitle(), Toast.LENGTH_LONG).show();
+		Toast.makeText(context , event.getTitle(), Toast.LENGTH_SHORT).show();
 		}	
 	}
 }
