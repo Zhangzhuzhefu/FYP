@@ -2,7 +2,7 @@ package sg.edu.ntu.sce.fyp.calevent.controller.listener;
 
 import sg.edu.ntu.sce.fyp.calevent.R;
 import sg.edu.ntu.sce.fyp.calevent.activity.MainActivity;
-import sg.edu.ntu.sce.fyp.calevent.view.HomeViewManager;
+import sg.edu.ntu.sce.fyp.calevent.view.HomeView;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
@@ -39,31 +39,31 @@ public class TabListener implements ActionBar.TabListener {
 	/* The following are each of the ActionBar.TabListener callbacks */
 
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
-		if (mTag.equalsIgnoreCase(HomeViewManager.HOME)) {
+		if (mTag.equalsIgnoreCase(HomeView.HOME)) {
 			mActivity.findViewById(R.id.activity_home_layout).setVisibility(
 					View.VISIBLE);
-			if (mActivity.calendarViewMgr != null)
-				mActivity.calendarViewMgr.updateTimeline();
+			if (mActivity.calendarViewManager != null)
+				mActivity.calendarViewManager.updateTimeline();
 			Toast.makeText(ctx, ctx.getString(R.string.home_on_tab),
 					Toast.LENGTH_SHORT).show();
 			
-		} else if (mTag.equalsIgnoreCase(HomeViewManager.NEWEVENT)) {
+		} else if (mTag.equalsIgnoreCase(HomeView.NEWEVENT)) {
 			mActivity.findViewById(R.id.activity_home_layout).setVisibility(
 					View.VISIBLE);
-			if (mActivity.calendarViewMgr != null)
-				mActivity.calendarViewMgr.updateTimeline();
+			if (mActivity.calendarViewManager != null)
+				mActivity.calendarViewManager.updateTimeline();
 			Toast.makeText(ctx, ctx.getString(R.string.new_on_tab),
 					Toast.LENGTH_SHORT).show();
 			
-		} else if (mTag.equalsIgnoreCase(HomeViewManager.INBOX)) {
+		} else if (mTag.equalsIgnoreCase(HomeView.INBOX)) {
 			mActivity.findViewById(R.id.activity_home_layout).setVisibility(
 					View.VISIBLE);
-			if (mActivity.calendarViewMgr != null)
-				mActivity.calendarViewMgr.updateTimeline();
+			if (mActivity.calendarViewManager != null)
+				mActivity.calendarViewManager.updateTimeline();
 			Toast.makeText(ctx, ctx.getString(R.string.inbox_on_tab),
 					Toast.LENGTH_SHORT).show();
 			
-		} else if (mTag.equalsIgnoreCase(HomeViewManager.INFO)) {
+		} else if (mTag.equalsIgnoreCase(HomeView.INFO)) {
 			Toast.makeText(ctx, ctx.getString(R.string.info_on_tab),
 					Toast.LENGTH_SHORT).show();
 			mActivity.findViewById(R.id.activity_home_layout).setVisibility(
@@ -82,13 +82,13 @@ public class TabListener implements ActionBar.TabListener {
 	}
 
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-		if (mTag.equalsIgnoreCase(HomeViewManager.HOME)) {
+		if (mTag.equalsIgnoreCase(HomeView.HOME)) {
 
-		} else if (mTag.equalsIgnoreCase(HomeViewManager.NEWEVENT)) {
+		} else if (mTag.equalsIgnoreCase(HomeView.NEWEVENT)) {
 
-		} else if (mTag.equalsIgnoreCase(HomeViewManager.INBOX)) {
+		} else if (mTag.equalsIgnoreCase(HomeView.INBOX)) {
 
-		} else if (mTag.equalsIgnoreCase(HomeViewManager.INFO)) {
+		} else if (mTag.equalsIgnoreCase(HomeView.INFO)) {
 			if (mFragment_info != null) {
 				// Detach the fragment, because another one is being attached
 				ft.detach(mFragment_info);

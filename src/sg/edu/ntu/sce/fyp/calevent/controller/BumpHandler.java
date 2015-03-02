@@ -1,4 +1,4 @@
-package sg.edu.ntu.sce.fyp.calevent.model;
+package sg.edu.ntu.sce.fyp.calevent.controller;
 
 import sg.edu.ntu.sce.fyp.calevent.activity.MainActivity;
 import sg.edu.ntu.sce.fyp.calevent.controller.listener.BumpListener;

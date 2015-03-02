@@ -10,13 +10,12 @@ import sg.edu.ntu.sce.fyp.calevent.model.DataManager;
 import sg.edu.ntu.sce.fyp.calevent.model.EventReader;
 import sg.edu.ntu.sce.fyp.calevent.model.EventWriter;
 import sg.edu.ntu.sce.fyp.calevent.model.myclass.MyEvent;
-import sg.edu.ntu.sce.fyp.calevent.view.CalendarViewManager;
 import android.net.Uri;
 
-public class CalendarHelper {
+public class CalendarController {
 	private MainActivity activity;
 	
-	private CalendarViewManager viewlMgr;
+	private ViewManager viewHelper;
 	
 	private DataManager dataMgr;
 	private CalendarReader calReader;
@@ -27,14 +26,14 @@ public class CalendarHelper {
 	public static final Uri CALENDAR_URI = Uri.parse("content://com.android.calendar/calendars");
 	public static final Uri EVENT_URI = Uri.parse("content://com.android.calendar/events");
 	
-	public CalendarHelper (MainActivity act){
+	public CalendarController (MainActivity act){
 		this.activity = act;
 		calReader = activity.calReader;
 		calWriter = activity.calWriter;
 		eventReader = activity.eventReader;
 		eventWriter = activity.eventWriter;
 		dataMgr = DataManager.getInstance();
-		viewlMgr = this.activity.calendarViewMgr;
+		viewHelper = this.activity.calendarViewManager;
 		
 		/*set allCalendars, selecedCalendarsIDs and selectedCalendars*/
 		dataMgr.setAllCalendarsAndUpdate(calReader.getAllCalendars());
@@ -47,7 +46,7 @@ public class CalendarHelper {
 		
 		ArrayList<MyEvent> eventList = readEventsOneWeekFromToday(dataMgr.getSelectedCalendarIDs());
 		dataMgr.setMyEventList(eventList);
-		viewlMgr.updateWeekView();
+		viewHelper.updateWeekView();
 	}
 	
 	public ArrayList<MyEvent> readEventsOneWeekFromToday(String[] calIDs){
@@ -65,7 +64,7 @@ public class CalendarHelper {
 		for (MyEvent ev : events) {
 			addNewEventToCalendar(ev, cal_id);
 		}
-		viewlMgr.updateWeekView();
+		viewHelper.updateWeekView();
 	}
 	public void addNewEventToCalendar(MyEvent ev, long cal_id){
 		if (ev != null) {
@@ -77,7 +76,7 @@ public class CalendarHelper {
 		if (ev != null) {
 			eventWriter.addNewEvent(ev, cal_id);
 			dataMgr.addNewEvent(ev);
-			viewlMgr.updateWeekView();
+			viewHelper.updateWeekView();
 		}
 	}
 	
@@ -85,7 +84,7 @@ public class CalendarHelper {
 		for (MyEvent ev : events) {
 			updateNewEvent(ev);
 		}
-		viewlMgr.updateWeekView();
+		viewHelper.updateWeekView();
 	}
 
 	public void updateNewEvent(MyEvent ev) {
@@ -97,14 +96,14 @@ public class CalendarHelper {
 	public void updateNewEventAndUpdateView(MyEvent ev) {
 		if (ev != null) {
 			eventWriter.updateEvent(ev);
-			viewlMgr.updateWeekView();
+			viewHelper.updateWeekView();
 		}
 	}
 	public void deletEvents(ArrayList<MyEvent> events){
 		for (MyEvent ev : events) {
 			deletEvent(ev);
 		}
-		viewlMgr.updateWeekView();
+		viewHelper.updateWeekView();
 	}
 	public void deletEvent(MyEvent ev) {
 		if (ev != null) {
@@ -116,7 +115,7 @@ public class CalendarHelper {
 		if (ev != null) {
 			eventWriter.deletEvent(ev);
 			dataMgr.deleteEvent(ev);
-			viewlMgr.updateWeekView();
+			viewHelper.updateWeekView();
 		}
 	}
 	

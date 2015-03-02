@@ -14,6 +14,7 @@ public class MyEvent {
 	private String event_id;
 	private String duration;
 	
+	//self-generated
 	private String startTimeFromMidnight;
 	private boolean toBeShared;
 	private boolean accepted;

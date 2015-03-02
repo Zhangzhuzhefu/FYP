@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import sg.edu.ntu.sce.fyp.calevent.controller.CalendarHelper;
+import sg.edu.ntu.sce.fyp.calevent.controller.CalendarController;
 import sg.edu.ntu.sce.fyp.calevent.model.myclass.MyEvent;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -55,7 +55,7 @@ public class EventReader {
 		for (String calId : calIDs) {
 			
 			arg[0] = calId;
-			cursor = contentResolver.query(CalendarHelper.EVENT_URI, FIELDS, selection, arg, sort);
+			cursor = contentResolver.query(CalendarController.EVENT_URI, FIELDS, selection, arg, sort);
 			Log.d(DEBUG_TAG, "calId: "+ calId + "\n"
 					+ "startMilli: " + startMilli + " " + df.format(new Date(startMilli)) + "\n"
 					+ "endMilli: " + endMilli + " " + df.format(new Date(endMilli)));

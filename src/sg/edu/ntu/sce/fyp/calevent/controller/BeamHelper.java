@@ -1,10 +1,9 @@
-package sg.edu.ntu.sce.fyp.calevent.model;
-
-import java.util.ArrayList;
+package sg.edu.ntu.sce.fyp.calevent.controller;
 
 import sg.edu.ntu.sce.fyp.calevent.R;
 import sg.edu.ntu.sce.fyp.calevent.activity.MainActivity;
-import sg.edu.ntu.sce.fyp.calevent.model.myclass.MyEvent;
+import sg.edu.ntu.sce.fyp.calevent.model.XMLConstructor;
+import sg.edu.ntu.sce.fyp.calevent.model.XMLParser;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,14 +18,15 @@ import android.util.Log;
 
 public class BeamHelper {
 	private static final String DEBUG_TAG = BeamHelper.class.getSimpleName();
-
 	private MainActivity activity;
-	private DataManager dataMgr;
-    NfcAdapter mNfcAdapter;
+    private NfcAdapter mNfcAdapter;
+    private XMLParser xmlParser;
+    private XMLConstructor xmlConstructor;
 
 	public BeamHelper(MainActivity act) {
 		this.activity = act;
-		dataMgr = act.dataManager;
+		xmlParser = new XMLParser();
+		xmlConstructor = new XMLConstructor();
         mNfcAdapter = NfcAdapter.getDefaultAdapter(activity);
         checkNFCAvalibility();
         if (mNfcAdapter == null) {
@@ -40,11 +40,7 @@ public class BeamHelper {
 	//called when a device is in range to beam data to
 	public NdefMessage createNdefMessage(NfcEvent event) {
 		String eventstext = new String();
-		ArrayList<MyEvent> eventList = dataMgr.getToBeSharedEventList();
-		for (MyEvent ev : eventList){
-			eventstext += (ev.getTitle() + ev.getDtstart());
-		}
-		
+		eventstext = xmlConstructor.getToBeSharedEventsInXML();
         NdefMessage msg = new NdefMessage(
                 new NdefRecord[] { NdefRecord.createMime(
                         "application/sg.edu.ntu.sce.fyp.calevent", 
@@ -58,12 +54,13 @@ public class BeamHelper {
         // Check to see that the Activity started due to an Android Beam
         if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(activity.getIntent().getAction())) {
             processIntent(activity.getIntent());
+            activity.calendarViewManager.homeViewSelectInboxTab();
         }
     }
 
     public void onNewIntent(Intent intent) {
         // onResume gets called after this to handle the intent
-    	activity.setIntent(intent);
+    	//activity.setIntent(intent);
     }
 
     /**
@@ -73,20 +70,9 @@ public class BeamHelper {
         Parcelable[] rawMsgs = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
         // only one message sent during the beam
         NdefMessage msg = (NdefMessage) rawMsgs[0];
-        String payload = new String(msg.getRecords()[0].getPayload()); 
+        String payload = new String(msg.getRecords()[0].getPayload());
         Log.d(DEBUG_TAG, payload);
-        // record 0 contains the MIME type, record 1 is the AAR, if present
-        new AlertDialog.Builder(activity)
-		.setTitle(activity.getResources().getString(R.string.alert))
-		.setMessage(payload)
-		.setPositiveButton(android.R.string.yes,
-				new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog,
-							int which) {
-						// continue with quit
-					}
-				}).setIcon(android.R.drawable.btn_star)
-		.show();
+        xmlParser.parseResult(payload);
     }
 
 	private void checkNFCAvalibility() {
@@ -101,7 +87,7 @@ public class BeamHelper {
 							new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog,
 										int which) {
-									// continue with quit
+									activity.finish();
 								}
 							}).setIcon(android.R.drawable.ic_dialog_alert)
 					.show();
@@ -116,7 +102,7 @@ public class BeamHelper {
 							new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog,
 										int which) {
-									// continue with quit
+									activity.finish();
 								}
 							}).setIcon(android.R.drawable.ic_dialog_alert)
 					.show();

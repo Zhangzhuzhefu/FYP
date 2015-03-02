@@ -40,11 +40,14 @@ public class MyEventOnClickListner implements OnClickListener{
 				if (event.isAccepted()) {
 					event.setAccepted(false);
 					v.setBackgroundColor(this.activity.getResources().getColor(R.color.otherEvent_green));
+					dataMgr.getReceivedEventList().add(event);
 					dataMgr.getAcceptedEventList().remove(event);
+					
 				} else {
 					event.setAccepted(true);
 					v.setBackgroundColor(this.activity.getResources().getColor(R.color.otherEvent_selected_green));
 					dataMgr.getAcceptedEventList().add(event);
+					dataMgr.getReceivedEventList().remove(event);
 				}
 			}
 		Toast.makeText(context , event.getTitle(), Toast.LENGTH_SHORT).show();

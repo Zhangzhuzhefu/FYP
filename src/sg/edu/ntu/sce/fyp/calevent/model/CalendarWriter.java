@@ -1,6 +1,6 @@
 package sg.edu.ntu.sce.fyp.calevent.model;
 
-import sg.edu.ntu.sce.fyp.calevent.controller.CalendarHelper;
+import sg.edu.ntu.sce.fyp.calevent.controller.CalendarController;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -21,7 +21,7 @@ public class CalendarWriter {
 		ContentValues values = new ContentValues();
 		// The new display name for the calendar
 		values.put(field, value);
-		Uri updateUri = ContentUris.withAppendedId(CalendarHelper.CALENDAR_URI, calID);
+		Uri updateUri = ContentUris.withAppendedId(CalendarController.CALENDAR_URI, calID);
 		int rows = contentResolver.update(updateUri, values, null, null);
 		Log.i(DEBUG_TAG, "Rows updated: " + rows);
 	}

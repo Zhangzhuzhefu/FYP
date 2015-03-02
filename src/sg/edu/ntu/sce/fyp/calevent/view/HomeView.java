@@ -6,7 +6,7 @@ import sg.edu.ntu.sce.fyp.calevent.activity.fragment.InfoFragment;
 import sg.edu.ntu.sce.fyp.calevent.controller.listener.TabListenerHome;
 import sg.edu.ntu.sce.fyp.calevent.controller.listener.TabListenerInbox;
 import sg.edu.ntu.sce.fyp.calevent.controller.listener.TabListenerInfo;
-import sg.edu.ntu.sce.fyp.calevent.controller.listener.TabListenerNewevent;
+import sg.edu.ntu.sce.fyp.calevent.controller.listener.TabListenerTimeSlot;
 import sg.edu.ntu.sce.fyp.calevent.model.DataManager;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
@@ -17,7 +17,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Switch;
 import android.widget.Toast;
 
-public class HomeViewManager {
+public class HomeView {
 	private Context context;
 	private Activity activity;
 	
@@ -26,7 +26,12 @@ public class HomeViewManager {
 	public static final String INBOX = "inbox";
 	public static final String INFO = "info";
 	
-	public HomeViewManager(MainActivity act){
+	public Tab tab_home;
+	public Tab tab_find;
+	public Tab tab_inbox;
+	public Tab tab_info;
+	
+	public HomeView(MainActivity act){
 		this.context = act.getApplicationContext(); 
 		this.activity = act;
 		setupHomeView();
@@ -40,31 +45,34 @@ public class HomeViewManager {
 	    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 	    actionBar.setDisplayShowTitleEnabled(false);
 
-		Tab tab = actionBar
+	    tab_home = actionBar
 				.newTab()
 				.setIcon(R.drawable.tab_home)
 				.setTabListener(
 						new TabListenerHome(activity));
-		actionBar.addTab(tab);
-		tab = actionBar
-				.newTab()
-				.setIcon(R.drawable.tab_new)
-				.setTabListener(
-						new TabListenerNewevent(activity));
-		actionBar.addTab(tab);
-		tab = actionBar
+	    actionBar.addTab(tab_home);
+	    
+		tab_inbox = actionBar
 				.newTab()
 				.setIcon(R.drawable.tab_inbox)
 				.setTabListener(
 						new TabListenerInbox(activity));
-		actionBar.addTab(tab);
-		tab = actionBar
+		actionBar.addTab(tab_inbox);
+		
+		tab_find = actionBar
+				.newTab()
+				.setIcon(R.drawable.tab_time_slot)
+				.setTabListener(
+						new TabListenerTimeSlot(activity));
+		actionBar.addTab(tab_find);
+		
+		tab_info = actionBar
 				.newTab()
 				.setIcon(R.drawable.tab_info)
 				.setTabListener(
 						new TabListenerInfo(activity, INFO,
 								InfoFragment.class));
-		actionBar.addTab(tab);
+		actionBar.addTab(tab_info);
 		
 		setupToggle();
 		

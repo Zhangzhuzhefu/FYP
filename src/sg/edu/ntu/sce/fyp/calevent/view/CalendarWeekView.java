@@ -10,6 +10,7 @@ import sg.edu.ntu.sce.fyp.calevent.global.DateHelper;
 import sg.edu.ntu.sce.fyp.calevent.global.Today;
 import sg.edu.ntu.sce.fyp.calevent.model.myclass.MyEvent;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -86,7 +87,7 @@ public class CalendarWeekView {
 		curTimeLine.setLayoutParams(layoutParams);
 	}
 	
-	public void updateEvents(ArrayList<MyEvent> eventList, int color, String tag){
+	public void updateEvents(ArrayList<MyEvent> eventList, String tag){
 		/*remove all TextViews*/
 		RelativeLayout[] colLayouts = new RelativeLayout[7];
 		colLayouts[0] = (RelativeLayout) this.activity.findViewById(R.id.sundayRelativeLayout);
@@ -97,20 +98,20 @@ public class CalendarWeekView {
 		colLayouts[5] = (RelativeLayout) this.activity.findViewById(R.id.fridayRelativeLayout);
 		colLayouts[6] = (RelativeLayout) this.activity.findViewById(R.id.saturdayRelativeLayout);
 		for (RelativeLayout layout : colLayouts) {
-			for (int i = 0; i < layout.getChildCount();i++) {
-		        View v = layout.getChildAt(i);
-		        if(v.getTag() != null)
-		        if (v instanceof TextView) {
-					if (v.getTag() != null) {
-						if (v.getTag() instanceof String) {
-							if (((String) v.getTag()).equalsIgnoreCase(tag)) {
-								layout.removeView(v); 
-								i--;
+			for (int i = 0; i < layout.getChildCount(); i++) {
+				View v = layout.getChildAt(i);
+				if (v.getTag() != null)
+					if (v instanceof TextView) {
+						if (v.getTag() != null) {
+							if (v.getTag() instanceof String) {
+								if (((String) v.getTag()).equalsIgnoreCase(tag)) {
+									layout.removeView(v);
+									i--;
+								}
 							}
 						}
 					}
-		        } 
-		    }
+			}
 		}
 		for (MyEvent ev : eventList) {
 			TextView tv;
@@ -131,9 +132,49 @@ public class CalendarWeekView {
 			tv.setText(eventTitle);
 			tv.setTextSize(10);
 			tv.setTextColor(this.activity.getResources().getColor(R.color.white));
+			int color; 
+			if (tag == MyEvent.MYEVENT) 
+				if (ev.isToBeShared())
+					color = R.color.myEvent_selected_blue;
+				else 
+					color = R.color.myEvent_blue;
+			else 
+				if (ev.isAccepted())
+					color = R.color.otherEvent_selected_green;
+				else 
+					color = R.color.otherEvent_green;
 			tv.setBackgroundColor(this.activity.getResources().getColor(color));
 			tv.setOnClickListener(new MyEventOnClickListner(this.activity, ev));
 			colLayouts[colIndex].addView(tv);
+		}
+	}
+	
+	public void updateReceivedEventsOnly(String tag){
+		/*remove all TextViews that is not MyEvent.RECEIVEDEVENT*/
+		RelativeLayout[] colLayouts = new RelativeLayout[7];
+		colLayouts[0] = (RelativeLayout) this.activity.findViewById(R.id.sundayRelativeLayout);
+		colLayouts[1] = (RelativeLayout) this.activity.findViewById(R.id.mondayRelativeLayout);
+		colLayouts[2] = (RelativeLayout) this.activity.findViewById(R.id.tuesdayRelativeLayout);
+		colLayouts[3] = (RelativeLayout) this.activity.findViewById(R.id.wednesdayRelativeLayout);
+		colLayouts[4] = (RelativeLayout) this.activity.findViewById(R.id.thursdayRelativeLayout);
+		colLayouts[5] = (RelativeLayout) this.activity.findViewById(R.id.fridayRelativeLayout);
+		colLayouts[6] = (RelativeLayout) this.activity.findViewById(R.id.saturdayRelativeLayout);
+		for (RelativeLayout layout : colLayouts) {
+			for (int i = 0; i < layout.getChildCount(); i++) {
+				View v = layout.getChildAt(i);
+				if (v.getTag() != null)
+					if (v instanceof TextView) {
+						if (v.getTag() != null) {
+							if (v.getTag() instanceof String) {
+								if (!((String) v.getTag())
+										.equalsIgnoreCase(tag)) {
+									layout.removeView(v);
+									i--;
+								}
+							}
+						}
+					}
+			}
 		}
 	}
 }

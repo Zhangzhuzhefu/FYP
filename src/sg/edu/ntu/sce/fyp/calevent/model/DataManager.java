@@ -15,6 +15,7 @@ public class DataManager {
 	private ArrayList<MyCalendar> allCalendars;
 	private ArrayList<MyCalendar> selectedCalendars;
 	private String[] selectedCalendarIDs;
+	
 	private ArrayList<MyEvent> myEventList;
 	private ArrayList<MyEvent> toBeSharedEventList;
 	private ArrayList<MyEvent> receivedEventList;

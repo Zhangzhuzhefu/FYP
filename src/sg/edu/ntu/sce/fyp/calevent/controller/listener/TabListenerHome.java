@@ -24,11 +24,13 @@ public class TabListenerHome implements ActionBar.TabListener {
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
 		mActivity.findViewById(R.id.activity_home_layout).setVisibility(
 				View.VISIBLE);
-		if (mActivity.calendarViewMgr != null)
-			mActivity.calendarViewMgr.updateTimeline();
+		if (mActivity.calendarViewManager != null)
+			mActivity.calendarViewManager.updateTimeline();
 
 		Toast.makeText(ctx, ctx.getString(R.string.home_on_tab),
 				Toast.LENGTH_SHORT).show();
+		if (mActivity.calendarViewManager != null)
+			mActivity.calendarViewManager.displayMyEventsOnly();
 	}
 
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {

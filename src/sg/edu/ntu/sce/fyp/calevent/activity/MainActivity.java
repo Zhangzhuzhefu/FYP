@@ -3,18 +3,17 @@ package sg.edu.ntu.sce.fyp.calevent.activity;
 import java.util.Calendar;
 
 import sg.edu.ntu.sce.fyp.calevent.R;
-import sg.edu.ntu.sce.fyp.calevent.controller.CalendarHelper;
+import sg.edu.ntu.sce.fyp.calevent.controller.BeamHelper;
+import sg.edu.ntu.sce.fyp.calevent.controller.BumpHandler;
+import sg.edu.ntu.sce.fyp.calevent.controller.CalendarController;
+import sg.edu.ntu.sce.fyp.calevent.controller.ViewManager;
 import sg.edu.ntu.sce.fyp.calevent.controller.adapter.WriteCaleandarListAdapter;
-import sg.edu.ntu.sce.fyp.calevent.model.BeamHelper;
-import sg.edu.ntu.sce.fyp.calevent.model.BumpHandler;
 import sg.edu.ntu.sce.fyp.calevent.model.CalendarReader;
 import sg.edu.ntu.sce.fyp.calevent.model.CalendarWriter;
 import sg.edu.ntu.sce.fyp.calevent.model.DataManager;
 import sg.edu.ntu.sce.fyp.calevent.model.EventReader;
 import sg.edu.ntu.sce.fyp.calevent.model.EventWriter;
 import sg.edu.ntu.sce.fyp.calevent.model.myclass.MyEvent;
-import sg.edu.ntu.sce.fyp.calevent.view.CalendarViewManager;
-import sg.edu.ntu.sce.fyp.calevent.view.HomeViewManager;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -31,8 +30,6 @@ import android.widget.ListView;
 
 public class MainActivity extends Activity implements CreateNdefMessageCallback{
 	private Context context;
-	public CalendarViewManager calendarViewMgr;
-	public HomeViewManager homeViewMgr;
 	
 	public DataManager dataManager;
 	public CalendarReader calReader;
@@ -40,7 +37,8 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback{
 	public EventReader eventReader;
 	public EventWriter eventWriter;
 	
-	public CalendarHelper caleventHelper;
+	public ViewManager calendarViewManager;
+	public CalendarController caleventHelper;
 	public BeamHelper beamHelper;
 	private BumpHandler bumpHandler;
 	
@@ -98,12 +96,11 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback{
 	}
 	
 	public void initializeAppViews() {
-		homeViewMgr = new HomeViewManager(this);
-		calendarViewMgr = new CalendarViewManager(this);
+		calendarViewManager = new ViewManager(this);
 	}
 
 	public void initializeAppController(){
-		caleventHelper = new CalendarHelper(this);
+		caleventHelper = new CalendarController(this);
 	}
 	
 	@Override

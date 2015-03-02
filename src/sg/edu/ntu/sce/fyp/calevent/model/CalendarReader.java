@@ -2,7 +2,7 @@ package sg.edu.ntu.sce.fyp.calevent.model;
 
 import java.util.ArrayList;
 
-import sg.edu.ntu.sce.fyp.calevent.controller.CalendarHelper;
+import sg.edu.ntu.sce.fyp.calevent.controller.CalendarController;
 import sg.edu.ntu.sce.fyp.calevent.model.myclass.MyCalendar;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -40,7 +40,7 @@ public class CalendarReader {
 	public ArrayList<MyCalendar> getAllCalendars() {
 		ArrayList<MyCalendar> allCalendars = new ArrayList<MyCalendar>();
 		Cursor cursor = contentResolver.query(
-				CalendarHelper.CALENDAR_URI, FIELDS, null, null, null);
+				CalendarController.CALENDAR_URI, FIELDS, null, null, null);
 		allCalendars = handleCursor_getCalendar(cursor);
 		return allCalendars;
 	}
@@ -54,7 +54,7 @@ public class CalendarReader {
 		
 		for (String cal_id : selectionIDs) {
 			selectionArgs[0] = cal_id;
-			cursor = contentResolver.query(CalendarHelper.CALENDAR_URI, FIELDS, selection, selectionArgs, null);
+			cursor = contentResolver.query(CalendarController.CALENDAR_URI, FIELDS, selection, selectionArgs, null);
 			selectedCalendars.add(handleCursor_getCalendar(cursor).get(0));
 		}
 		
