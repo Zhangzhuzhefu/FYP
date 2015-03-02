@@ -1,7 +1,10 @@
 package sg.edu.ntu.sce.fyp.calevent.model;
 
+import java.util.ArrayList;
+
 import sg.edu.ntu.sce.fyp.calevent.R;
 import sg.edu.ntu.sce.fyp.calevent.activity.MainActivity;
+import sg.edu.ntu.sce.fyp.calevent.model.myclass.MyEvent;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,9 +15,11 @@ import android.nfc.NfcAdapter;
 import android.nfc.NfcEvent;
 import android.os.Build;
 import android.os.Parcelable;
-import android.widget.Toast;
+import android.util.Log;
 
 public class BeamHelper {
+	private static final String DEBUG_TAG = BeamHelper.class.getSimpleName();
+
 	private MainActivity activity;
 	private DataManager dataMgr;
     NfcAdapter mNfcAdapter;
@@ -32,26 +37,20 @@ public class BeamHelper {
         
 	}
 
-	public void sendAndReceiveData() {
-		//TODO 
-	}
-	
+	//called when a device is in range to beam data to
 	public NdefMessage createNdefMessage(NfcEvent event) {
-		String text = ("Beam me up, Android!\n\n" +
-                "Beam Time: " + System.currentTimeMillis());
+		String eventstext = new String();
+		ArrayList<MyEvent> eventList = dataMgr.getToBeSharedEventList();
+		for (MyEvent ev : eventList){
+			eventstext += (ev.getTitle() + ev.getDtstart());
+		}
+		
         NdefMessage msg = new NdefMessage(
                 new NdefRecord[] { NdefRecord.createMime(
-                        "application/vnd.com.example.android.beam", text.getBytes())
-         /**
-          * The Android Application Record (AAR) is commented out. When a device
-          * receives a push with an AAR in it, the application specified in the AAR
-          * is guaranteed to run. The AAR overrides the tag dispatch system.
-          * You can add it back in to guarantee that this
-          * activity starts when receiving a beamed message. For now, this code
-          * uses the tag dispatch system.
-          */
-          //,NdefRecord.createApplicationRecord("com.example.android.beam")
+                        "application/sg.edu.ntu.sce.fyp.calevent", 
+                        eventstext.getBytes())
         });
+        
         return msg;
 	}
 	
@@ -71,15 +70,23 @@ public class BeamHelper {
      * Parses the NDEF Message from the intent and prints to the TextView
      */
     void processIntent(Intent intent) {
-        Parcelable[] rawMsgs = intent.getParcelableArrayExtra(
-                NfcAdapter.EXTRA_NDEF_MESSAGES);
+        Parcelable[] rawMsgs = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
         // only one message sent during the beam
         NdefMessage msg = (NdefMessage) rawMsgs[0];
+        String payload = new String(msg.getRecords()[0].getPayload()); 
+        Log.d(DEBUG_TAG, payload);
         // record 0 contains the MIME type, record 1 is the AAR, if present
-        Toast.makeText(
-				activity.getApplicationContext(),
-				new String(msg.getRecords()[0].getPayload()),
-				Toast.LENGTH_SHORT).show();
+        new AlertDialog.Builder(activity)
+		.setTitle(activity.getResources().getString(R.string.alert))
+		.setMessage(payload)
+		.setPositiveButton(android.R.string.yes,
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog,
+							int which) {
+						// continue with quit
+					}
+				}).setIcon(android.R.drawable.btn_star)
+		.show();
     }
 
 	private void checkNFCAvalibility() {

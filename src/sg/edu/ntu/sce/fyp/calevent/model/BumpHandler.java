@@ -9,11 +9,9 @@ import android.widget.Toast;
 public class BumpHandler {
 	private MainActivity activity;
 	private BumpListener bumper;
-	private BeamHelper transferHelper;
 
 	public BumpHandler(MainActivity mainActivity) {
 		activity = mainActivity;
-		transferHelper = activity.beamHelper;
 		final Vibrator vibe = (Vibrator)activity.getSystemService(Context.VIBRATOR_SERVICE);
 
 	    bumper = new BumpListener(activity);
@@ -22,7 +20,6 @@ public class BumpHandler {
 	      {
 	        vibe.vibrate(100);
 			Toast.makeText(activity.getApplicationContext(), "shaken", Toast.LENGTH_SHORT).show();
-			transferHelper.sendAndReceiveData();
 	      }
 	    });
 	}
