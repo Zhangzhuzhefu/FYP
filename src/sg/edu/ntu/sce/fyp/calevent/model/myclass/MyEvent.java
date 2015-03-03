@@ -21,6 +21,7 @@ public class MyEvent {
 	
 	public static final String MYEVENT = "myevent";
 	public static final String RECEIVEDEVENT = "receivedevent";
+	public static final String TIMESLOT = "timslot";
 	
 	public MyEvent(){
 		toBeShared = false;

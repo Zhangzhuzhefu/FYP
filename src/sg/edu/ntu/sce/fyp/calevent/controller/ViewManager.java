@@ -55,19 +55,31 @@ public class ViewManager {
 	
 	public void displayReceivedEventsOnly(){
 		if (weekView != null){
-			weekView.updateReceivedEventsOnly(MyEvent.RECEIVEDEVENT);
+			weekView.onlyUpdateEventsOf(MyEvent.RECEIVEDEVENT);
 		}
 	}
 	
 	public void displayMyEventsOnly(){
 		if (weekView != null){
-			weekView.updateReceivedEventsOnly(MyEvent.MYEVENT);
+			weekView.onlyUpdateEventsOf(MyEvent.MYEVENT);
+		}
+	}
+	
+	public void displayTimeSlotsOnly(){
+		if (weekView != null){
+			weekView.onlyUpdateEventsOf(MyEvent.TIMESLOT);
+			weekView.updateTimeSlots();
 		}
 	}
 	
 	public void homeViewSelectInboxTab(){
 		if (homeView != null) 
 			homeView.tab_inbox.select();
+	}
+	
+	public void homeViewSelectTimeSlotTab(){
+		if (homeView != null) 
+			homeView.tab_time_slot.select();
 	}
 
 }

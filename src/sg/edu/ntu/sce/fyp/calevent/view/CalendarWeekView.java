@@ -10,7 +10,6 @@ import sg.edu.ntu.sce.fyp.calevent.global.DateHelper;
 import sg.edu.ntu.sce.fyp.calevent.global.Today;
 import sg.edu.ntu.sce.fyp.calevent.model.myclass.MyEvent;
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -149,7 +148,7 @@ public class CalendarWeekView {
 		}
 	}
 	
-	public void updateReceivedEventsOnly(String tag){
+	public void onlyUpdateEventsOf(String tag){
 		/*remove all TextViews that is not MyEvent.RECEIVEDEVENT*/
 		RelativeLayout[] colLayouts = new RelativeLayout[7];
 		colLayouts[0] = (RelativeLayout) this.activity.findViewById(R.id.sundayRelativeLayout);
@@ -176,5 +175,9 @@ public class CalendarWeekView {
 					}
 			}
 		}
+	}
+	
+	public void updateTimeSlots(){
+		//TODO
 	}
 }

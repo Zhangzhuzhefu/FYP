@@ -27,7 +27,7 @@ public class HomeView {
 	public static final String INFO = "info";
 	
 	public Tab tab_home;
-	public Tab tab_find;
+	public Tab tab_time_slot;
 	public Tab tab_inbox;
 	public Tab tab_info;
 	
@@ -59,16 +59,16 @@ public class HomeView {
 						new TabListenerInbox(activity));
 		actionBar.addTab(tab_inbox);
 		
-		tab_find = actionBar
+		tab_time_slot = actionBar
 				.newTab()
 				.setIcon(R.drawable.tab_time_slot)
 				.setTabListener(
 						new TabListenerTimeSlot(activity));
-		actionBar.addTab(tab_find);
+		actionBar.addTab(tab_time_slot);
 		
 		tab_info = actionBar
 				.newTab()
-				.setIcon(R.drawable.tab_info)
+				.setIcon(R.drawable.tab_cal_list)
 				.setTabListener(
 						new TabListenerInfo(activity, INFO,
 								InfoFragment.class));
@@ -87,9 +87,9 @@ public class HomeView {
 				
 				Toast.makeText(
 						context,
-						isChecked ? activity.getResources().getText(
-								R.string.find_mode) : activity.getResources()
-								.getText(R.string.share_mode),
+						isChecked 
+						? activity.getResources().getText(R.string.find_mode) 
+								: activity.getResources().getText(R.string.share_mode),
 						Toast.LENGTH_SHORT).show();
 			}
 		});

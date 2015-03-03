@@ -24,8 +24,11 @@ public class TabListenerTimeSlot implements ActionBar.TabListener {
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
 		mActivity.findViewById(R.id.activity_home_layout).setVisibility(
 				View.VISIBLE);
-		if (mActivity.calendarViewManager != null)
+		
+		if (mActivity.calendarViewManager != null) {
 			mActivity.calendarViewManager.updateTimeline();
+			mActivity.calendarViewManager.displayTimeSlotsOnly();
+		}
 
 		Toast.makeText(ctx, ctx.getString(R.string.new_on_tab),
 				Toast.LENGTH_SHORT).show();

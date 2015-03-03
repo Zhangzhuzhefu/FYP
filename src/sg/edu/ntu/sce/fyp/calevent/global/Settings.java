@@ -2,6 +2,8 @@ package sg.edu.ntu.sce.fyp.calevent.global;
 
 public class Settings {
 	private static Settings settings;
+	public static final String FIND = "find";
+	public static final String SHARE = "share";
 	
 	private boolean toggle; //ture: find; flase: share
 	private long writeCalendarId;
@@ -16,8 +18,12 @@ public class Settings {
 		return settings;
 	}
 
-	public boolean isToggle() {
+	public boolean isFindMode() {
 		return toggle;
+	}
+	
+	public boolean isShareMode() {
+		return !toggle;
 	}
 
 	public void setToggle(boolean toggle) {

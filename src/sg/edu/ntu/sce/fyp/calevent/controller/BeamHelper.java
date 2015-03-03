@@ -2,6 +2,7 @@ package sg.edu.ntu.sce.fyp.calevent.controller;
 
 import sg.edu.ntu.sce.fyp.calevent.R;
 import sg.edu.ntu.sce.fyp.calevent.activity.MainActivity;
+import sg.edu.ntu.sce.fyp.calevent.global.Settings;
 import sg.edu.ntu.sce.fyp.calevent.model.XMLConstructor;
 import sg.edu.ntu.sce.fyp.calevent.model.XMLParser;
 import android.app.AlertDialog;
@@ -40,7 +41,7 @@ public class BeamHelper {
 	//called when a device is in range to beam data to
 	public NdefMessage createNdefMessage(NfcEvent event) {
 		String eventstext = new String();
-		eventstext = xmlConstructor.getToBeSharedEventsInXML();
+		eventstext = xmlConstructor.getToBeSentContentsInXML();
         NdefMessage msg = new NdefMessage(
                 new NdefRecord[] { NdefRecord.createMime(
                         "application/sg.edu.ntu.sce.fyp.calevent", 
@@ -54,7 +55,6 @@ public class BeamHelper {
         // Check to see that the Activity started due to an Android Beam
         if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(activity.getIntent().getAction())) {
             processIntent(activity.getIntent());
-            activity.calendarViewManager.homeViewSelectInboxTab();
         }
     }
 
@@ -72,7 +72,12 @@ public class BeamHelper {
         NdefMessage msg = (NdefMessage) rawMsgs[0];
         String payload = new String(msg.getRecords()[0].getPayload());
         Log.d(DEBUG_TAG, payload);
-        xmlParser.parseResult(payload);
+        String mode = xmlParser.parseResult(payload);
+        if (mode.equalsIgnoreCase(Settings.SHARE)){
+        	activity.calendarViewManager.homeViewSelectInboxTab();
+        } else {
+        	activity.calendarViewManager.homeViewSelectTimeSlotTab();
+        }
     }
 
 	private void checkNFCAvalibility() {

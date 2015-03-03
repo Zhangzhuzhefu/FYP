@@ -6,6 +6,7 @@ import sg.edu.ntu.sce.fyp.calevent.global.Settings;
 import sg.edu.ntu.sce.fyp.calevent.global.Today;
 import sg.edu.ntu.sce.fyp.calevent.model.myclass.MyCalendar;
 import sg.edu.ntu.sce.fyp.calevent.model.myclass.MyEvent;
+import sg.edu.ntu.sce.fyp.calevent.model.myclass.MyTimeSlot;
 
 public class DataManager {
 
@@ -20,6 +21,9 @@ public class DataManager {
 	private ArrayList<MyEvent> toBeSharedEventList;
 	private ArrayList<MyEvent> receivedEventList;
 	private ArrayList<MyEvent> acceptedEventList;
+	
+	private ArrayList<MyTimeSlot> timeSlotList;
+	private ArrayList<MyTimeSlot> receivedtTimeSlotList;
 	
 	public static DataManager getInstance(){
 		if (dataMgr == null) {
@@ -158,6 +162,22 @@ public class DataManager {
 	public void deleteEvent(MyEvent ev) {
 		if (ev != null)
 			myEventList.remove(ev);
+	}
+
+	public ArrayList<MyTimeSlot> getTimeSlotList() {
+		return timeSlotList;
+	}
+
+	public void setTimeSlotList(ArrayList<MyTimeSlot> timeSlotList) {
+		this.timeSlotList = timeSlotList;
+	}
+
+	public ArrayList<MyTimeSlot> getReceivedtTimeSlotList() {
+		return receivedtTimeSlotList;
+	}
+
+	public void setReceivedtTimeSlotList(ArrayList<MyTimeSlot> receivedtTimeSlotList) {
+		this.receivedtTimeSlotList = receivedtTimeSlotList;
 	}
 
 }
