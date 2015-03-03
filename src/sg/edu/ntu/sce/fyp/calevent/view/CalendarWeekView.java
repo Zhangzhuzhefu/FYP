@@ -224,7 +224,8 @@ public class CalendarWeekView {
 			int color = R.color.comment_orange;
 			view.setBackgroundColor(this.activity.getResources().getColor(color));
 //			view.setOnClickListener(new MyEventOnClickListner(this.activity, slot));
-			colLayouts[colIndex].addView(view);
+			if (colIndex >= 0 && colIndex <7)
+				colLayouts[colIndex].addView(view);
 		}
 	}
 }

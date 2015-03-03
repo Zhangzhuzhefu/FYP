@@ -38,25 +38,28 @@ public class TabListenerInfo implements ActionBar.TabListener {
 	/* The following are each of the ActionBar.TabListener callbacks */
 
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
-			Toast.makeText(ctx, ctx.getString(R.string.info_on_tab),
-					Toast.LENGTH_SHORT).show();
-			
-			mActivity.findViewById(R.id.activity_home_layout).setVisibility(
-					View.INVISIBLE);
-			if (mFragment_info == null) {
-				mFragment_info = Fragment.instantiate(mActivity,
-						mClass.getName());
-				ft.add(android.R.id.content, mFragment_info, mTag);
-			} else {
-				ft.attach(mFragment_info);
-			}
+		Toast.makeText(ctx, ctx.getString(R.string.info_on_tab),
+				Toast.LENGTH_SHORT).show();
+		
+		mActivity.findViewById(R.id.activity_home_layout).setVisibility(
+				View.INVISIBLE);
+		if (mFragment_info == null) {
+			mFragment_info = Fragment.instantiate(mActivity,
+					mClass.getName());
+			ft.add(android.R.id.content, mFragment_info, mTag);
+		} else {
+			ft.attach(mFragment_info);
+		}
 	}
 
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-			if (mFragment_info != null) {
-				// Detach the fragment, because another one is being attached
-				ft.detach(mFragment_info);
-			}
+		if (mActivity.dataManager != null) {
+			mActivity.dataManager.setTimeSlotList(null);
+		}
+		if (mFragment_info != null) {
+			// Detach the fragment, because another one is being attached
+			ft.detach(mFragment_info);
+		}
 	}
 
 	public void onTabReselected(Tab tab, FragmentTransaction ft) {
