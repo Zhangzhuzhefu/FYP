@@ -3,6 +3,7 @@ package sg.edu.ntu.sce.fyp.calevent.controller;
 import sg.edu.ntu.sce.fyp.calevent.R;
 import sg.edu.ntu.sce.fyp.calevent.activity.MainActivity;
 import sg.edu.ntu.sce.fyp.calevent.global.Settings;
+import sg.edu.ntu.sce.fyp.calevent.model.TimeSlotCalculator;
 import sg.edu.ntu.sce.fyp.calevent.model.XMLConstructor;
 import sg.edu.ntu.sce.fyp.calevent.model.XMLParser;
 import android.app.AlertDialog;
@@ -74,9 +75,22 @@ public class BeamHelper {
         Log.d(DEBUG_TAG, payload);
         String mode = xmlParser.parseResult(payload);
         if (mode.equalsIgnoreCase(Settings.SHARE)){
+
         	activity.calendarViewManager.homeViewSelectInboxTab();
         } else {
-        	activity.calendarViewManager.homeViewSelectTimeSlotTab();
+			if (activity.dataManager != null) {
+				if (activity.dataManager.getTimeSlotList() == null) {
+					activity.dataManager.setTimeSlotList(
+							TimeSlotCalculator.getInstance().calculateTimeSlot(
+											activity.dataManager.getTimeSlotList(),
+											activity.dataManager.getReceivedtTimeSlotList()));
+				}
+	        	activity.dataManager.setTimeSlotList(
+						TimeSlotCalculator.getInstance().calculateTimeSlot(
+								activity.dataManager.getTimeSlotList(),
+								activity.dataManager.getReceivedtTimeSlotList()));
+	        	activity.calendarViewManager.homeViewSelectTimeSlotTab();
+			}
         }
     }
 

@@ -26,6 +26,7 @@ public class TabListenerHome implements ActionBar.TabListener {
 				View.VISIBLE);
 		if (mActivity.calendarViewManager != null) {
 			mActivity.calendarViewManager.updateTimeline();
+			mActivity.calendarViewManager.updateWeekView();
 			mActivity.calendarViewManager.displayMyEventsOnly();
 		}
 

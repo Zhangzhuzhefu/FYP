@@ -39,6 +39,13 @@ public class ViewManager {
 		updateReceivedEventsInWeekView();
 	}
 	
+	public void updateTimeSlotsInWeekView(){
+		weekView.updateTimeLine();
+		if (dataMgr.getTimeSlotList() != null){
+			weekView.updateTimeSlots(dataMgr.getTimeSlotList());
+		}
+	}
+	
 	private void updateMyEventsInWeekView(){
 		weekView.updateTimeLine();
 		if (dataMgr.getMyEventList() != null){
@@ -49,7 +56,7 @@ public class ViewManager {
 	private void updateReceivedEventsInWeekView(){
 		weekView.updateTimeLine();
 		if (dataMgr.getReceivedEventList() != null){
-			weekView.updateEvents(dataMgr.getReceivedEventList(),MyEvent.RECEIVEDEVENT);
+			weekView.updateEvents(dataMgr.getReceivedEventList(), MyEvent.RECEIVEDEVENT);
 		}
 	}
 	
@@ -68,7 +75,6 @@ public class ViewManager {
 	public void displayTimeSlotsOnly(){
 		if (weekView != null){
 			weekView.onlyUpdateEventsOf(MyEvent.TIMESLOT);
-			weekView.updateTimeSlots();
 		}
 	}
 	

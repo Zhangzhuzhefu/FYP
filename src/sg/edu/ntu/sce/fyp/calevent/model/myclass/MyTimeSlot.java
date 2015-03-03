@@ -2,11 +2,15 @@ package sg.edu.ntu.sce.fyp.calevent.model.myclass;
 
 public class MyTimeSlot {
 
-	public long start;
-	public long end;
+	private long start;
+	private long end;
 	
-	public MyTimeSlot(){
-		
+	public MyTimeSlot(long s, long e){
+		start = s;
+		end = e;
+	}
+
+	public MyTimeSlot() {
 	}
 
 	public long getStart() {
@@ -15,6 +19,14 @@ public class MyTimeSlot {
 
 	public void setStart(long start) {
 		this.start = start;
+	}
+
+	public long getEnd() {
+		return end;
+	}
+
+	public void setEnd(long end) {
+		this.end = end;
 	}
 	
 	

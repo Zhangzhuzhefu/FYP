@@ -9,6 +9,7 @@ import sg.edu.ntu.sce.fyp.calevent.controller.listener.MyEventOnClickListner;
 import sg.edu.ntu.sce.fyp.calevent.global.DateHelper;
 import sg.edu.ntu.sce.fyp.calevent.global.Today;
 import sg.edu.ntu.sce.fyp.calevent.model.myclass.MyEvent;
+import sg.edu.ntu.sce.fyp.calevent.model.myclass.MyTimeSlot;
 import android.content.Context;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -177,7 +178,53 @@ public class CalendarWeekView {
 		}
 	}
 	
-	public void updateTimeSlots(){
-		//TODO
+	public void updateTimeSlots(ArrayList<MyTimeSlot> timeSlotList){
+		/*remove all TextViews*/
+		RelativeLayout[] colLayouts = new RelativeLayout[7];
+		colLayouts[0] = (RelativeLayout) this.activity.findViewById(R.id.sundayRelativeLayout);
+		colLayouts[1] = (RelativeLayout) this.activity.findViewById(R.id.mondayRelativeLayout);
+		colLayouts[2] = (RelativeLayout) this.activity.findViewById(R.id.tuesdayRelativeLayout);
+		colLayouts[3] = (RelativeLayout) this.activity.findViewById(R.id.wednesdayRelativeLayout);
+		colLayouts[4] = (RelativeLayout) this.activity.findViewById(R.id.thursdayRelativeLayout);
+		colLayouts[5] = (RelativeLayout) this.activity.findViewById(R.id.fridayRelativeLayout);
+		colLayouts[6] = (RelativeLayout) this.activity.findViewById(R.id.saturdayRelativeLayout);
+		for (RelativeLayout layout : colLayouts) {
+			for (int i = 0; i < layout.getChildCount(); i++) {
+				View v = layout.getChildAt(i);
+				if (v.getTag() != null)
+					if (v instanceof TextView) {
+						if (v.getTag() != null) {
+							if (v.getTag() instanceof String) {
+								if (((String) v.getTag()).equalsIgnoreCase(MyEvent.TIMESLOT)) {
+									layout.removeView(v);
+									i--;
+								}
+							}
+						}
+					}
+			}
+		}
+		for (MyTimeSlot slot : timeSlotList) {
+			TextView view;
+			int colIndex, tvHeight, tvMargtinTop;
+			long start = slot.getStart();
+			long end = slot.getEnd();
+			long duration = end - start;
+			
+			view = new TextView(activity);
+			tvHeight =(int) (Float.valueOf(duration) / Float.valueOf(DateHelper.HOURINMILLI) * 60);
+			tvMargtinTop = (int) (Float.valueOf(DateHelper.getTimeFromMidnightInMilli(start)) / Float.valueOf(DateHelper.HOURINMILLI) * 60);
+			colIndex = (int) ((Float.valueOf(start) - Float.valueOf(DateHelper.getTodayMidnightInMilli()))/DateHelper.DAYINMILLI);
+			
+			RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
+					RelativeLayout.LayoutParams.MATCH_PARENT, tvHeight);
+			layoutParams.setMargins(0, tvMargtinTop, 0, 0);
+			view.setTag(MyEvent.TIMESLOT);
+			view.setLayoutParams(layoutParams);
+			int color = R.color.comment_orange;
+			view.setBackgroundColor(this.activity.getResources().getColor(color));
+//			view.setOnClickListener(new MyEventOnClickListner(this.activity, slot));
+			colLayouts[colIndex].addView(view);
+		}
 	}
 }

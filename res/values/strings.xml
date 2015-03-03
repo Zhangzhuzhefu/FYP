@@ -62,7 +62,7 @@
     <string name="share_mode">Share mode</string>
     <string name="find_mode">Find mode</string>
     <string name="home_on_tab">Home</string>
-    <string name="new_on_tab">Create new event</string>
+    <string name="new_on_tab">TimeSlot</string>
     <string name="inbox_on_tab">Inbox</string>
     <string name="info_on_tab">Select calendars</string> 
     <string name="select_to_be_written_calendar">Select your calendar to be written</string>
