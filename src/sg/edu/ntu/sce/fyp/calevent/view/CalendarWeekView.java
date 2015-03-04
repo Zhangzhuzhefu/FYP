@@ -145,7 +145,8 @@ public class CalendarWeekView {
 					color = R.color.otherEvent_green;
 			tv.setBackgroundColor(this.activity.getResources().getColor(color));
 			tv.setOnClickListener(new MyEventOnClickListner(this.activity, ev));
-			colLayouts[colIndex].addView(tv);
+			if (colIndex >= 0 && colIndex <7)
+				colLayouts[colIndex].addView(tv);
 		}
 	}
 	

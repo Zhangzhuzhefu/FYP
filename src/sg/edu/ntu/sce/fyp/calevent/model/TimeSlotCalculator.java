@@ -25,15 +25,58 @@ public class TimeSlotCalculator {
 			int tsListMax = tsList.size() - 1;
 			int i = 0, j = 0;
 			while (i <= evListMax || j <= tsListMax) {
+				long evS, evE, tsS, tsE;
 				if (i >= evListMax && j < tsListMax) {
-					
+					/**compare lastSlot and ts*/
+					tsS = tsList.get(i).getStart();
+					tsE = tsList.get(i).getEnd();
+					long start = lastSlot.getStart();
+					long end = lastSlot.getEnd();
+					if (start <= tsS && end >= tsE) { //lastSlot bigger
+						
+					} else if (start >= tsS && end <= tsE) { // ts bigger
+						lastSlot.setStart(tsS);
+						lastSlot.setEnd(tsE);
+					} else if (start > tsE) { // disjoint ts first
+						Log.d("logic bug", "lastSlot appears after a timeslot: timeSlotList is not in order");
+					} else if (tsS > end) { // disjoint lastSlot first
+						if (start != 0 && end!= 0)
+							resultTimeSlotList.add(lastSlot);
+						lastSlot = new MyTimeSlot(tsS, tsE);
+					} else if (start > tsS) { // joint ts first 
+						lastSlot.setStart(tsS);
+					} else { // joint lastSlot first
+						lastSlot.setEnd(tsE);
+					}
+					j ++;
 				} else if (i < evListMax && j >= tsListMax) {
-					
+					/**compare lastSlot and ev*/
+					evS = evList.get(i).getStart();
+					evE = evList.get(i).getEnd();
+					long start = lastSlot.getStart();
+					long end = lastSlot.getEnd();
+					if (start <= evS && end >= evE) { //lastSlot bigger
+						
+					} else if (start >= evS && end <= evE) { // ts bigger
+						lastSlot.setStart(evS);
+						lastSlot.setEnd(evE);
+					} else if (start > evE) { // disjoint ts first
+						Log.d("logic bug", "lastSlot appears after a timeslot: timeSlotList is not in order");
+					} else if (evS > end) { // disjoint lastSlot first
+						if (start != 0 && end!= 0)
+							resultTimeSlotList.add(lastSlot);
+						lastSlot = new MyTimeSlot(evS, evE);
+					} else if (start > evS) { // joint ts first 
+						lastSlot.setStart(evS);
+					} else { // joint lastSlot first
+						lastSlot.setEnd(evE);
+					}
+					i ++;
 				} 
-				long evS = evList.get(i).getStart();
-				long evE = evList.get(i).getEnd();
-				long tsS = tsList.get(i).getStart();
-				long tsE = tsList.get(i).getEnd();
+				evS = evList.get(i).getStart();
+				evE = evList.get(i).getEnd();
+				tsS = tsList.get(i).getStart();
+				tsE = tsList.get(i).getEnd();
 				
 				if (evS <= tsS && evE >= tsE) { //ev bigger
 					j ++;
