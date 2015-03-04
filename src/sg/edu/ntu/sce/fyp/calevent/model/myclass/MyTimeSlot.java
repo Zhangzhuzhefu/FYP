@@ -29,5 +29,7 @@ public class MyTimeSlot {
 		this.end = end;
 	}
 	
-	
+	public String toString(){
+		return String.valueOf(start) + "->" + String.valueOf(end);
+	}
 }

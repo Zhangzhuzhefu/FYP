@@ -26,10 +26,10 @@ public class TimeSlotCalculator {
 			int i = 0, j = 0;
 			while (i <= evListMax || j <= tsListMax) {
 				long evS, evE, tsS, tsE;
-				if (i >= evListMax && j < tsListMax) {
+				if (i > evListMax && j <= tsListMax) {
 					/**compare lastSlot and ts*/
-					tsS = tsList.get(i).getStart();
-					tsE = tsList.get(i).getEnd();
+					tsS = tsList.get(j).getStart();
+					tsE = tsList.get(j).getEnd();
 					long start = lastSlot.getStart();
 					long end = lastSlot.getEnd();
 					if (start <= tsS && end >= tsE) { //lastSlot bigger
@@ -49,7 +49,7 @@ public class TimeSlotCalculator {
 						lastSlot.setEnd(tsE);
 					}
 					j ++;
-				} else if (i < evListMax && j >= tsListMax) {
+				} else if (i <= evListMax && j > tsListMax) {
 					/**compare lastSlot and ev*/
 					evS = evList.get(i).getStart();
 					evE = evList.get(i).getEnd();
@@ -72,114 +72,117 @@ public class TimeSlotCalculator {
 						lastSlot.setEnd(evE);
 					}
 					i ++;
-				} 
-				evS = evList.get(i).getStart();
-				evE = evList.get(i).getEnd();
-				tsS = tsList.get(i).getStart();
-				tsE = tsList.get(i).getEnd();
-				
-				if (evS <= tsS && evE >= tsE) { //ev bigger
-					j ++;
-					continue;
-				} else if (evS >= tsS && evE <= tsE) { //ts bigger
-					i ++;
-					continue;
-				} else if (evS > tsE) { // disjoint ts first
-					/**compare lastSlot and ts*/
-					long start = lastSlot.getStart();
-					long end = lastSlot.getEnd();
-					if (start <= tsS && end >= tsE) { //lastSlot bigger
-						
-					} else if (start >= tsS && end <= tsE) { // ts bigger
-						lastSlot.setStart(tsS);
-						lastSlot.setEnd(tsE);
-					} else if (start > tsE) { // disjoint ts first
-						Log.d("logic bug", "lastSlot appears after a timeslot: timeSlotList is not in order");
-					} else if (tsS > end) { // disjoint lastSlot first
-						if (start != 0 && end!= 0)
-							resultTimeSlotList.add(lastSlot);
-						lastSlot = new MyTimeSlot(tsS, tsE);
-					} else if (start > tsS) { // joint ts first 
-						lastSlot.setStart(tsS);
-					} else { // joint lastSlot first
-						lastSlot.setEnd(tsE);
+				} else {
+					evS = evList.get(i).getStart();
+					evE = evList.get(i).getEnd();
+					tsS = tsList.get(j).getStart();
+					tsE = tsList.get(j).getEnd();
+					
+					if (evS <= tsS && evE >= tsE) { //ev bigger
+						j ++;
+						continue;
+					} else if (evS >= tsS && evE <= tsE) { //ts bigger
+						i ++;
+						continue;
+					} else if (evS > tsE) { // disjoint ts first
+						/**compare lastSlot and ts*/
+						long start = lastSlot.getStart();
+						long end = lastSlot.getEnd();
+						if (start <= tsS && end >= tsE) { //lastSlot bigger
+							
+						} else if (start >= tsS && end <= tsE) { // ts bigger
+							lastSlot.setStart(tsS);
+							lastSlot.setEnd(tsE);
+						} else if (start > tsE) { // disjoint ts first
+							Log.d("logic bug", "lastSlot appears after a timeslot: timeSlotList is not in order");
+						} else if (tsS > end) { // disjoint lastSlot first
+							if (start != 0 && end!= 0)
+								resultTimeSlotList.add(lastSlot);
+							lastSlot = new MyTimeSlot(tsS, tsE);
+						} else if (start > tsS) { // joint ts first 
+							lastSlot.setStart(tsS);
+						} else { // joint lastSlot first
+							lastSlot.setEnd(tsE);
+						}
+						j ++;
+					} else if (tsS > evE) { // disjoint ev first
+						/**compare lastSlot and ev*/
+						long start = lastSlot.getStart();
+						long end = lastSlot.getEnd();
+						if (start <= evS && end >= evE) { //lastSlot bigger
+							
+						} else if (start >= evS && end <= evE) { // ts bigger
+							lastSlot.setStart(evS);
+							lastSlot.setEnd(evE);
+						} else if (start > evE) { // disjoint ts first
+							Log.d("logic bug", "lastSlot appears after a timeslot: timeSlotList is not in order");
+						} else if (evS > end) { // disjoint lastSlot first
+							if (start != 0 && end!= 0)
+								resultTimeSlotList.add(lastSlot);
+							lastSlot = new MyTimeSlot(evS, evE);
+						} else if (start > evS) { // joint ts first 
+							lastSlot.setStart(evS);
+						} else { // joint lastSlot first
+							lastSlot.setEnd(evE);
+						}
+						i ++;
+					} else if (evS > tsS) { // joint ts first 
+						/**compare lastSlot and tsS & evE*/
+						long start = lastSlot.getStart();
+						long end = lastSlot.getEnd();
+						if (start <= tsS && end >= evE) { //lastSlot bigger
+							
+						} else if (start >= tsS && end <= evE) { // ts bigger
+							lastSlot.setStart(tsS);
+							lastSlot.setEnd(evE);
+						} else if (start > evE) { // disjoint ts first
+							Log.d("logic bug", "lastSlot appears after a timeslot: timeSlotList is not in order");
+						} else if (tsS > end) { // disjoint lastSlot first
+							if (start != 0 && end!= 0)
+								resultTimeSlotList.add(lastSlot);
+							lastSlot = new MyTimeSlot(tsS, evE);
+						} else if (start > tsS) { // joint ts first 
+							lastSlot.setStart(tsS);
+						} else { // joint lastSlot first
+							lastSlot.setEnd(evE);
+						}
+						i ++;
+						j ++;
+					} else { // joint ev first
+						/**compare lastSlot and evS & tsE*/
+						long start = lastSlot.getStart();
+						long end = lastSlot.getEnd();
+						if (start <= evS && end >= tsE) { //lastSlot bigger
+							
+						} else if (start >= evS && end <= tsE) { // ts bigger
+							lastSlot.setStart(evS);
+							lastSlot.setEnd(tsE);
+						} else if (start > tsE) { // disjoint ts first
+							Log.d("logic bug", "lastSlot appears after a timeslot: timeSlotList is not in order");
+						} else if (evS > end) { // disjoint lastSlot first
+							if (start != 0 && end!= 0)
+								resultTimeSlotList.add(lastSlot);
+							lastSlot = new MyTimeSlot(evS, tsE);
+						} else if (start > evS) { // joint ts first 
+							lastSlot.setStart(evS);
+						} else { // joint lastSlot first
+							lastSlot.setEnd(tsE);
+						}
+						i ++;
+						j ++;
 					}
-					j ++;
-				} else if (tsS > evE) { // disjoint ev first
-					/**compare lastSlot and ev*/
-					long start = lastSlot.getStart();
-					long end = lastSlot.getEnd();
-					if (start <= evS && end >= evE) { //lastSlot bigger
-						
-					} else if (start >= evS && end <= evE) { // ts bigger
-						lastSlot.setStart(evS);
-						lastSlot.setEnd(evE);
-					} else if (start > evE) { // disjoint ts first
-						Log.d("logic bug", "lastSlot appears after a timeslot: timeSlotList is not in order");
-					} else if (evS > end) { // disjoint lastSlot first
-						if (start != 0 && end!= 0)
-							resultTimeSlotList.add(lastSlot);
-						lastSlot = new MyTimeSlot(evS, evE);
-					} else if (start > evS) { // joint ts first 
-						lastSlot.setStart(evS);
-					} else { // joint lastSlot first
-						lastSlot.setEnd(evE);
-					}
-					i ++;
-				} else if (evS > tsS) { // joint ts first 
-					/**compare lastSlot and tsS & evE*/
-					long start = lastSlot.getStart();
-					long end = lastSlot.getEnd();
-					if (start <= tsS && end >= evE) { //lastSlot bigger
-						
-					} else if (start >= tsS && end <= evE) { // ts bigger
-						lastSlot.setStart(tsS);
-						lastSlot.setEnd(evE);
-					} else if (start > evE) { // disjoint ts first
-						Log.d("logic bug", "lastSlot appears after a timeslot: timeSlotList is not in order");
-					} else if (tsS > end) { // disjoint lastSlot first
-						if (start != 0 && end!= 0)
-							resultTimeSlotList.add(lastSlot);
-						lastSlot = new MyTimeSlot(tsS, evE);
-					} else if (start > tsS) { // joint ts first 
-						lastSlot.setStart(tsS);
-					} else { // joint lastSlot first
-						lastSlot.setEnd(evE);
-					}
-					i ++;
-					j ++;
-				} else { // joint ev first
-					/**compare lastSlot and evS & tsE*/
-					long start = lastSlot.getStart();
-					long end = lastSlot.getEnd();
-					if (start <= evS && end >= tsE) { //lastSlot bigger
-						
-					} else if (start >= evS && end <= tsE) { // ts bigger
-						lastSlot.setStart(evS);
-						lastSlot.setEnd(tsE);
-					} else if (start > tsE) { // disjoint ts first
-						Log.d("logic bug", "lastSlot appears after a timeslot: timeSlotList is not in order");
-					} else if (evS > end) { // disjoint lastSlot first
-						if (start != 0 && end!= 0)
-							resultTimeSlotList.add(lastSlot);
-						lastSlot = new MyTimeSlot(evS, tsE);
-					} else if (start > evS) { // joint ts first 
-						lastSlot.setStart(evS);
-					} else { // joint lastSlot first
-						lastSlot.setEnd(tsE);
-					}
-					i ++;
-					j ++;
 				}
-				if (i >= evListMax && j >= tsListMax) {
+				if (i > evListMax && j > tsListMax) {
 					break;
 				}
 			}
+			resultTimeSlotList.add(lastSlot);
 		} else if (evList == null) {
 			Log.d(DEBUG_TAG, "myTimeSlotList is null");
 		} else {
 			Log.d(DEBUG_TAG, "receivedTimeSlotList is null");
 		}
+		
 		return resultTimeSlotList;
 	}
 	

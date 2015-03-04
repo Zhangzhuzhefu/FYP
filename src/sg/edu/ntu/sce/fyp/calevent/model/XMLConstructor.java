@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import sg.edu.ntu.sce.fyp.calevent.global.Settings;
 import sg.edu.ntu.sce.fyp.calevent.model.myclass.MyEvent;
+import sg.edu.ntu.sce.fyp.calevent.model.myclass.MyTimeSlot;
 
 public class XMLConstructor {
 	
@@ -16,11 +17,24 @@ public class XMLConstructor {
 	public String getToBeSentContentsInXML(){
 		String data = new String();
 		data = "<data><mode>";
-		data += (Settings.getInstance().isFindMode() 
-				? Settings.FIND : Settings.SHARE 
+		data += ((Settings.getInstance().isFindMode() 
+				? Settings.FIND : Settings.SHARE)
 				+ "</mode>");
 		if (Settings.getInstance().isFindMode()) {
-			
+			if (dtMgr != null) {
+				if (dtMgr.getTimeSlotList() == null) {
+					dtMgr.setTimeSlotList(
+							TimeSlotCalculator.getInstance().calculateTimeSlot(
+									dtMgr.getMyEventList()));
+				}
+				for (MyTimeSlot ts : dtMgr.getTimeSlotList()) {
+					data = data + 
+							"<timeslot>" + 
+								"<dtstart>" + ts.getStart() + "</dtstart>" + 
+								"<dtend>" + ts.getEnd() + "</dtend>" + 
+							"</timeslot>";
+				}
+			}
 		} else {
 			ArrayList<MyEvent> eventList = dtMgr.getToBeSharedEventList();
 			for (MyEvent ev : eventList) {

@@ -6,6 +6,7 @@ import sg.edu.ntu.sce.fyp.calevent.global.Settings;
 import sg.edu.ntu.sce.fyp.calevent.model.TimeSlotCalculator;
 import sg.edu.ntu.sce.fyp.calevent.model.XMLConstructor;
 import sg.edu.ntu.sce.fyp.calevent.model.XMLParser;
+import sg.edu.ntu.sce.fyp.calevent.model.myclass.MyTimeSlot;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -82,13 +83,19 @@ public class BeamHelper {
 				if (activity.dataManager.getTimeSlotList() == null) {
 					activity.dataManager.setTimeSlotList(
 							TimeSlotCalculator.getInstance().calculateTimeSlot(
-											activity.dataManager.getTimeSlotList(),
-											activity.dataManager.getReceivedtTimeSlotList()));
+											activity.dataManager.getMyEventList()));
+				}
+				for (MyTimeSlot ts:activity.dataManager.getReceivedtTimeSlotList()) {
+					Log.d("zzzf getReceivedtTimeSlotList", ts.toString());
 				}
 	        	activity.dataManager.setTimeSlotList(
 						TimeSlotCalculator.getInstance().calculateTimeSlot(
 								activity.dataManager.getTimeSlotList(),
 								activity.dataManager.getReceivedtTimeSlotList()));
+	        	
+	        	for (MyTimeSlot ts:activity.dataManager.getTimeSlotList()) {
+					Log.d("zzzf getTimeSlotList", ts.toString());
+				}
 	        	activity.calendarViewManager.homeViewSelectTimeSlotTab();
 			}
         }

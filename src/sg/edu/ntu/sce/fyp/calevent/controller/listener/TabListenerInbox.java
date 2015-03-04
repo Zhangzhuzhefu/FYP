@@ -25,6 +25,7 @@ public class TabListenerInbox implements ActionBar.TabListener {
 		mActivity.findViewById(R.id.activity_home_layout).setVisibility(
 				View.VISIBLE);
 		if (mActivity.calendarViewManager != null) {
+			mActivity.calendarViewManager.displayMyEventsOnly();
 			mActivity.calendarViewManager.updateWeekView();
 		}
 		

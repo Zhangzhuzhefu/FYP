@@ -2,6 +2,7 @@ package sg.edu.ntu.sce.fyp.calevent.model;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -15,10 +16,10 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import android.util.Log;
-
 import sg.edu.ntu.sce.fyp.calevent.global.Settings;
 import sg.edu.ntu.sce.fyp.calevent.model.myclass.MyEvent;
+import sg.edu.ntu.sce.fyp.calevent.model.myclass.MyTimeSlot;
+import android.util.Log;
 
 public class XMLParser {
 	private static final String DEBUG_TAG = XMLParser.class.getSimpleName();
@@ -90,9 +91,28 @@ public class XMLParser {
 					dtMgr.getReceivedEventList().add(nEvent);
 				}
 		    } else { /*Find mode*/
-		    	
+		    	 nodes = doc.getElementsByTagName("timeslot");
+		    	 ArrayList<MyTimeSlot> tsList = new ArrayList<MyTimeSlot>();
+					for (int i = 0; i < nodes.getLength(); i++) {
+						MyTimeSlot nTs = new MyTimeSlot();
+						element = (Element) nodes.item(i);
+		
+						NodeList title = element.getElementsByTagName("dtstart");
+						Element line = (Element) title.item(0);
+						String content = getCharacterDataFromElement(line);
+						nTs.setStart(Long.valueOf(content));
+						result += (content + "\n");
+		
+						NodeList atstart = element.getElementsByTagName("dtend");
+						line = (Element) atstart.item(0);
+						content = getCharacterDataFromElement(line);
+						nTs.setEnd(Long.valueOf(content));
+						result += (content + "\n");
+		
+						tsList.add(nTs);
+					}
+					dtMgr.setReceivedtTimeSlotList(tsList);
 		    }
-		    
 		    
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();

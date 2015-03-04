@@ -33,10 +33,6 @@ public class TabListenerTimeSlot implements ActionBar.TabListener {
 								mActivity.dataManager.getMyEventList()));
 			}
 			
-			/*mActivity.dataManager.setTimeSlotList(
-					TimeSlotCalculator.getInstance().calculateTimeSlot(
-							mActivity.dataManager.getTimeSlotList(),
-							mActivity.dataManager.getReceivedtTimeSlotList()));*/
 		}
 		
 		if (mActivity.calendarViewManager != null) {

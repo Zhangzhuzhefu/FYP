@@ -173,6 +173,9 @@ public class DataManager {
 	}
 
 	public ArrayList<MyTimeSlot> getReceivedtTimeSlotList() {
+		if (receivedtTimeSlotList == null){
+			receivedtTimeSlotList = new ArrayList<MyTimeSlot>();
+		}
 		return receivedtTimeSlotList;
 	}
 
