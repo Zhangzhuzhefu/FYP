@@ -2,8 +2,8 @@ package sg.edu.ntu.sce.fyp.calevent.global;
 
 public class Settings {
 	private static Settings settings;
-	public static final String FIND = "find";
-	public static final String SHARE = "share";
+	public static final String EventSharing = "find";
+	public static final String TimeSlotSharing = "share";
 	
 	private boolean toggle; //ture: find; flase: share
 	private long writeCalendarId;

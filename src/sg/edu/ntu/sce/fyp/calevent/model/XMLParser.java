@@ -43,7 +43,7 @@ public class XMLParser {
 		    Element element = (Element) nodes.item(0);
 		    mode = getCharacterDataFromElement(element);
 		    
-		    if (mode.equalsIgnoreCase(Settings.SHARE)){ 
+		    if (mode.equalsIgnoreCase(Settings.TimeSlotSharing)){ 
 		    	/*Share mode*/
 			    nodes = doc.getElementsByTagName("event");
 				for (int i = 0; i < nodes.getLength(); i++) {

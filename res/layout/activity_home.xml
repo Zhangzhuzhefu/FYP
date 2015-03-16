@@ -27,7 +27,7 @@
             android:layout_centerHorizontal="true"
             android:orientation="vertical" >
 
-            <LinearLayout
+            <RelativeLayout
                 android:id="@+id/toggle_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -41,6 +41,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/switch_mode"
+                    android:layout_centerVertical="true"
                     android:text="@string/share"
                     android:textColor="@color/black"
                     android:typeface="sans"
@@ -53,6 +55,8 @@
                     android:layout_height="wrap_content"
                     android:textOn="@string/nullString"
                     android:textOff="@string/nullString"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
                     android:thumbTextPadding="22dp"
                     android:track="@drawable/toggle_bg"
                     android:thumb="@drawable/toggle_button" />
@@ -62,13 +66,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/switch_mode"
+                    android:layout_centerVertical="true"
                     android:text="@string/find"
                     android:textColor="@color/black"
                     android:typeface="sans"
                     android:textStyle="bold"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
                 
-            </LinearLayout>
+            </RelativeLayout>
             
             <LinearLayout
                 android:id="@+id/toggle_dscrpt_layout"

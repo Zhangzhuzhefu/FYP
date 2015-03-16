@@ -30,6 +30,7 @@ public class HomeView {
 	public Tab tab_time_slot;
 	public Tab tab_inbox;
 	public Tab tab_info;
+	public Switch toggle;
 	
 	public HomeView(MainActivity act){
 		this.context = act.getApplicationContext(); 
@@ -78,8 +79,8 @@ public class HomeView {
 		
 		}	
 	
-	private void setupToggle(){
-		Switch toggle = (Switch) this.activity.findViewById(R.id.switch_mode);
+	public void setupToggle(){
+		toggle = (Switch) this.activity.findViewById(R.id.switch_mode);
 		toggle.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

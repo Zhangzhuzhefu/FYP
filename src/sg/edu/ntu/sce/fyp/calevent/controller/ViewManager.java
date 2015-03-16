@@ -87,5 +87,15 @@ public class ViewManager {
 		if (homeView != null) 
 			homeView.tab_time_slot.select();
 	}
+	
+	public void setToggleTo(boolean isEventShare){
+		if (isEventShare) {
+			homeView.toggle.setChecked(true);
+			dataMgr.getSettings().setToggle(true);
+		} else {
+			homeView.toggle.setChecked(false);
+			dataMgr.getSettings().setToggle(false);
+		}
+	}
 
 }

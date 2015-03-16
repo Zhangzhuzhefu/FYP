@@ -75,8 +75,8 @@ public class BeamHelper {
         String payload = new String(msg.getRecords()[0].getPayload());
         Log.d(DEBUG_TAG, payload);
         String mode = xmlParser.parseResult(payload);
-        if (mode.equalsIgnoreCase(Settings.SHARE)){
-
+        activity.calendarViewManager.setToggleTo(mode.equalsIgnoreCase(Settings.EventSharing));
+        if (mode.equalsIgnoreCase(Settings.TimeSlotSharing)){
         	activity.calendarViewManager.homeViewSelectInboxTab();
         } else {
 			if (activity.dataManager != null) {
@@ -86,7 +86,7 @@ public class BeamHelper {
 											activity.dataManager.getMyEventList()));
 				}
 				for (MyTimeSlot ts:activity.dataManager.getReceivedtTimeSlotList()) {
-					Log.d("zzzf getReceivedtTimeSlotList", ts.toString());
+					Log.d(DEBUG_TAG, ts.toString());
 				}
 	        	activity.dataManager.setTimeSlotList(
 						TimeSlotCalculator.getInstance().calculateTimeSlot(
@@ -94,7 +94,7 @@ public class BeamHelper {
 								activity.dataManager.getReceivedtTimeSlotList()));
 	        	
 	        	for (MyTimeSlot ts:activity.dataManager.getTimeSlotList()) {
-					Log.d("zzzf getTimeSlotList", ts.toString());
+					Log.d(DEBUG_TAG, ts.toString());
 				}
 	        	activity.calendarViewManager.homeViewSelectTimeSlotTab();
 			}
