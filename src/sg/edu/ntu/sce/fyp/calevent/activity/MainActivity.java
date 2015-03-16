@@ -8,15 +8,10 @@ import sg.edu.ntu.sce.fyp.calevent.controller.BumpHandler;
 import sg.edu.ntu.sce.fyp.calevent.controller.CalendarController;
 import sg.edu.ntu.sce.fyp.calevent.controller.ViewManager;
 import sg.edu.ntu.sce.fyp.calevent.controller.adapter.WriteCaleandarListAdapter;
-import sg.edu.ntu.sce.fyp.calevent.model.CalendarReader;
-import sg.edu.ntu.sce.fyp.calevent.model.CalendarWriter;
 import sg.edu.ntu.sce.fyp.calevent.model.DataManager;
-import sg.edu.ntu.sce.fyp.calevent.model.EventReader;
-import sg.edu.ntu.sce.fyp.calevent.model.EventWriter;
 import sg.edu.ntu.sce.fyp.calevent.model.myclass.MyEvent;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.nfc.NdefMessage;
 import android.nfc.NfcAdapter.CreateNdefMessageCallback;
@@ -29,13 +24,8 @@ import android.view.View;
 import android.widget.ListView;
 
 public class MainActivity extends Activity implements CreateNdefMessageCallback{
-	private Context context;
 	
 	public DataManager dataManager;
-	public CalendarReader calReader;
-	public CalendarWriter calWriter;
-	public EventReader eventReader;
-	public EventWriter eventWriter;
 	
 	public ViewManager calendarViewManager;
 	public CalendarController caleventHelper;
@@ -45,7 +35,6 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		context = getApplicationContext();
 
 		initializeAppModels();
 		initializeAppViews();
@@ -89,10 +78,7 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback{
 		dataManager = DataManager.getInstance();
 		bumpHandler = new BumpHandler(this);
 		beamHelper = new BeamHelper(this);
-		calReader = new CalendarReader(context);
-		calWriter = new CalendarWriter(context);
-		eventReader = new EventReader(context);
-		eventWriter = new EventWriter(context);
+		
 	}
 	
 	public void initializeAppViews() {

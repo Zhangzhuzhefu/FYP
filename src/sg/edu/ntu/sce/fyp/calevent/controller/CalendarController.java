@@ -28,10 +28,10 @@ public class CalendarController {
 	
 	public CalendarController (MainActivity act){
 		this.activity = act;
-		calReader = activity.calReader;
-		calWriter = activity.calWriter;
-		eventReader = activity.eventReader;
-		eventWriter = activity.eventWriter;
+		calReader = new CalendarReader(activity.getApplicationContext());
+		calWriter = new CalendarWriter(activity.getApplicationContext());
+		eventReader = new EventReader(activity.getApplicationContext());
+		eventWriter = new EventWriter(activity.getApplicationContext());
 		dataMgr = DataManager.getInstance();
 		viewHelper = this.activity.calendarViewManager;
 		
