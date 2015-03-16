@@ -25,8 +25,6 @@ import android.widget.ListView;
 
 public class MainActivity extends Activity implements CreateNdefMessageCallback{
 	
-	public DataManager dataManager;
-	
 	public ViewManager calendarViewManager;
 	public CalendarController caleventHelper;
 	public BeamHelper beamHelper;
@@ -75,7 +73,6 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback{
 	}
 	
 	public void initializeAppModels(){
-		dataManager = DataManager.getInstance();
 		bumpHandler = new BumpHandler(this);
 		beamHelper = new BeamHelper(this);
 		

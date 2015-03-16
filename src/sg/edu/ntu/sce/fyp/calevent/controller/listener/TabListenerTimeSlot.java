@@ -2,6 +2,7 @@ package sg.edu.ntu.sce.fyp.calevent.controller.listener;
 
 import sg.edu.ntu.sce.fyp.calevent.R;
 import sg.edu.ntu.sce.fyp.calevent.activity.MainActivity;
+import sg.edu.ntu.sce.fyp.calevent.model.DataManager;
 import sg.edu.ntu.sce.fyp.calevent.model.TimeSlotCalculator;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
@@ -23,14 +24,16 @@ public class TabListenerTimeSlot implements ActionBar.TabListener {
 	/* The following are each of the ActionBar.TabListener callbacks */
 
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
+		DataManager dataMgr = DataManager.getInstance();
+		
 		mActivity.findViewById(R.id.activity_home_layout).setVisibility(
 				View.VISIBLE);
 		
-		if (mActivity.dataManager != null) {
-			if (mActivity.dataManager.getTimeSlotList() == null) {
-				mActivity.dataManager.setTimeSlotList(
+		if (dataMgr != null) {
+			if (dataMgr.getTimeSlotList() == null) {
+				dataMgr.setTimeSlotList(
 						TimeSlotCalculator.getInstance().calculateTimeSlot(
-								mActivity.dataManager.getMyEventList()));
+								dataMgr.getMyEventList()));
 			}
 			
 		}

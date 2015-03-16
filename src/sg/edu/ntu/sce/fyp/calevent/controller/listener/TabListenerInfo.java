@@ -2,6 +2,7 @@ package sg.edu.ntu.sce.fyp.calevent.controller.listener;
 
 import sg.edu.ntu.sce.fyp.calevent.R;
 import sg.edu.ntu.sce.fyp.calevent.activity.MainActivity;
+import sg.edu.ntu.sce.fyp.calevent.model.DataManager;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
@@ -53,8 +54,9 @@ public class TabListenerInfo implements ActionBar.TabListener {
 	}
 
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-		if (mActivity.dataManager != null) {
-			mActivity.dataManager.setTimeSlotList(null);
+		DataManager dataMgr = DataManager.getInstance();
+		if (dataMgr != null) {
+			dataMgr.setTimeSlotList(null);
 		}
 		if (mFragment_info != null) {
 			// Detach the fragment, because another one is being attached

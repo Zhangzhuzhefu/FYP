@@ -8,6 +8,7 @@ import sg.edu.ntu.sce.fyp.calevent.controller.listener.CalendarOnClickListner;
 import sg.edu.ntu.sce.fyp.calevent.controller.listener.MyEventOnClickListner;
 import sg.edu.ntu.sce.fyp.calevent.global.DateHelper;
 import sg.edu.ntu.sce.fyp.calevent.global.Today;
+import sg.edu.ntu.sce.fyp.calevent.model.DataManager;
 import sg.edu.ntu.sce.fyp.calevent.model.myclass.MyEvent;
 import sg.edu.ntu.sce.fyp.calevent.model.myclass.MyTimeSlot;
 import android.content.Context;
@@ -31,7 +32,7 @@ public class CalendarWeekView {
 		 * set up calendarViewWeek
 		 */
 		calendarViewWeek = this.activity.findViewById(R.id.calendar_layout_week);
-		Today today = this.activity.dataManager.getToday();
+		Today today = DataManager.getInstance().getToday();
 		TextView currentMonthTextView = (TextView) this.activity.findViewById(R.id.currentMonthTextView);
 		TextView currentYearTextView = (TextView) this.activity.findViewById(R.id.currentYearTextView);
 		currentMonthTextView.setText(DateHelper.convertMonth(today.monthInt));

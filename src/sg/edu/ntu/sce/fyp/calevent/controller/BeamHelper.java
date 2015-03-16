@@ -3,6 +3,7 @@ package sg.edu.ntu.sce.fyp.calevent.controller;
 import sg.edu.ntu.sce.fyp.calevent.R;
 import sg.edu.ntu.sce.fyp.calevent.activity.MainActivity;
 import sg.edu.ntu.sce.fyp.calevent.global.Settings;
+import sg.edu.ntu.sce.fyp.calevent.model.DataManager;
 import sg.edu.ntu.sce.fyp.calevent.model.TimeSlotCalculator;
 import sg.edu.ntu.sce.fyp.calevent.model.XMLConstructor;
 import sg.edu.ntu.sce.fyp.calevent.model.XMLParser;
@@ -69,6 +70,7 @@ public class BeamHelper {
      * Parses the NDEF Message from the intent and prints to the TextView
      */
     void processIntent(Intent intent) {
+    	DataManager dataMgr = DataManager.getInstance();
         Parcelable[] rawMsgs = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
         // only one message sent during the beam
         NdefMessage msg = (NdefMessage) rawMsgs[0];
@@ -79,21 +81,21 @@ public class BeamHelper {
         if (mode.equalsIgnoreCase(Settings.TimeSlotSharing)){
         	activity.calendarViewManager.homeViewSelectInboxTab();
         } else {
-			if (activity.dataManager != null) {
-				if (activity.dataManager.getTimeSlotList() == null) {
-					activity.dataManager.setTimeSlotList(
+			if (dataMgr != null) {
+				if (dataMgr.getTimeSlotList() == null) {
+					dataMgr.setTimeSlotList(
 							TimeSlotCalculator.getInstance().calculateTimeSlot(
-											activity.dataManager.getMyEventList()));
+									dataMgr.getMyEventList()));
 				}
-				for (MyTimeSlot ts:activity.dataManager.getReceivedtTimeSlotList()) {
+				for (MyTimeSlot ts:dataMgr.getReceivedtTimeSlotList()) {
 					Log.d(DEBUG_TAG, ts.toString());
 				}
-	        	activity.dataManager.setTimeSlotList(
+				dataMgr.setTimeSlotList(
 						TimeSlotCalculator.getInstance().calculateTimeSlot(
-								activity.dataManager.getTimeSlotList(),
-								activity.dataManager.getReceivedtTimeSlotList()));
+								dataMgr.getTimeSlotList(),
+								dataMgr.getReceivedtTimeSlotList()));
 	        	
-	        	for (MyTimeSlot ts:activity.dataManager.getTimeSlotList()) {
+	        	for (MyTimeSlot ts:dataMgr.getTimeSlotList()) {
 					Log.d(DEBUG_TAG, ts.toString());
 				}
 	        	activity.calendarViewManager.homeViewSelectTimeSlotTab();
