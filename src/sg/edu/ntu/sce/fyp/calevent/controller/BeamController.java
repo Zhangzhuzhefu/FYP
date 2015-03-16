@@ -20,14 +20,14 @@ import android.os.Build;
 import android.os.Parcelable;
 import android.util.Log;
 
-public class BeamHelper {
-	private static final String DEBUG_TAG = BeamHelper.class.getSimpleName();
+public class BeamController {
+	private static final String DEBUG_TAG = BeamController.class.getSimpleName();
 	private MainActivity activity;
     private NfcAdapter mNfcAdapter;
     private XMLParser xmlParser;
     private XMLConstructor xmlConstructor;
 
-	public BeamHelper(MainActivity act) {
+	public BeamController(MainActivity act) {
 		this.activity = act;
 		xmlParser = new XMLParser();
 		xmlConstructor = new XMLConstructor();

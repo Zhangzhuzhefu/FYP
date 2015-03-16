@@ -8,13 +8,12 @@ import sg.edu.ntu.sce.fyp.calevent.model.myclass.MyTimeSlot;
 
 public class XMLConstructor {
 	
-	private DataManager dtMgr;
 
 	public XMLConstructor (){
-		dtMgr = DataManager.getInstance();
 	}
 	
 	public String getToBeSentContentsInXML(){
+		DataManager dtMgr = DataManager.getInstance();
 		String data = new String();
 		data = "<data><mode>";
 		data += ((Settings.getInstance().isFindMode() 

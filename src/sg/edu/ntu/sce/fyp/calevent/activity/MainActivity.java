@@ -3,10 +3,10 @@ package sg.edu.ntu.sce.fyp.calevent.activity;
 import java.util.Calendar;
 
 import sg.edu.ntu.sce.fyp.calevent.R;
-import sg.edu.ntu.sce.fyp.calevent.controller.BeamHelper;
-import sg.edu.ntu.sce.fyp.calevent.controller.BumpHandler;
+import sg.edu.ntu.sce.fyp.calevent.controller.BeamController;
+import sg.edu.ntu.sce.fyp.calevent.controller.BumpControler;
 import sg.edu.ntu.sce.fyp.calevent.controller.CalendarController;
-import sg.edu.ntu.sce.fyp.calevent.controller.ViewManager;
+import sg.edu.ntu.sce.fyp.calevent.controller.ViewController;
 import sg.edu.ntu.sce.fyp.calevent.controller.adapter.WriteCaleandarListAdapter;
 import sg.edu.ntu.sce.fyp.calevent.model.DataManager;
 import sg.edu.ntu.sce.fyp.calevent.model.myclass.MyEvent;
@@ -25,10 +25,10 @@ import android.widget.ListView;
 
 public class MainActivity extends Activity implements CreateNdefMessageCallback{
 	
-	public ViewManager calendarViewManager;
+	public ViewController calendarViewManager;
 	public CalendarController caleventHelper;
-	public BeamHelper beamHelper;
-	private BumpHandler bumpHandler;
+	public BeamController beamHelper;
+	private BumpControler bumpHandler;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -73,13 +73,13 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback{
 	}
 	
 	public void initializeAppModels(){
-		bumpHandler = new BumpHandler(this);
-		beamHelper = new BeamHelper(this);
+		bumpHandler = new BumpControler(this);
+		beamHelper = new BeamController(this);
 		
 	}
 	
 	public void initializeAppViews() {
-		calendarViewManager = new ViewManager(this);
+		calendarViewManager = new ViewController(this);
 	}
 
 	public void initializeAppController(){

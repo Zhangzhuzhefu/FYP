@@ -6,11 +6,11 @@ import android.content.Context;
 import android.os.Vibrator;
 import android.widget.Toast;
 
-public class BumpHandler {
+public class BumpControler {
 	private MainActivity activity;
 	private BumpListener bumper;
 
-	public BumpHandler(MainActivity mainActivity) {
+	public BumpControler(MainActivity mainActivity) {
 		activity = mainActivity;
 		final Vibrator vibe = (Vibrator)activity.getSystemService(Context.VIBRATOR_SERVICE);
 

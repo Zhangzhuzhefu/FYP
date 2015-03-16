@@ -15,7 +15,7 @@ import android.net.Uri;
 public class CalendarController {
 	private MainActivity activity;
 	
-	private ViewManager viewHelper;
+	private ViewController viewHelper;
 	
 	private DataManager dataMgr;
 	private CalendarReader calReader;

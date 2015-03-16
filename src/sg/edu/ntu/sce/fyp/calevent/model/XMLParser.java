@@ -23,13 +23,12 @@ import android.util.Log;
 
 public class XMLParser {
 	private static final String DEBUG_TAG = XMLParser.class.getSimpleName();
-	private DataManager dtMgr;
 	
 	public XMLParser() {
-		dtMgr = DataManager.getInstance();
 	}
 	
 	public String parseResult(String xmlRecords){
+		DataManager dtMgr = DataManager.getInstance();
 	    String mode = new String();
 	    String result = new String();
 

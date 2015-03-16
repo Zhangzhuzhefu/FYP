@@ -8,7 +8,7 @@ import sg.edu.ntu.sce.fyp.calevent.view.CalendarWeekView;
 import sg.edu.ntu.sce.fyp.calevent.view.HomeView;
 import android.content.Context;
 
-public class ViewManager {
+public class ViewController {
 
 	private DataManager dataMgr; 
 	
@@ -16,7 +16,7 @@ public class ViewManager {
 	private CalendarMonthView monthView;
 	private HomeView homeView;
 	
-	public ViewManager(MainActivity act){
+	public ViewController(MainActivity act){
 		Context ctx = act.getApplicationContext();
 		weekView = new CalendarWeekView(ctx, act);
 		monthView = new CalendarMonthView(ctx, act);
