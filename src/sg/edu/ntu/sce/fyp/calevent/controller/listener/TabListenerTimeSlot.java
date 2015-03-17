@@ -1,9 +1,12 @@
 package sg.edu.ntu.sce.fyp.calevent.controller.listener;
 
+import java.util.ArrayList;
+
 import sg.edu.ntu.sce.fyp.calevent.R;
 import sg.edu.ntu.sce.fyp.calevent.activity.MainActivity;
 import sg.edu.ntu.sce.fyp.calevent.model.DataManager;
 import sg.edu.ntu.sce.fyp.calevent.model.TimeSlotCalculator;
+import sg.edu.ntu.sce.fyp.calevent.model.myclass.MyTimeSlot;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
@@ -35,6 +38,13 @@ public class TabListenerTimeSlot implements ActionBar.TabListener {
 						TimeSlotCalculator.getInstance().calculateTimeSlot(
 								dataMgr.getMyEventList()));
 			}
+			ArrayList <MyTimeSlot> tsList = 
+					TimeSlotCalculator.getInstance().calculateTimeSlot(
+							dataMgr.getMyEventList());
+			dataMgr.setTimeSlotList(
+					TimeSlotCalculator.getInstance().calculateTimeSlot(
+							dataMgr.getTimeSlotList(),
+							tsList));
 			
 		}
 		
