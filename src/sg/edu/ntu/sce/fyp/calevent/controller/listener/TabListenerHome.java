@@ -2,6 +2,7 @@ package sg.edu.ntu.sce.fyp.calevent.controller.listener;
 
 import sg.edu.ntu.sce.fyp.calevent.R;
 import sg.edu.ntu.sce.fyp.calevent.activity.MainActivity;
+import sg.edu.ntu.sce.fyp.calevent.model.DataManager;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
@@ -35,7 +36,10 @@ public class TabListenerHome implements ActionBar.TabListener {
 	}
 
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-		
+		DataManager dataMgr = DataManager.getInstance();
+		if (dataMgr != null) {
+			dataMgr.setTimeSlotList(null);
+		}
 	}
 
 	public void onTabReselected(Tab tab, FragmentTransaction ft) {

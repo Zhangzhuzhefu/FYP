@@ -155,8 +155,15 @@ public class DataManager {
 	}
 	
 	public void addNewEvent(MyEvent ev) {
-		if (ev != null)
+		if (ev != null) {
+			for (MyEvent mEv : myEventList) {
+				if (Long.valueOf(ev.getDtstart()) < Long.valueOf(mEv.getDtstart())) {
+					myEventList.add(myEventList.indexOf(mEv), ev);
+					return;
+				}
+			}
 			myEventList.add(ev);
+		}
 	}
 
 	public void deleteEvent(MyEvent ev) {

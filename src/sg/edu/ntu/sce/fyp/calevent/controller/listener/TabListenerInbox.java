@@ -44,6 +44,10 @@ public class TabListenerInbox implements ActionBar.TabListener {
 				dataMgr.getAcceptedEventList(), 
 				Settings.getInstance().getWriteCalendarId());
 		dataMgr.getAcceptedEventList().clear();
+		
+		if (dataMgr != null) {
+			dataMgr.setTimeSlotList(null);
+		}
 	}
 
 	public void onTabReselected(Tab tab, FragmentTransaction ft) {

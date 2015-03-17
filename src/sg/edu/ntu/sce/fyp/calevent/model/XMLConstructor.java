@@ -17,7 +17,7 @@ public class XMLConstructor {
 		String data = new String();
 		data = "<data><mode>";
 		data += ((Settings.getInstance().isFindMode() 
-				? Settings.EventSharing : Settings.TimeSlotSharing)
+				? Settings.TimeSlotSharing : Settings.EventSharing )
 				+ "</mode>");
 		if (Settings.getInstance().isFindMode()) {
 			if (dtMgr != null) {

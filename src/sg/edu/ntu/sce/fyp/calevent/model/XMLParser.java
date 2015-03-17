@@ -42,8 +42,8 @@ public class XMLParser {
 		    Element element = (Element) nodes.item(0);
 		    mode = getCharacterDataFromElement(element);
 		    
-		    if (mode.equalsIgnoreCase(Settings.TimeSlotSharing)){ 
-		    	/*Share mode*/
+		    if (mode.equalsIgnoreCase(Settings.EventSharing)){ 
+		    	/*Event mode*/
 			    nodes = doc.getElementsByTagName("event");
 				for (int i = 0; i < nodes.getLength(); i++) {
 					MyEvent nEvent = new MyEvent();
@@ -89,7 +89,7 @@ public class XMLParser {
 	
 					dtMgr.getReceivedEventList().add(nEvent);
 				}
-		    } else { /*Find mode*/
+		    } else { /*Timeslot mode*/
 		    	 nodes = doc.getElementsByTagName("timeslot");
 		    	 ArrayList<MyTimeSlot> tsList = new ArrayList<MyTimeSlot>();
 					for (int i = 0; i < nodes.getLength(); i++) {

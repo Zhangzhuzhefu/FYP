@@ -78,7 +78,7 @@ public class BeamController {
         Log.d(DEBUG_TAG, payload);
         String mode = xmlParser.parseResult(payload);
         activity.calendarViewManager.setToggleTo(mode.equalsIgnoreCase(Settings.EventSharing));
-        if (mode.equalsIgnoreCase(Settings.TimeSlotSharing)){
+        if (mode.equalsIgnoreCase(Settings.EventSharing)){
         	activity.calendarViewManager.homeViewSelectInboxTab();
         } else {
 			if (dataMgr != null) {
